@@ -53,7 +53,7 @@ function MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
-autocmd BufNewFile,BufRead *.py exec "source ~/python/vimset.vim"
+autocmd BufNewFile,BufRead *.py exec "source ~/vimfiles/plugin/py_vimset.vim"
 autocmd BufNewFile *.py exec ".call w:PySetMain()"
 "\ set fileformat=unix
 
