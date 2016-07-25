@@ -27,18 +27,22 @@ filetype plugin indent on
 
 source $VIMRUNTIME/vimrc_example.vim
 "source $VIMRUNTIME/mswin.vim
-behave mswin
+"behave mswin
 
+"""""""""""""""""""""""""""""""user set
+" file type set ******************
 autocmd BufNewFile,BufRead *.py exec "source ~/my_vim/py_vimset.vim"
 autocmd BufNewFile *.py exec ".call w:PySetMain()"
 autocmd BufNewFile *.html exec ".call w:HtmlHead()"
-"\ set fileformat=unix
+autocmd BufRead *.v exec "source $HOME/my_vim/myfunc_verilog.vim"
+autocmd BufNewFile *.v exec "call YSetTitle()"
+" file type set ******************
+set fileformat=unix
 
 "set encoding=utf-8
 "let &termencoding=&encoding
 "set fileencodings=utf-8,gbk,ucs-bom,cp936
 
-"""""""""""""""""""""""""""""""user set
 " basic set ******************
 set nobackup		" do not keep a backup file, use versions instead
 " F2 开关行号
@@ -91,21 +95,6 @@ set fencs=utf-8,gbk,ucs-bom,gb18030,gb2312,cp936
 set helplang=en
 set iskeyword+=
 "au BufNewFile,BufRead *.wiki set spell spelllang=en_us
-" maxize window
-"if has('win32')
-"    au GUIEnter * simalt ~x
-"else
-"    au GUIEnter * call MaximizeWindow()
-"endif
-" 
-"function! MaximizeWindow()
-"    silent !wmctrl -r :ACTIVE: -b add,maximized_vert,maximized_horz
-"endfunction
-
-" verilog set ******************
-autocmd BufRead *.v exec "source $HOME/my_vim/myfunc_verilog.vim"
-autocmd BufNewFile *.v exec "call YSetTitle()"
-" verilog set ******************
 
 " vimwiki set ******************
 let g:vimwiki_list = [{'path': '~/work_wiki/', 
@@ -121,9 +110,6 @@ inoremap <F5> <br />
 iab xdate <c-r>=strftime("%c wd%w # ")<C-I>
 iab vimhome <c-r>=$HOME<C-I>
 iab cdir <c-r>=pwd<C-I>
-
-" tagexplore
-" let TE_Ctags_Path = 'd:\lianghy\.vim\ctags58\ctags.exe'
 
 " tags
 " set tags=~/tags
