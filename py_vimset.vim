@@ -5,6 +5,8 @@ set textwidth=79
 set expandtab 
 set autoindent 
 set foldmethod=indent
+set foldnestmax=3
+set foldignore=~
 " in exists, '*' means function name
 if !exists("*s:PySetMain")
     func s:PySetMain()
