@@ -14,12 +14,12 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/DrawIt'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vimwiki/vimwiki'
+Plugin 'godlygeek/tabular'
 Plugin 'mathjax/MathJax'
 Plugin 'mattn/emmet-vim'
-Plugin 'Rykka/riv.vim'
-Plugin 'Rykka/rhythm.css'
-Plugin 'Valloric/YouCompleteMe'
-"Plugin 'godlygeek/tabular'
+"Plugin 'Rykka/riv.vim'
+"Plugin 'Rykka/rhythm.css'
+"Plugin 'Valloric/YouCompleteMe'
 "Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()            " required
@@ -37,7 +37,7 @@ set expandtab
 """""""""""""""""""""""""""""""user set
 " file type set ******************
 autocmd BufNewFile,BufRead *.py exec "source ~/my_vim/py_vimset.vim"
-autocmd BufNewFile *.py exec ".call s:PySetMain()"
+autocmd BufNewFile *.py exec ".call PySetMain()"
 autocmd BufRead *.v exec "source $HOME/my_vim/myfunc_verilog.vim"
 autocmd BufNewFile *.v exec "call s:YSetTitle()"
 " file type set ******************
@@ -64,16 +64,7 @@ colorscheme torte
 set foldnestmax=3
 set foldignore=~
 " language set ******************
-" 设置编码
-"if has("win32")
-"set fileencoding=chinese
-"else
-"set fileencoding=utf-8
-"endif
 set fileencoding=utf-8
-
-"解决consle输出乱码
-"language messages zh_CN.utf-8 竟然用不上！！
 
 " 设置文件编码检测类型及支持格式
 "set fileencodings=utf-8,chinese,latin-1
