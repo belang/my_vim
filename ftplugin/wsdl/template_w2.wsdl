@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<discription name="${service_name}_discript"
+  xmlns="http://www.w3.org/ns/wsdl"
+  targetNamespace="http://${service_path}/wsdl/${service_name}"
+  xmlns:tns="http://${service_path}/wsdl/${service_name}"
+  xmlns:ghns="http://${service_path}/schemas/${service_name}"
+  xmlns:wsoap="http://www.w3.org/ns/wsdl/soap"
+  xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
+  xmlns:wsdlx= "http://www.w3.org/ns/wsdl-extensions">
+
+  <documentation>
+    author: lianghy
+    time: strftime("%c")
+  </documentation>
+
+  <types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+      targetNamespace="${service_path}/schemas/${service_name}"
+      xmlns="${service_path}/schemas/${service_name}">
+      <xs:element name="${service_name}_request" type="t${service_name}_request"/>
+      <xs:complexType name="t${service_name}_request">
+        <xs:sequence>
+          <xs:element name="${service_name}_request_para1" type="xs:string"/>
+          <xs:element name="${service_name}_request_para2" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="${service_name}_response" type="xs:string"/>
+      <xs:element name="${service_name}_error" type="xs:string"/>
+    </xs:schema>
+  </types>
+
+  <interface name="${service_name}_interface">
+    <fault name="${service_name}_fault" element="ghns:${service_name}_error"/>
+    <operation name="op_${service_name}"
+            pattern="http://www.w3.org/ns/wsdl/in-out" 
+            style="http://www.w3.org/ns/wsdl/style/iri"
+            wsdlx:safe = "true">
+      <input messageLabel="In" element="ghns:${service_name}_request"/>
+      <output messageLabel="Out" element="ghns:${service_name}_response"/>
+      <outfault ref="tns:${service_name}_fault" messageLabel="Out"/>
+    </operation>
+  </interface>
+
+  <binding name="${service_name}_soap_binding"
+        interface="tns:${service_name}_interface"
+        type="http://www.w3.org/ns/wsdl/soap"
+        wsoap:protocol="http://www.w3.org/2003/05/soap/bindings/HTTP/">
+    <fault ref="tns:${service_name}_fault" wsoap:code="soap:Sender"/>
+    <operation ref="tns:op_${service_name}"
+        wsoap:mep="http://www.w3.org/2003/05/soap/mep/soap-response"/>
+  </binding>
+
+  <service name="${service_name}_service" interface="tns:${service_name}_interface">
+    <documentation>
+    </documentation>
+    <endpoint name="${service_name}_endpoint"
+        binding="tns:${service_name}_soap_binding"
+        address="${service_path}/${service_name}/"/>
+  </service>
+</discription>

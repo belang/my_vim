@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<definitions name="${service_name}_DF"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        targetNamespace="http://${service_path}/wsdl/${service_name}"
+        xmlns:tns="http://${service_path}/wsdl/${service_name}"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <import namespace="" location=""/>
+    <documentation>
+    author: lianghy
+    time: strftime("%c")
+    </documentation>
+
+    <types>
+    <xs:schema targetNamespace="http://${service_path}/wsdl/${service_name}">
+        <xs:element name="${request_name}" type="t${request_name}"/>
+        <xs:complexType name="t${request_name}">
+            <xs:sequence>
+                <xs:element name="${request_para1}" type="xs:string"/>
+                <xs:element name="${request_para2}" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:element name="${response_name}" type="xs:string"/>
+    </xs:schema>
+    </types>
+
+  <message name="${service_name}_Request">
+    <part name="${request_ps}" type="xs:string"/>
+    <part name="${request_ps}" element="tns:${request_name}"/>
+  </message>
+  <message name="${service_name}_Response">
+    <part name="${response_ps}" type="xs:string"/>
+  </message>
+
+  <portType name="${service_name}_PT">
+    <operation name="${service_name}_op">
+        <input message="tns:${service_name}_Request"/>
+        <output message="tns:${service_name}_Response"/>
+    </operation>
+  </portType>
+
+  <binding name="${service_name}_soap_binding" type="${service_name}_PT">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <operation name="${service_name}_op">
+      <soap:operation soapAction="soap_action"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="${service_name}">
+    <documentation>
+    </documentation>
+    <port binding="tns:${service_name}_soap_binding" name="${service_name}_port">
+        <soap:address loaction="http://${service_path}/${service_name}/"/>
+    </port>
+  </service>
+</definitions>
