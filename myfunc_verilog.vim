@@ -9,7 +9,7 @@ if !exists("*s:pbegin_add")
 
 " verilog header:
 "if !exists("YSetTitle")
-  func w:YSetTitle()
+  func s:YSetTitle()
     if &filetype == 'verilog'
       "call setline(1,"`timescale 1ns/1ps")
       "call setline(2,"// file name: .expand(%))
@@ -21,7 +21,7 @@ if !exists("*s:pbegin_add")
       call setline(3,"endmodule")
     endif
   endfunc
-  func w:PFmoveDefine()
+  func! PFmoveDefine()
     for line in getline(1, line("$"))
       if line ~= '^always ' || line ~= '^assign '
         let s:llinepos = line('.')-1
@@ -37,3 +37,7 @@ if !exists("*s:pbegin_add")
     endif
   endfunc
 endif
+
+func! addHead()
+    call s:YSetTitle()
+endfunc

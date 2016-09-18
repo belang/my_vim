@@ -5,9 +5,9 @@
 " sh* : 章节标题*
 " tb+ : 在表格当前行的上一行增加一行+--+结构。
 
-inoremap <C-E>sh1 <Esc>:call dyRst#dyAddSectionHead(1)<Enter>
-inoremap <C-E>sh2 <Esc>:call dyRst#dyAddSectionHead(2)<Enter>
-inoremap <C-E>sh3 <Esc>:call dyRst#dyAddSectionHead(3)<Enter>
+"inoremap <C-E>sh1 <Esc>:call dyRst#dyAddSectionHead(1)<Enter>
+"inoremap <C-E>sh2 <Esc>:call dyRst#dyAddSectionHead(2)<Enter>
+"inoremap <C-E>sh3 <Esc>:call dyRst#dyAddSectionHead(3)<Enter>
 nnoremap <C-E>sh1 :call dyRst#dyAddSectionHead(1)<Enter>
 nnoremap <C-E>sh2 :call dyRst#dyAddSectionHead(2)<Enter>
 nnoremap <C-E>sh3 :call dyRst#dyAddSectionHead(3)<Enter>

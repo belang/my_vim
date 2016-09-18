@@ -16,7 +16,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vimwiki/vimwiki'
 Plugin 'godlygeek/tabular'
 Plugin 'mathjax/MathJax'
-Plugin 'mattn/emmet-vim'
+Plugin 'othree/xml.vim'
+"Plugin 'mattn/emmet-vim'
 "Plugin 'Rykka/riv.vim'
 "Plugin 'Rykka/rhythm.css'
 "Plugin 'Valloric/YouCompleteMe'
@@ -36,10 +37,10 @@ set expandtab
 
 """""""""""""""""""""""""""""""user set
 " file type set ******************
-autocmd BufNewFile,BufRead *.py exec "source ~/my_vim/py_vimset.vim"
-autocmd BufNewFile *.py exec ".call PySetMain()"
-autocmd BufRead *.v exec "source $HOME/my_vim/myfunc_verilog.vim"
-autocmd BufNewFile *.v exec "call s:YSetTitle()"
+autocmd BufRead,BufNewFile *.py exec "source ~/my_vim/py_vimset.vim"
+autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/myfunc_verilog.vim"
+autocmd BufRead,BufNewFile *.rst exec "source ~/my_vim/ftplugin/rst/dyRst.vim"
+noremap <C-h> :call AddHead()<cr>
 " file type set ******************
 set fileformat=unix
 
@@ -48,7 +49,8 @@ set fileformat=unix
 "set fileencodings=utf-8,gbk,ucs-bom,cp936
 
 " basic set ******************
-set nobackup		" do not keep a backup file, use versions instead
+" do not keep a backup file, use versions instead
+set nobackup		
 " F2 开关行号
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR> 
 "set mouse=a " 打开鼠标模式
@@ -56,7 +58,7 @@ nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 set autochdir
 "set colorscheme 
 "colorscheme pablo
-colorscheme torte
+colorscheme desert
 "set fileencodings=GBK,UTF-8,gb18030,ucs-bom,cp936
 "set viminfo='50,n$VIMRUNTIME\_viminfo
 
@@ -64,7 +66,16 @@ colorscheme torte
 set foldnestmax=3
 set foldignore=~
 " language set ******************
+" 设置编码
+"if has("win32")
+"set fileencoding=chinese
+"else
+"set fileencoding=utf-8
+"endif
 set fileencoding=utf-8
+
+"解决consle输出乱码
+"language messages zh_CN.utf-8 竟然用不上！！
 
 " 设置文件编码检测类型及支持格式
 "set fileencodings=utf-8,chinese,latin-1
