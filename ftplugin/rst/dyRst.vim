@@ -8,11 +8,12 @@
 inoremap <C-E>sh1 <Esc>:call dyRst#dyAddSectionHead(1)<Enter>
 inoremap <C-E>sh2 <Esc>:call dyRst#dyAddSectionHead(2)<Enter>
 inoremap <C-E>sh3 <Esc>:call dyRst#dyAddSectionHead(3)<Enter>
-nnoremap <C-E>sh1 :call dyRst#dyAddSectionHead(1)<Enter>
-nnoremap <C-E>sh2 :call dyRst#dyAddSectionHead(2)<Enter>
-nnoremap <C-E>sh3 :call dyRst#dyAddSectionHead(3)<Enter>
+nnoremap <buffer> <C-E>sh1 :call dyRst#dyAddSectionHead(1)<Enter>
+nnoremap <buffer> <C-E>sh2 :call dyRst#dyAddSectionHead(2)<Enter>
+nnoremap <buffer> <C-E>sh3 :call dyRst#dyAddSectionHead(3)<Enter>
 
-nnoremap <C-E>tbh :call dyRst#dyAddTblPluse()<Enter>
+nnoremap <buffer> <C-E>tbh :call dyRst#dyAddTblPluse()<Enter>
+nnoremap <buffer> <CR> :call dyRst#dyGoToRstFile()<Enter>
 " {{{1 Create/Modify Title
 "fun! s:is_title(str) "{{{
 "    return a:str =~ '\S' && a:str !~ g:_riv_p.section
@@ -20,12 +21,20 @@ nnoremap <C-E>tbh :call dyRst#dyAddTblPluse()<Enter>
 "fun! s:is_sline(str) "{{{
 "    return a:str =~ g:_riv_p.section
 "endfun "}}}
+"
+"******** global config
+let g:dyRst_hn = ['','=','-','~','*','#']
+
+"******** pub func
 fun! s:is_blank(str) "{{{
     return a:str =~ '^\s*$'
 endfun "}}}
 
-let g:dyRst_hn = ['','=','-','~','*','#']
+function! s:strdiswidth(cell_str)
+    return strdisplaywidth(a:cell_str)
+endfunction
 
+"******** main func
 
 function! dyRst#dyAddSectionHead(level,...) "{{{
 	let head_row = line('.')
@@ -39,9 +48,6 @@ function! dyRst#dyAddSectionHead(level,...) "{{{
 	endif
 endfunction "}}}
 
-function! s:strdiswidth(cell_str)
-    return strdisplaywidth(a:cell_str)
-endfunction
 function! dyRst#dyAddTblPluse() "{{{
     let state = 'NONE'
     let cell_length = []
@@ -80,4 +86,12 @@ function! dyRst#dyAddTblPluse() "{{{
     let new_row .= '+'
     "echo new_row
     call append(tar_row,new_row)
+endfunction "}}}
+
+function! dyRst#dyGoToRstFile() "{{{
+    " get line string
+    " add rst
+    " go to 
+    let lstring = getline(line('.'))
+    let fname = getTextOfCursor(lstring)
 endfunction "}}}
