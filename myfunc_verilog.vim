@@ -38,6 +38,6 @@ if !exists("*s:pbegin_add")
   endfunc
 endif
 
-func! addHead()
+func! AddHead()
     call s:YSetTitle()
 endfunc

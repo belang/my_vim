@@ -3,13 +3,18 @@ set nocompatible
 filetype off 
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+if has('win32')
+    set rtp+=~/vimfiles/bundle/Vundle.vim
+else
+if has('unix')
+    set rtp+=~/.vim/bundle/Vundle.vim
+endif
+endif
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/DrawIt'
 Plugin 'scrooloose/nerdtree'
@@ -17,6 +22,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'godlygeek/tabular'
 Plugin 'mathjax/MathJax'
 Plugin 'othree/xml.vim'
+"Plugin 'scrooloose/syntastic'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'Rykka/riv.vim'
 "Plugin 'Rykka/rhythm.css'
@@ -28,8 +34,19 @@ call vundle#end()            " required
 filetype plugin indent on
 
 source $VIMRUNTIME/vimrc_example.vim
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
+if has('win32')
+    source $VIMRUNTIME/mswin.vim
+    au GUIEnter * simalt ~x
+    set fileformat=dos
+    " tags
+    let g:tagbar_ctags_bin = '/usr/bin/ctags'
+else
+    if has('unix')
+        set fileformat=unix
+        let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
+    endif
+endif
+
 set tabstop=4 
 set softtabstop=4 
 set shiftwidth=4 
@@ -42,7 +59,6 @@ autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/myfunc_verilog.vim"
 autocmd BufRead,BufNewFile *.rst exec "source ~/my_vim/ftplugin/rst/dyRst.vim"
 noremap <C-h> :call AddHead()<cr>
 " file type set ******************
-set fileformat=unix
 
 "set encoding=utf-8
 "let &termencoding=&encoding
@@ -73,13 +89,8 @@ set foldignore=~
 "set fileencoding=utf-8
 "endif
 set fileencoding=utf-8
-
-"解决consle输出乱码
-"language messages zh_CN.utf-8 竟然用不上！！
-
 " 设置文件编码检测类型及支持格式
-"set fileencodings=utf-8,chinese,latin-1
-set fencs=utf-8,gbk,ucs-bom,gb18030,gb2312,cp936
+set fileencodings=utf-8,gbk,ucs-bom,gb18030,gb2312,cp936
 
 " vimwiki set ******************
 let g:vimwiki_list = [{'path': '~/work_wiki/', 
@@ -96,8 +107,6 @@ iab xdate <c-r>=strftime("%c wd%w # ")<C-I>
 iab vimhome <c-r>=$HOME<C-I>
 iab cdir <c-r>=pwd<C-I>
 
-" tags
-let g:tagbar_ctags_bin = '/usr/bin/ctags'
 
 "let python = 'd:/Python34/python.exe'
 " python *************
