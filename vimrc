@@ -3,13 +3,7 @@ set nocompatible
 filetype off 
 
 " set the runtime path to include Vundle and initialize
-if has('win32')
-    set rtp+=~/vimfiles/bundle/Vundle.vim
-else
-if has('unix')
-    set rtp+=~/.vim/bundle/Vundle.vim
-endif
-endif
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -22,12 +16,12 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'godlygeek/tabular'
 Plugin 'mathjax/MathJax'
 Plugin 'othree/xml.vim'
+Plugin 'plasticboy/vim-markdown'
 "Plugin 'scrooloose/syntastic'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'Rykka/riv.vim'
 "Plugin 'Rykka/rhythm.css'
 "Plugin 'Valloric/YouCompleteMe'
-"Plugin 'plasticboy/vim-markdown'
 
 call vundle#end()            " required
 "call vundle#config#require(g:bundles)
@@ -40,11 +34,11 @@ if has('win32')
     set fileformat=dos
     " tags
     let g:tagbar_ctags_bin = '/usr/bin/ctags'
-else
-    if has('unix')
-        set fileformat=unix
-        let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
-    endif
+elseif has('unix')
+    set fileformat=unix
+    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
+    noremap <C-h> <Plug>VimwikiGoBackLink
+    noremap <C-h> :VimwikiGoBackLink<cr>
 endif
 
 set tabstop=4 
@@ -57,7 +51,7 @@ set expandtab
 autocmd BufRead,BufNewFile *.py exec "source ~/my_vim/py_vimset.vim"
 autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/myfunc_verilog.vim"
 autocmd BufRead,BufNewFile *.rst exec "source ~/my_vim/ftplugin/rst/dyRst.vim"
-noremap <C-h> :call AddHead()<cr>
+noremap <C-d>h :call AddHead()<cr>
 " file type set ******************
 
 "set encoding=utf-8
