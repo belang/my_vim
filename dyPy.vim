@@ -54,4 +54,5 @@ func! s:createUnitTest()
     call setline(15,"        obj.tearDown()")
 endfunc
 noremap <C-d>init :call <SID>dyPyInit()<cr>
+noremap <C-d>test :call <SID>createUnitTest()<cr>
 
