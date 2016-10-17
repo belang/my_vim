@@ -36,5 +36,22 @@ func! AddHead()
     call s:PySetMain()
 endfunc
 
+func! s:createUnitTest()
+    call setline(1,"class testClass:")
+    call setline(2,"    def setup(self):")
+    call setline(3,"        pass")
+    call setline(4,"    def tearDown(self):")
+    call setline(5,"        pass")
+    call setline(6,"    def test_c1(self):")
+    call setline(7,"        pass")
+    call setline(8,"")
+    call setline(9,"for test_method in get_test_classes():")
+    call setline(10,"    obj = testClass()")
+    call setline(11,"    obj.setup()")
+    call setline(12,"    try:")
+    call setline(13,"        obj.test_method()")
+    call setline(14,"    finally:")
+    call setline(15,"        obj.tearDown()")
+endfunc
 noremap <C-d>init :call <SID>dyPyInit()<cr>
 

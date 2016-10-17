@@ -48,8 +48,8 @@ set expandtab
 
 """""""""""""""""""""""""""""""user set
 " file type set ******************
-autocmd BufRead,BufNewFile *.py exec "source ~/my_vim/py_vimset.vim"
-autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/myfunc_verilog.vim"
+autocmd BufRead,BufNewFile *.py exec "source ~/my_vim/dyPy.vim"
+autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/dyVerilog.vim"
 autocmd BufRead,BufNewFile *.rst exec "source ~/my_vim/ftplugin/rst/dyRst.vim"
 noremap <C-d>h :call AddHead()<cr>
 " file type set ******************
