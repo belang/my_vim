@@ -51,6 +51,7 @@ autocmd BufRead,BufNewFile *.py exec "source ~/my_vim/dyPy.vim"
 autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/dyVerilog.vim"
 autocmd BufRead,BufNewFile *.rst exec "source ~/my_vim/ftplugin/rst/dyRst.vim"
 noremap <C-d>h :call AddHead()<cr>
+autocmd BufRead,BufNewFile *.wsdl setf xml
 " file type set ******************
 
 "set encoding=utf-8
