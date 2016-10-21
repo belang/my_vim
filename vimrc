@@ -33,11 +33,10 @@ if has('win32')
     au GUIEnter * simalt ~x
     set fileformat=dos
     " tags
-    let g:tagbar_ctags_bin = '/usr/bin/ctags'
+    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
 elseif has('unix')
     set fileformat=unix
-    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
-    noremap <C-h> <Plug>VimwikiGoBackLink
+    let g:tagbar_ctags_bin = '/usr/bin/ctags'
     noremap <C-h> :VimwikiGoBackLink<cr>
 endif
 
