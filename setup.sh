@@ -6,3 +6,4 @@
 
 # in vim
 # :PluginInstall
+# ctags for tagbar
