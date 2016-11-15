@@ -85,10 +85,3 @@ function! dyRst#dyAddTblPluse() "{{{
     call append(tar_row,new_row)
 endfunction "}}}
 
-function! dyRst#dyGoToRstFile() "{{{
-    " get line string
-    " add rst
-    " go to 
-    let lstring = getline(line('.'))
-    let fname = getTextOfCursor(lstring)
-endfunction "}}}
