@@ -3,7 +3,7 @@
 " 为了便于完成reStructureText格式文件，本文提供了一些快捷方式。
 " C-E是调用函数的前缀。
 " sh* : 章节标题*
-" tb+ : 在表格当前行的上一行增加一行+--+结构。
+" tbh : 在表格当前行的上一行增加一行+--+结构。
 
 nnoremap <C-E>sh1 :call dyRst#dyAddSectionHead(1)<Enter>
 nnoremap <C-E>sh2 :call dyRst#dyAddSectionHead(2)<Enter>

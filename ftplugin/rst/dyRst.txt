@@ -1,0 +1,8 @@
+*dyRst.txt*	Plugin for correcting typing mistakes
+
+为了便于完成reStructureText格式文件，本文提供了一些快捷方式。
+在普通模式下，<C-E>+'command'调用函数。
+command :
+sh* : 章节标题1~3
+tbh : 在表格当前行的上一行增加一行+--+结构。
+

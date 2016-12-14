@@ -16,8 +16,13 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'godlygeek/tabular'
 Plugin 'mathjax/MathJax'
 Plugin 'othree/xml.vim'
-Plugin 'plasticboy/vim-markdown'
 Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'garbas/vim-snipmate'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+"Plugin 'plasticboy/vim-markdown'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'Rykka/riv.vim'
 "Plugin 'Rykka/rhythm.css'
@@ -27,26 +32,26 @@ call vundle#end()            " required
 "call vundle#config#require(g:bundles)
 filetype plugin indent on
 
-source $VIMRUNTIME/vimrc_example.vim
-if has('win32')
-    source $VIMRUNTIME/mswin.vim
-    au GUIEnter * simalt ~x
-    set fileformat=dos
-    " tags
-    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
-elseif has('unix')
-    set fileformat=unix
-    let g:tagbar_ctags_bin = '/usr/bin/ctags'
-    noremap <C-h> :VimwikiGoBackLink<cr>
-endif
-
-set tabstop=4 
-set softtabstop=4 
-set shiftwidth=4 
-set expandtab 
-
-"""""""""""""""""""""""""""""""user set
-" file type set ******************
+"source $VIMRUNTIME/vimrc_example.vim
+"if has('win32')
+"    source $VIMRUNTIME/mswin.vim
+"    au GUIEnter * simalt ~x
+"    set fileformat=dos
+"    " tags
+"    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
+"elseif has('unix')
+"    set fileformat=unix
+"    let g:tagbar_ctags_bin = '/usr/bin/ctags'
+"    noremap <C-h> :VimwikiGoBackLink<cr>
+"endif
+"
+"set tabstop=4 
+"set softtabstop=4 
+"set shiftwidth=4 
+"set expandtab 
+"
+""""""""""""""""""""""""""""""""user set
+"" file type set ******************
 autocmd BufRead,BufNewFile *.py exec "source ~/my_vim/dyPy.vim"
 autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/dyVerilog.vim"
 autocmd BufRead,BufNewFile *.rst exec "source ~/my_vim/ftplugin/rst/dyRst.vim"
