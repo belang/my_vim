@@ -19,7 +19,7 @@ if !exists("*s:PySetMain")
             call setline(4,"# author: lianghy")
             call setline(5,"# time: ".strftime("%c"))
             call setline(6,"")
-            call setline(7,"if __name__==\"__main__\":")
+            call setline(7,"if __name__ == \"__main__\":")
             call setline(8,"    print(\"".expand("%c")."\")")
         endif
     endfunc
