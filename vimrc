@@ -33,18 +33,18 @@ call vundle#end()            " required
 filetype plugin indent on
 
 "source $VIMRUNTIME/vimrc_example.vim
-"if has('win32')
-"    source $VIMRUNTIME/mswin.vim
-"    au GUIEnter * simalt ~x
-"    set fileformat=dos
+if has('win32')
+    source $VIMRUNTIME/mswin.vim
+    au GUIEnter * simalt ~x
+    set fileformat=dos
 "    " tags
 "    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
-"elseif has('unix')
-"    set fileformat=unix
+elseif has('unix')
+    set fileformat=unix
 "    let g:tagbar_ctags_bin = '/usr/bin/ctags'
-"    noremap <C-h> :VimwikiGoBackLink<cr>
-"endif
-"
+    noremap <C-h> :VimwikiGoBackLink<cr>
+endif
+
 "set tabstop=4 
 "set softtabstop=4 
 "set shiftwidth=4 
