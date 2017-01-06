@@ -5,12 +5,12 @@
 " sh* : 章节标题*
 " tbh : 在表格当前行的上一行增加一行+--+结构。
 
-nnoremap <C-E>sh1 :call dyRst#dyAddSectionHead(1)<Enter>
-nnoremap <C-E>sh2 :call dyRst#dyAddSectionHead(2)<Enter>
-nnoremap <C-E>sh3 :call dyRst#dyAddSectionHead(3)<Enter>
+nnoremap <C-E>sh1 :call rst#dyAddSectionHead(1)<Enter>
+nnoremap <C-E>sh2 :call rst#dyAddSectionHead(2)<Enter>
+nnoremap <C-E>sh3 :call rst#dyAddSectionHead(3)<Enter>
 
-nnoremap <buffer> <C-E>tbh :call dyRst#dyAddTblPluse()<Enter>
-nnoremap <buffer> <CR> :call dyRst#dyGoToRstFile()<Enter>
+nnoremap <buffer> <C-E>tbh :call rst#dyAddTblPluse()<Enter>
+"nnoremap <buffer> <CR> :call rst#dyGoToRstFile()<Enter>
 " {{{1 Create/Modify Title
 "fun! s:is_title(str) "{{{
 "    return a:str =~ '\S' && a:str !~ g:_riv_p.section
@@ -20,7 +20,7 @@ nnoremap <buffer> <CR> :call dyRst#dyGoToRstFile()<Enter>
 "endfun "}}}
 "
 "******** global config
-let g:dyRst_hn = ['','=','-','~','*','#']
+let g:rst_hn = ['','=','-','~','*','#']
 
 "******** pub func
 fun! s:is_blank(str) "{{{
@@ -33,19 +33,19 @@ endfunction
 
 "******** main func
 
-function! dyRst#dyAddSectionHead(level,...) "{{{
+function! rst#dyAddSectionHead(level,...) "{{{
 	let head_row = line('.')
 	let head_name = getline(head_row)
 	if s:is_blank(head_name)
 		echo 'empty head name'
 	else
-		let punc = g:dyRst_hn[a:level]
+		let punc = g:rst_hn[a:level]
 		let sline = repeat(punc, strdisplaywidth(head_name))
 		call append(head_row,sline)
 	endif
 endfunction "}}}
 
-function! dyRst#dyAddTblPluse() "{{{
+function! rst#dyAddTblPluse() "{{{
     let state = 'NONE'
     let cell_length = []
     let length = 0

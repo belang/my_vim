@@ -4,6 +4,6 @@ set autoindent
 " 2 帮助完成WSDL文件。
 
 function! w:newWSDL()
-    let fa = readfile("E:/lianghy/my_vim/ftplugin/wsdl/template_w1.wsdl")
+    let fa = readfile("$HOME/my_vim/ftplugin/wsdl/template_w1.wsdl")
     call append(0,fa)
 endfunction

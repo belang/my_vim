@@ -1,4 +1,4 @@
-*dyRst.txt*	Plugin for correcting typing mistakes
+*rst.txt*	Plugin for correcting typing mistakes
 
 为了便于完成reStructureText格式文件，本文提供了一些快捷方式。
 在普通模式下，<C-E>+'command'调用函数。

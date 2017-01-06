@@ -10,7 +10,7 @@ set foldignore=~
 " in exists, '*' means function name
 if !exists("*s:PySetMain")
     func s:PySetMain()
-        if &filetype == 'python'
+        "if &filetype == 'python'
             "call setline(1,"`timescale 1ns/1ps")
             "call setline(5,"")
             call setline(1,"#! $PATH/python")
@@ -21,7 +21,7 @@ if !exists("*s:PySetMain")
             call setline(6,"")
             call setline(7,"if __name__ == \"__main__\":")
             call setline(8,"    print(\"".expand("%c")."\")")
-        endif
+        "endif
     endfunc
     func PyDefFunc() abort
             return pumvisible() ? "\<c-e>" : ''

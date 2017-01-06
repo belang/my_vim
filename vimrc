@@ -45,18 +45,24 @@ elseif has('unix')
     noremap <C-h> :VimwikiGoBackLink<cr>
 endif
 
-"set tabstop=4 
-"set softtabstop=4 
-"set shiftwidth=4 
-"set expandtab 
 "
 """"""""""""""""""""""""""""""""user set
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+autocmd BufReadPost *
+\ if line("'\"") >= 1 && line("'\"") <= line("$") |
+\   exe "normal! g`\"" |
+\ endif
+
 "" file type set ******************
-autocmd BufRead,BufNewFile *.py exec "source ~/my_vim/dyPy.vim"
-autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/dyVerilog.vim"
-autocmd BufRead,BufNewFile *.rst exec "source ~/my_vim/ftplugin/rst/dyRst.vim"
+"autocmd BufRead,BufNewFile *.py exec "source ~/my_vim/dyPy.vim"
+"autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/dyVerilog.vim"
+"autocmd BufRead,BufNewFile *.rst exec "source ~/my_vim/ftplugin/rst/dyRst.vim"
 noremap <C-d>h :call AddHead()<cr>
 autocmd BufRead,BufNewFile *.wsdl setf xml
+autocmd BufRead,BufNewFile *.xsd setf xml
+autocmd BufRead,BufNewFile *.rst setf rst
 " file type set ******************
 
 " basic set ******************
