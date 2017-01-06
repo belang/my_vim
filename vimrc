@@ -9,8 +9,6 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/DrawIt'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vimwiki/vimwiki'
 Plugin 'godlygeek/tabular'
@@ -22,6 +20,8 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
+"Plugin 'majutsushi/tagbar'
+"Plugin 'vim-scripts/DrawIt'
 "Plugin 'plasticboy/vim-markdown'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'Rykka/riv.vim'
