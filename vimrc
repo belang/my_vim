@@ -45,8 +45,8 @@ elseif has('unix')
     noremap <C-h> :VimwikiGoBackLink<cr>
 endif
 
-"
 """"""""""""""""""""""""""""""""user set
+set ruler		" show the cursor position all the time
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
@@ -106,7 +106,7 @@ set fileencodings=utf-8,gbk,ucs-bom,gb18030,gb2312,cp936
 " vimwiki set ******************
 let g:vimwiki_list = [{'path': '~/work_wiki/', 
     \ 'path_html': '~/public_html/',
-    \ 'template_path': '~/template/',
+    \ 'template_path': '~/work_wiki/template/',
     \ 'template_default': 'template',
     \ 'template_ext': '.html'}]
 
