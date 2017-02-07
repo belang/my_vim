@@ -2,9 +2,14 @@
 set nocompatible
 filetype off 
 
+if has('win32')
+	set rtp+=~/vimfiles/bundle/Vundle.vim
+	call vundle#begin('~/vimfiles/bundle/Vundle.vim')
+elseif has('unix')
+	set rtp+=~/.vim/bundle/Vundle.vim
+	call vundle#begin('~/.vim/bundle/Vundle.vim')
+endif
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 " let Vundle manage Vundle, required
@@ -114,7 +119,8 @@ inoremap <F5> <br />
 " vimwiki set ******************
 "
 " global key map
-iab xdate <c-r>=strftime("%c wd%w # ")<C-I>
+iab xdate <c-r>=strftime("%c wd%w # ")
+iab xday <c-r>=strftime("%Y-%m-%d")
 iab vimhome <c-r>=$HOME<C-I>
 iab cdir <c-r>=pwd<C-I>
 
