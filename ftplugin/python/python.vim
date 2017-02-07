@@ -50,6 +50,6 @@ func! s:createUnitTest()
     call setline(11,"")
 endfunc
 
-noremap <C-d>init :call <SID>dyPyInit()<cr>
-noremap <C-d>test :call <SID>createUnitTest()<cr>
+noremap <C-e>init :call <SID>dyPyInit()<cr>
+noremap <C-e>test :call <SID>createUnitTest()<cr>
 
