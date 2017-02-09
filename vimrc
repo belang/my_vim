@@ -7,7 +7,7 @@ if has('win32')
 	call vundle#begin('~/vimfiles/bundle/Vundle.vim')
 elseif has('unix')
 	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin('~/.vim/bundle/Vundle.vim')
+	call vundle#begin()
 endif
 " set the runtime path to include Vundle and initialize
 " alternatively, pass a path where Vundle should install plugins
