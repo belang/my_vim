@@ -11,14 +11,14 @@ if !exists("*s:pbegin_add")
 "if !exists("YSetTitle")
   func s:YSetTitle()
     if &filetype == 'verilog'
-      "call setline(1,"`timescale 1ns/1ps")
-      "call setline(2,"// file name: .expand(%))
-      "call setline(3,"// author: lianghy")
-      "call setline(4,"// time: ".strftime("%c"))
-      "call setline(5,"")
-      call setline(1,"module (/*autoarg*/")
-      call setline(2,");")
-      call setline(3,"endmodule")
+      call setline(1,"`timescale 1ns/1ps")
+      call setline(2,"// file name: ".expand("%"))
+      call setline(3,"// author: lianghy")
+      call setline(4,"// time: ".strftime("%c"))
+      call setline(5,"")
+      call setline(6,"module (")
+      call setline(7,");")
+      call setline(8,"endmodule")
     endif
   endfunc
   func! PFmoveDefine()
@@ -38,6 +38,8 @@ if !exists("*s:pbegin_add")
   endfunc
 endif
 
+nmap ; A;<Esc>
+vmap ; :s/$/;/<cr>
 func! AddHead()
     call s:YSetTitle()
 endfunc
