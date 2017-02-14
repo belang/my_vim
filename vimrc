@@ -2,9 +2,14 @@
 set nocompatible
 filetype off 
 
+if has('win32')
+	set rtp+=~/vimfiles/bundle/Vundle.vim
+	call vundle#begin('~/vimfiles/bundle/Vundle.vim')
+elseif has('unix')
+	set rtp+=~/.vim/bundle/Vundle.vim
+	call vundle#begin()
+endif
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 " let Vundle manage Vundle, required
@@ -36,11 +41,19 @@ filetype plugin indent on
 if has('win32')
     source $VIMRUNTIME/mswin.vim
     au GUIEnter * simalt ~x
-    set fileformat=dos
+    set fileformat=unix
+    set encoding=utf-8
+    set langmenu=zh_CN.UTF-8
+    language message zh_CN.UTF-8
+    "处理菜单及右键菜单乱码
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim
+    unmap <C-V>
+    cunmap <C-V>
 "    " tags
 "    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
 elseif has('unix')
-    set fileformat=unix
+    "set fileformat=unix
 "    let g:tagbar_ctags_bin = '/usr/bin/ctags'
     noremap <C-h> :VimwikiGoBackLink<cr>
 endif
@@ -59,7 +72,7 @@ autocmd BufReadPost *
 "autocmd BufRead,BufNewFile *.py exec "source ~/my_vim/dyPy.vim"
 "autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/dyVerilog.vim"
 "autocmd BufRead,BufNewFile *.rst exec "source ~/my_vim/ftplugin/rst/dyRst.vim"
-noremap <C-d>h :call AddHead()<cr>
+noremap <C-e>h :call AddHead()<cr>
 autocmd BufRead,BufNewFile *.wsdl setf xml
 autocmd BufRead,BufNewFile *.xsd setf xml
 autocmd BufRead,BufNewFile *.rst setf rst
@@ -86,7 +99,7 @@ set autochdir
 "colorscheme pablo
 colorscheme desert
 
-"set foldmethod=marker
+set foldmethod=marker
 set foldnestmax=3
 set foldignore=~
 " language set ******************
@@ -101,12 +114,17 @@ set foldignore=~
 "endif
 set fileencoding=utf-8
 " 设置文件编码检测类型及支持格式
-set fileencodings=utf-8,gbk,ucs-bom,gb18030,gb2312,cp936
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
 " vimwiki set ******************
 let g:vimwiki_list = [{'path': '~/work_wiki/', 
     \ 'path_html': '~/public_html/',
     \ 'template_path': '~/work_wiki/template/',
+    \ 'template_default': 'template',
+    \ 'template_ext': '.html'},
+    \ {'path': '~/office/', 
+    \ 'path_html': '~/office/public_html/',
+    \ 'template_path': '~/office/template/',
     \ 'template_default': 'template',
     \ 'template_ext': '.html'}]
 
@@ -114,7 +132,8 @@ inoremap <F5> <br />
 " vimwiki set ******************
 "
 " global key map
-iab xdate <c-r>=strftime("%c wd%w # ")<C-I>
+iab xdate <c-r>=strftime("%c wd%w # ")
+iab xday <c-r>=strftime("%Y-%m-%d")
 iab vimhome <c-r>=$HOME<C-I>
 iab cdir <c-r>=pwd<C-I>
 
@@ -122,7 +141,6 @@ iab cdir <c-r>=pwd<C-I>
 "let python = 'd:/Python34/python.exe'
 " python *************
 map <F12> :!python.exe %
-noremap <SPACE> o""" """<Esc>
 "map :!'d:/Python34/python.exe' %
 
 " eclim python set ******************

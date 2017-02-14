@@ -4,12 +4,30 @@
 " C-E是调用函数的前缀。
 " sh* : 章节标题*
 " tbh : 在表格当前行的上一行增加一行+--+结构。
+" axl : 增加顺序号
+"
+
+if exists("b:did_ftplugin")
+  finish
+endif
+let b:did_ftplugin = 1  " Don't load another plugin for this buffer
+
+set tabstop=4 
+set softtabstop=0 
+set shiftwidth=4 
+set textwidth=79 
+set expandtab 
+set backspace=eol,start whichwrap+=<,>,[,]
 
 nnoremap <C-E>sh1 :call rst#dyAddSectionHead(1)<Enter>
 nnoremap <C-E>sh2 :call rst#dyAddSectionHead(2)<Enter>
 nnoremap <C-E>sh3 :call rst#dyAddSectionHead(3)<Enter>
-
 nnoremap <buffer> <C-E>tbh :call rst#dyAddTblPluse()<Enter>
+
+" COMMAND {{{
+command! -buffer -nargs=* AddNumList call rst#dyAddNumerousList(<f-args>)
+" COMMAND }}}
+
 "nnoremap <buffer> <CR> :call rst#dyGoToRstFile()<Enter>
 " {{{1 Create/Modify Title
 "fun! s:is_title(str) "{{{
@@ -83,5 +101,17 @@ function! rst#dyAddTblPluse() "{{{
     let new_row .= '+'
     "echo new_row
     call append(tar_row,new_row)
+endfunction "}}}
+
+function! rst#dyAddNumerousList(length) "{{{
+	let row_num = line('.')
+	let row_content = getline(row_num)
+	for current_line in range(a:length)
+		let list_num = current_line+1
+		let row_content = list_num.'. '.row_content
+		call setline(row_num, row_content)
+		let row_num += 1
+		let row_content = getline(row_num)
+	endfor
 endfunction "}}}
 

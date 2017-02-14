@@ -1,3 +1,7 @@
+if exists("b:did_ftplugin")
+  finish
+endif
+let b:did_ftplugin = 1  " Don't load another plugin for this buffer
 set tabstop=4 
 set softtabstop=4 
 set shiftwidth=4 
@@ -50,6 +54,7 @@ func! s:createUnitTest()
     call setline(11,"")
 endfunc
 
-noremap <C-d>init :call <SID>dyPyInit()<cr>
-noremap <C-d>test :call <SID>createUnitTest()<cr>
+noremap <C-e>init :call <SID>dyPyInit()<cr>
+noremap <C-e>test :call <SID>createUnitTest()<cr>
+noremap <SPACE> o""" """<Esc>
 
