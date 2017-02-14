@@ -99,7 +99,7 @@ set autochdir
 "colorscheme pablo
 colorscheme desert
 
-"set foldmethod=marker
+set foldmethod=marker
 set foldnestmax=3
 set foldignore=~
 " language set ******************
@@ -121,6 +121,11 @@ let g:vimwiki_list = [{'path': '~/work_wiki/',
     \ 'path_html': '~/public_html/',
     \ 'template_path': '~/work_wiki/template/',
     \ 'template_default': 'template',
+    \ 'template_ext': '.html'},
+    \ {'path': '~/office/', 
+    \ 'path_html': '~/office/public_html/',
+    \ 'template_path': '~/office/template/',
+    \ 'template_default': 'template',
     \ 'template_ext': '.html'}]
 
 inoremap <F5> <br />
@@ -136,7 +141,6 @@ iab cdir <c-r>=pwd<C-I>
 "let python = 'd:/Python34/python.exe'
 " python *************
 map <F12> :!python.exe %
-noremap <SPACE> o""" """<Esc>
 "map :!'d:/Python34/python.exe' %
 
 " eclim python set ******************
