@@ -2,13 +2,19 @@
 set nocompatible
 filetype off 
 
-if has('win32')
+"if has('win32')
+if $OS =~ "Windows.*"
 	set rtp+=~/vimfiles/bundle/Vundle.vim
 	call vundle#begin('~/vimfiles/bundle/Vundle.vim')
-elseif has('unix')
+"elseif has('unix')
+elseif $OS =~ "Unix"
+	set rtp+=~/.vim/bundle/Vundle.vim
+	call vundle#begin()
+else
 	set rtp+=~/.vim/bundle/Vundle.vim
 	call vundle#begin()
 endif
+
 " set the runtime path to include Vundle and initialize
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
