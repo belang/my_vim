@@ -27,10 +27,11 @@ Plugin 'mathjax/MathJax'
 Plugin 'othree/xml.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'garbas/vim-snipmate'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 "Plugin 'majutsushi/tagbar'
 "Plugin 'vim-scripts/DrawIt'
 "Plugin 'plasticboy/vim-markdown'
@@ -75,9 +76,6 @@ autocmd BufReadPost *
 \ endif
 
 "" file type set ******************
-"autocmd BufRead,BufNewFile *.py exec "source ~/my_vim/dyPy.vim"
-"autocmd BufRead,BufNewFile *.v exec "source $HOME/my_vim/dyVerilog.vim"
-"autocmd BufRead,BufNewFile *.rst exec "source ~/my_vim/ftplugin/rst/dyRst.vim"
 noremap <C-e>h :call AddHead()<cr>
 autocmd BufRead,BufNewFile *.wsdl setf xml
 autocmd BufRead,BufNewFile *.xsd setf xml
