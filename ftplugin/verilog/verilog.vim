@@ -38,8 +38,10 @@ if !exists("*s:pbegin_add")
       call setline(4,"// time: ".strftime("%c"))
       call setline(5,"")
       call setline(6,"module (")
-      call setline(7,");")
-      call setline(8,"endmodule")
+      call setline(7,"input clk,")
+      call setline(8,"input rst_n,")
+      call setline(9,");")
+      call setline(10,"endmodule")
     endif
   endfunc
   func! PFmoveDefine()
@@ -70,9 +72,9 @@ func! Always(pos_neg, high_low)
   let cur_line += 1
   let lines = "    if ("
   if a:high_low == 1
-    let lines .= "rst_n) begin"
+    let lines .= "rst) begin"
   else  
-    let lines .= "!rst) begin"
+    let lines .= "!rst_n) begin"
   endif
   call append(cur_line, lines)
   let cur_line += 1

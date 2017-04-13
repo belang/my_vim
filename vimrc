@@ -21,7 +21,6 @@ endif
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'vimwiki/vimwiki'
 Plugin 'godlygeek/tabular'
 Plugin 'mathjax/MathJax'
 Plugin 'othree/xml.vim'
@@ -32,6 +31,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+Plugin 'vimwiki/vimwiki'
 "Plugin 'majutsushi/tagbar'
 "Plugin 'vim-scripts/DrawIt'
 "Plugin 'plasticboy/vim-markdown'
@@ -57,6 +57,8 @@ if has('win32')
     source $VIMRUNTIME/menu.vim
     unmap <C-V>
     cunmap <C-V>
+    unmap <C-Y>
+    iunmap <C-Y>
 "    " tags
 "    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
 elseif has('unix')
@@ -121,9 +123,9 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
 " vimwiki set ******************
-let g:vimwiki_list = [{'path': '~/work_wiki/', 
+let g:vimwiki_list = [{'path': '~/wiki/', 
     \ 'path_html': '~/public_html/',
-    \ 'template_path': '~/work_wiki/template/',
+    \ 'template_path': '~/wiki/template/',
     \ 'template_default': 'template',
     \ 'template_ext': '.html'},
     \ {'path': '~/office/', 

@@ -24,6 +24,7 @@ nnoremap <C-E>sh2 :call rst#dyAddSectionHead(2)<Enter>
 nnoremap <C-E>sh3 :call rst#dyAddSectionHead(3)<Enter>
 nnoremap <buffer> <C-E>tbh :call rst#dyAddTblPluse()<Enter>
 nnoremap <buffer> <C-E>tbe :call rst#dyAddTblEqual()<Enter>
+nnoremap <CR> gf
 
 " COMMAND {{{
 command! -buffer -nargs=* AddNumList call rst#dyAddNumerousList(<f-args>)
