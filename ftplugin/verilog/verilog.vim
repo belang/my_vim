@@ -19,7 +19,28 @@ nnoremap <C-E>gnl :call GenNumList()<cr>
 nmap ; A;<Esc>
 vmap ; :s/$/;/<cr>/asdf<cr>
 
-if !exists("*s:pbegin_add")
+" verilog header:
+"if !exists("YSetTitle")
+func s:YSetTitle()
+    if &filetype == 'verilog'
+        let fname = "".expand("%")
+        let module_name = substitute(fname, "\(.*\).v", "\1", '')
+        call setline(1,"`timescale 1ns/1ps")
+        call setline(2,"// file name: ".fname)
+        call setline(3,"// author: lianghy")
+        call setline(4,"// time: ".strftime("%c"))
+        call setline(5,"")
+        call setline(6,"module ".module_name."(")
+        call setline(7,"input clk,")
+        call setline(8,"input rst_n,")
+        call setline(9,");")
+        call setline(10,"endmodule")
+  endif
+endfunc
+
+" vim function
+"
+
   "delfunction s:pbegin_add
   function s:pbegin_add()
     execute "normal! aif () begin\rend\relse begin\rend"
@@ -28,38 +49,22 @@ if !exists("*s:pbegin_add")
   inoremap <buffer> if<Space>begin <Esc>:call <SID>pbegin_add()<cr>
 "endif
 
-" verilog header:
-"if !exists("YSetTitle")
-  func s:YSetTitle()
-    if &filetype == 'verilog'
-      call setline(1,"`timescale 1ns/1ps")
-      call setline(2,"// file name: ".expand("%"))
-      call setline(3,"// author: lianghy")
-      call setline(4,"// time: ".strftime("%c"))
-      call setline(5,"")
-      call setline(6,"module (")
-      call setline(7,"input clk,")
-      call setline(8,"input rst_n,")
-      call setline(9,");")
-      call setline(10,"endmodule")
+func! PFmoveDefine()
+  for line in getline(1, line("$"))
+    if line ~= '^always ' || line ~= '^assign '
+      let s:llinepos = line('.')-1
+      break
     endif
-  endfunc
-  func! PFmoveDefine()
+  endfor
+  if exist("s:llinepos")
     for line in getline(1, line("$"))
-      if line ~= '^always ' || line ~= '^assign '
-        let s:llinepos = line('.')-1
+      if line ~= '^reg ' || line ~= '^wire '
         break
       endif
     endfor
-    if exist("s:llinepos")
-      for line in getline(1, line("$"))
-        if line ~= '^reg ' || line ~= '^wire '
-          break
-        endif
-      endfor
-    endif
-  endfunc
-endif
+  endif
+endfunc
+
 func! Always(pos_neg, high_low)
   let cur_line = line('.')
   let lines = "always @("

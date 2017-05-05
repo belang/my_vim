@@ -78,13 +78,12 @@ autocmd BufReadPost *
 \   exe "normal! g`\"" |
 \ endif
 
-"" file type set ******************
-noremap <C-e>h :call AddHead()<cr>
-autocmd BufRead,BufNewFile *.wsdl setf xml
-autocmd BufRead,BufNewFile *.xsd setf xml
-autocmd BufRead,BufNewFile *.rst setf rst
-" file type set ******************
-
+set tabstop=4 
+set softtabstop=4 
+set shiftwidth=4 
+set textwidth=79 
+set expandtab 
+set autoindent 
 " basic set ******************
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -125,13 +124,8 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
 " vimwiki set ******************
 let g:vimwiki_list = [{'path': '~/wiki/', 
-    \ 'path_html': '~/public_html/',
+    \ 'path_html': '~/wiki/public_html/',
     \ 'template_path': '~/wiki/template/',
-    \ 'template_default': 'template',
-    \ 'template_ext': '.html'},
-    \ {'path': '~/office/', 
-    \ 'path_html': '~/office/public_html/',
-    \ 'template_path': '~/office/template/',
     \ 'template_default': 'template',
     \ 'template_ext': '.html'}]
 
@@ -144,10 +138,17 @@ iab xday <c-r>=strftime("%Y-%m-%d")
 iab vimhome <c-r>=$HOME<C-I>
 iab cdir <c-r>=pwd<C-I>
 
+"" file type set ******************
+noremap <C-e>h :call AddHead()<cr>
+autocmd BufRead,BufNewFile *.wsdl setf xml
+autocmd BufRead,BufNewFile *.xsd setf xml
+autocmd BufRead,BufNewFile *.rst setf rst
+" file type set ******************
+
 
 "let python = 'd:/Python34/python.exe'
 " python *************
-map <F12> :!python.exe %
+" map <F12> :!python.exe %
 "map :!'d:/Python34/python.exe' %
 
 " eclim python set ******************
