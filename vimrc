@@ -47,8 +47,8 @@ filetype plugin indent on
 
 "source $VIMRUNTIME/vimrc_example.vim
 if has('win32')
-    source $VIMRUNTIME/mswin.vim
-    au GUIEnter * simalt ~x
+    "source $VIMRUNTIME/mswin.vim
+    "au GUIEnter * simalt ~x
     set fileformat=unix
     set encoding=utf-8
     set langmenu=zh_CN.UTF-8
@@ -57,10 +57,10 @@ if has('win32')
     "处理菜单及右键菜单乱码
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
-    unmap <C-V>
-    cunmap <C-V>
-    unmap <C-Y>
-    iunmap <C-Y>
+    "unmap <C-V>
+    "cunmap <C-V>
+    "unmap <C-Y>
+    "iunmap <C-Y>
 "    " tags
 "    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
 elseif has('unix')
