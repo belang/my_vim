@@ -52,6 +52,7 @@ if has('win32')
     set fileformat=unix
     set encoding=utf-8
     set langmenu=zh_CN.UTF-8
+    set guifont=新宋体:h14
     language message zh_CN.UTF-8
     "处理菜单及右键菜单乱码
     source $VIMRUNTIME/delmenu.vim
