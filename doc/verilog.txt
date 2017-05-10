@@ -1,4 +1,8 @@
 *verilog.txt*	Plugin for verilog
 
 ; 在行尾添加分号，支持单行和多行模式。
-<C-E>imp : 引用子模块
+<C-E>aph : 添加alwase posedge high reset
+<C-E>apl : 添加alwase posedge low reset
+<C-E>anh : 添加alwase negedge high reset
+<C-E>anl : 添加alwase negedge low reset
+<C-E>gnl : 生成数字列表0-9
