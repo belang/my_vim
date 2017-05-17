@@ -48,7 +48,7 @@ filetype plugin indent on
 "source $VIMRUNTIME/vimrc_example.vim
 if has('win32')
     "source $VIMRUNTIME/mswin.vim
-    "au GUIEnter * simalt ~x
+    au GUIEnter * simalt ~x
     set fileformat=unix
     set encoding=utf-8
     set langmenu=zh_CN.UTF-8
