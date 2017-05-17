@@ -125,18 +125,18 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
 " vimwiki set ******************
 let g:vimwiki_list = [
-    \ {'path': '~/work/wiki/', 
-    \ 'path_html': '~/work/wiki/public_html/',
+    \ {'path': '~/work_wiki/', 
+    \ 'path_html': '~/work_wiki/public_html/',
     \ 'syntax': 'markdown',
     \ 'ext': '.md',
-    \ 'template_path': '~/work/wiki/template/',
+    \ 'template_path': '~/work_wiki/template/',
     \ 'template_default': 'template',
     \ 'template_ext': '.html'},
-    \{'path': '~/job/wiki/', 
-    \ 'path_html': '~/job/wiki/public_html/',
+    \{'path': '~/job_wiki/', 
+    \ 'path_html': '~/job_wiki/public_html/',
     \ 'syntax': 'markdown',
     \ 'ext': '.md',
-    \ 'template_path': '~/job/wiki/template/',
+    \ 'template_path': '~/job_wiki/template/',
     \ 'template_default': 'template',
     \ 'template_ext': '.html'}]
 
