@@ -16,6 +16,7 @@ set autoindent
 vnoremap <C-E>imp :s/\(\S*\),/.\1 (\1),/<cr>
 nmap ; A;<Esc>
 vmap ; :s/$/;/<cr>/asdf<cr>
+nmap , g$x
 
 " verilog header:
 func! YSetTitle()
