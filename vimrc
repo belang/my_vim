@@ -48,6 +48,8 @@ filetype plugin indent on
 "source $VIMRUNTIME/vimrc_example.vim
 if has('win32')
     "source $VIMRUNTIME/mswin.vim
+    " backspace and cursor keys wrap to previous/next line
+    set backspace=indent,eol,start whichwrap+=<,>,[,]
     au GUIEnter * simalt ~x
     set fileformat=unix
     set encoding=utf-8
