@@ -19,11 +19,11 @@ set textwidth=79
 set expandtab 
 set backspace=eol,start whichwrap+=<,>,[,]
 
-nnoremap <C-E>sh1 :call rst#dyAddSectionHead(1)<Enter>
-nnoremap <C-E>sh2 :call rst#dyAddSectionHead(2)<Enter>
-nnoremap <C-E>sh3 :call rst#dyAddSectionHead(3)<Enter>
-nnoremap <buffer> <C-E>tbh :call rst#dyAddTblPluse()<Enter>
-nnoremap <buffer> <C-E>tbe :call rst#dyAddTblEqual()<Enter>
+nnoremap <C-E>h1 :call rst#dyAddSectionHead(1)<Enter>
+nnoremap <C-E>h2 :call rst#dyAddSectionHead(2)<Enter>
+nnoremap <C-E>h3 :call rst#dyAddSectionHead(3)<Enter>
+nnoremap <buffer> <C-E>thp :call rst#dyAddTblPluse()<Enter>
+nnoremap <buffer> <C-E>the :call rst#dyAddTblEqual()<Enter>
 nnoremap <CR> gf
 
 " COMMAND {{{
