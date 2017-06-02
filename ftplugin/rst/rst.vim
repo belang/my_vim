@@ -15,7 +15,7 @@ let b:did_ftplugin = 1  " Don't load another plugin for this buffer
 set tabstop=4 
 set softtabstop=0 
 set shiftwidth=4 
-set textwidth=79 
+"set textwidth=79 
 set expandtab 
 set backspace=eol,start whichwrap+=<,>,[,]
 
