@@ -33,12 +33,13 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/VisIncr'
 Plugin 'vim-scripts/DrawIt'
+Plugin 'Rykka/riv.vim'
+Plugin 'Rykka/rhythm.css'
+Plugin 'Rykka/InstantRst'
 "Plugin 'vimwiki/vimwiki'
 "Plugin 'majutsushi/tagbar'
 "Plugin 'plasticboy/vim-markdown'
 "Plugin 'mattn/emmet-vim'
-"Plugin 'Rykka/riv.vim'
-"Plugin 'Rykka/rhythm.css'
 "Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()            " required
@@ -126,14 +127,10 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
 " vimwiki set ******************
-let g:vimwiki_list = [
-    \ {'path': '~/abraham/', 
-    \ 'path_html': '~/abraham/public_html/',
-    \ 'syntax': 'markdown',
-    \ 'ext': '.md',
-    \ 'template_path': '~/abraham/template/',
-    \ 'template_default': 'template',
-    \ 'template_ext': '.html'}]
+let proj1 = { 'path': '~/work',}
+let proj2 = { 'path': '~/info',}
+let proj3 = { 'path': '~/project',}
+let g:riv_projects = [proj1, proj2, proj3]
 
 inoremap <F5> <br />
 " vimwiki set ******************

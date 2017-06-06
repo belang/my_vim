@@ -19,12 +19,12 @@ set shiftwidth=4
 set expandtab 
 set backspace=eol,start whichwrap+=<,>,[,]
 
-nnoremap <C-E>h1 :call rst#dyAddSectionHead(1)<Enter>
-nnoremap <C-E>h2 :call rst#dyAddSectionHead(2)<Enter>
-nnoremap <C-E>h3 :call rst#dyAddSectionHead(3)<Enter>
-nnoremap <buffer> <C-E>thp :call rst#dyAddTblPluse()<Enter>
-nnoremap <buffer> <C-E>the :call rst#dyAddTblEqual()<Enter>
-nnoremap <CR> gf
+"nnoremap <C-E>h1 :call rst#dyAddSectionHead(1)<Enter>
+"nnoremap <C-E>h2 :call rst#dyAddSectionHead(2)<Enter>
+"nnoremap <C-E>h3 :call rst#dyAddSectionHead(3)<Enter>
+"nnoremap <buffer> <C-E>thp :call rst#dyAddTblPluse()<Enter>
+"nnoremap <buffer> <C-E>the :call rst#dyAddTblEqual()<Enter>
+"nnoremap <CR> gf
 
 " COMMAND {{{
 command! -buffer -nargs=* AddNumList call rst#dyAddNumerousList(<f-args>)
