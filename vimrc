@@ -127,10 +127,15 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
 " vimwiki set ******************
-let proj1 = { 'path': '~/work',}
-let proj2 = { 'path': '~/info',}
-let proj3 = { 'path': '~/project',}
-let g:riv_projects = [proj1, proj2, proj3]
+let proj1 = { 'path': '~/000_document'}
+let proj2 = { 'path': '~/001_material'}
+let proj3 = { 'path': '~/010_download'}
+let proj4 = { 'path': '~/011_multimedia'}
+let proj5 = { 'path': '~/100_tmp'}
+let proj6 = { 'path': '~/101_script'}
+let proj7 = { 'path': '~/110_project'}
+let proj8 = { 'path': '~/111_work'}
+let g:riv_projects = [proj1, proj2, proj3, proj4, proj5, proj6, proj7, proj8]
 
 inoremap <F5> <br />
 " vimwiki set ******************
