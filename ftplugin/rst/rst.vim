@@ -23,11 +23,11 @@ set backspace=eol,start whichwrap+=<,>,[,]
 "nnoremap <C-E>h2 :call rst#dyAddSectionHead(2)<Enter>
 "nnoremap <C-E>h3 :call rst#dyAddSectionHead(3)<Enter>
 "nnoremap <buffer> <C-E>thp :call rst#dyAddTblPluse()<Enter>
-"nnoremap <buffer> <C-E>the :call rst#dyAddTblEqual()<Enter>
+nnoremap <buffer> <C-E>the :call rst#dyAddTblEqual()<Enter>
 "nnoremap <CR> gf
 
 " COMMAND {{{
-command! -buffer -nargs=* AddNumList call rst#dyAddNumerousList(<f-args>)
+"command! -buffer -nargs=* AddNumList call rst#dyAddNumerousList(<f-args>)
 " COMMAND }}}
 
 "nnoremap <buffer> <CR> :call rst#dyGoToRstFile()<Enter>
@@ -107,8 +107,9 @@ endfunction "}}}
 
 function! rst#dyAddTblEqual() "{{{
     "两个状态：EMPTY和CELL，EMPTY表示空格或初始，CELL代表字符。
-    "检测到非空时，开始置CELL，将字符加入字符串，遇到空时，记算字符列表长度，加入总长度列表。
+    "检测到非空时，开始置CELL，将字符加入字符串，遇到两个以上的空格时，记算字符列表长度，加入总长度列表。
     let state = 'EMPTY'
+    let last_state = 'EMPTY'
     let cell_length = []
     let length = 0
     let cell_str = ''
@@ -119,30 +120,33 @@ function! rst#dyAddTblEqual() "{{{
         let ch = cur_row_context[idx]
         if state ==# 'EMPTY'
             if ch != ' '
-                let state = 'CELL'
-                let length = 0
-                let cell_str .= ch
-                continue
-            endif
-        elseif state ==# 'CELL'
-            if ch == ' '
-                let state = 'EMPTY'
-                let length = s:strdiswidth(cell_str)
-                call add(cell_length, length)
-                let length = 0
-                let cell_str = ''
-            else
-                let cell_str .= ch
+                if last_state ==# 'EMPTY'
+                    let length = s:strdiswidth(cell_str) - 2
+                    call add(cell_length, length)
+                    let length = 0
+                    let cell_str = ''
+                endif
             endif
         endif
+        if ch == ' '
+            let last_state = state
+            let state = 'EMPTY'
+        else
+            let last_state = state
+            let state = 'CELL'
+        endif
+        let cell_str .= ch
     endfor
     let length = s:strdiswidth(cell_str)
     call add(cell_length, length)
     for clen in cell_length
-	let cur_row_len = strlen(new_row)
-	if cur_row_len != 0
+        if clen <= 0
+            continue
+        endif
+        let cur_row_len = strlen(new_row)
+        if cur_row_len != 0
             let new_row .= '  '
-	endif
+        endif
         for plen in range(clen)
             let new_row .= '='
         endfor

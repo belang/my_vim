@@ -88,6 +88,8 @@ set shiftwidth=4
 set textwidth=79 
 set expandtab 
 set autoindent 
+set formatoptions+=m
+
 " basic set ******************
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -126,7 +128,7 @@ set fileencoding=utf-8
 " 设置文件编码检测类型及支持格式
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
-" vimwiki set ******************
+" vimwiki set -- RIV ******************
 let proj1 = { 'path': '~/000_document'}
 let proj2 = { 'path': '~/001_material'}
 let proj3 = { 'path': '~/010_download'}
@@ -136,6 +138,7 @@ let proj6 = { 'path': '~/101_script'}
 let proj7 = { 'path': '~/110_project'}
 let proj8 = { 'path': '~/111_work'}
 let g:riv_projects = [proj1, proj2, proj3, proj4, proj5, proj6, proj7, proj8]
+let g:riv_auto_format_table = 0
 
 inoremap <F5> <br />
 " vimwiki set ******************
