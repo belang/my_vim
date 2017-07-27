@@ -14,9 +14,58 @@ set autoindent
 
 " import
 vnoremap <C-E>imp :s/\(\S*\),/.\1 (\1),/<cr>
+nnoremap <buffer> <C-E>apl :call verilog#dyAddPinList()<Enter>
 nmap ; A;<Esc>
 vmap ; :s/$/;/<cr>/asdf<cr>
 nmap , g$x
+
+" add pins to module define
+"
+func! verilog#dyAddPinList()
+    let total_lines = line("$")
+    let line_num = 0
+    let module_head_line_num = 1000000
+    let pin_list = []
+    while line_num <= total_lines
+        let line_str = getline(line_num)
+        if line_str =~ '^module.*'
+            let module_head_line_num = line_num
+        elseif line_str =~ '^ *input .*'
+            let sub_str = substitute(line_str, ';', '', 'g')
+            let sub_str_list = split(sub_str, ' \+')
+            for one_pin in sub_str_list[1:-1]
+                if one_pin =~ '[.*'
+                    continue
+                endif
+                let one_pin = substitute(one_pin, ',', '', 'g')
+                call add(pin_list, one_pin)
+            endfor
+        elseif line_str =~ '^ *output .*'
+            let sub_str = substitute(line_str, ';', '', 'g')
+            let sub_str_list = split(sub_str, ' \+')
+            for one_pin in sub_str_list[1:-1]
+                if one_pin =~ '[.*'
+                    continue
+                endif
+                let one_pin = substitute(one_pin, ',', '', 'g')
+                call add(pin_list, one_pin)
+            endfor
+        endif
+        let line_num = line_num +1
+    endwhile
+    if module_head_line_num == 1000000
+        exit
+    endif
+    if len(pin_list) > 0
+        let tmp_num = module_head_line_num
+        for pin in pin_list
+            let pin_line = "    " . pin . ','
+            call append(tmp_num, pin_line)
+            let tmp_num = tmp_num + 1
+        endfor
+    endif
+endfunction
+
 
 " verilog header:
 func! YSetTitle()
