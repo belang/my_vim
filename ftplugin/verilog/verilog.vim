@@ -13,7 +13,7 @@ set autoindent
 "nnoremap <C-E>anl :call Always(0, 0)<cr>
 
 " import
-vnoremap <C-E>imp :s/\(\S*\),/.\1 (\1),/<cr>
+vnoremap <C-E>imp :s/ *\(\%(i_\)\\|\%(o_\)\)\?\([^,]*\)\(,\?\)/    .\1\2 (\2)\3/<cr>
 nnoremap <buffer> <C-E>apl :call verilog#dyAddPinList()<Enter>
 nmap ; A;<Esc>
 vmap ; :s/$/;/<cr>/asdf<cr>
@@ -63,6 +63,8 @@ func! verilog#dyAddPinList()
             call append(tmp_num, pin_line)
             let tmp_num = tmp_num + 1
         endfor
+        let last_line = getline(tmp_num)
+        call setline(tmp_num, last_line[0:-2])
     endif
 endfunction
 
@@ -78,11 +80,9 @@ func! YSetTitle()
         call setline(6 ,"`include \"define.v\"")
         call setline(7 ,"")
         call setline(8 ,"module (")
-        call setline(9 ,"    clk,")
-        call setline(10,"    rst_n,")
-        call setline(11,");")
-        call setline(12,"input clk, rst_n;")
-        call setline(13,"endmodule")
+        call setline(9 ,");")
+        call setline(10,"input clk, rst_n;")
+        call setline(11,"endmodule")
       endif
 endfunc
 
