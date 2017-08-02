@@ -2,9 +2,7 @@
 " 说明
 " 为了便于完成reStructureText格式文件，本文提供了一些快捷方式。
 " C-E是调用函数的前缀。
-" sh* : 章节标题*
 " tbh : 在表格当前行的上一行增加一行+--+结构。
-" axl : 增加顺序号
 "
 
 if exists("b:did_ftplugin")
@@ -17,7 +15,7 @@ set softtabstop=0
 set shiftwidth=4 
 "set textwidth=79 
 set expandtab 
-set backspace=eol,start whichwrap+=<,>,[,]
+"set backspace=eol,start whichwrap+=<,>,[,]
 
 "nnoremap <C-E>h1 :call rst#dyAddSectionHead(1)<Enter>
 "nnoremap <C-E>h2 :call rst#dyAddSectionHead(2)<Enter>
