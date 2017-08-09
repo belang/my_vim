@@ -1,3 +1,3 @@
 #! bash
 
-mv ./.bash_aliases ~/.
+cp ./.bash_aliases ~/.
