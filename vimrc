@@ -55,7 +55,7 @@ if has('win32')
     set fileformat=unix
     set encoding=utf-8
     set langmenu=zh_CN.UTF-8
-    set guifont=新宋体:h14
+    set guifont=Consolas:h14
     language message zh_CN.UTF-8
     "处理菜单及右键菜单乱码
     source $VIMRUNTIME/delmenu.vim
@@ -65,10 +65,10 @@ if has('win32')
     "unmap <C-Y>
     "iunmap <C-Y>
 "    " tags
-"    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
+    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
 elseif has('unix')
     "set fileformat=unix
-"    let g:tagbar_ctags_bin = '/usr/bin/ctags'
+    let g:tagbar_ctags_bin = '/usr/bin/ctags'
     noremap <C-h> :VimwikiGoBackLink<cr>
 endif
 
