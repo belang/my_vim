@@ -5,7 +5,6 @@ let b:did_ftplugin = 1  " Don't load another plugin for this buffer
 set tabstop=4 
 set softtabstop=4 
 set shiftwidth=4 
-set textwidth=79 
 set expandtab 
 set autoindent 
 set foldmethod=indent

@@ -35,9 +35,9 @@ Plugin 'vim-scripts/DrawIt'
 Plugin 'Rykka/riv.vim'
 Plugin 'Rykka/rhythm.css'
 Plugin 'Rykka/InstantRst'
+Plugin 'majutsushi/tagbar'
 "Plugin 'mathjax/MathJax'
 "Plugin 'vimwiki/vimwiki'
-"Plugin 'majutsushi/tagbar'
 "Plugin 'plasticboy/vim-markdown'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'Valloric/YouCompleteMe'
@@ -65,10 +65,10 @@ if has('win32')
     "unmap <C-Y>
     "iunmap <C-Y>
 "    " tags
-"    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
+    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
 elseif has('unix')
     "set fileformat=unix
-"    let g:tagbar_ctags_bin = '/usr/bin/ctags'
+    let g:tagbar_ctags_bin = '/usr/bin/ctags'
     noremap <C-h> :VimwikiGoBackLink<cr>
 endif
 
@@ -85,10 +85,13 @@ autocmd BufReadPost *
 set tabstop=4 
 set softtabstop=4 
 set shiftwidth=4 
-set textwidth=79 
+"set textwidth=79 
 set expandtab 
 set autoindent 
 set formatoptions+=m
+set foldmethod=marker
+set foldnestmax=5
+set foldignore="~"
 
 " basic set ******************
 " Switch syntax highlighting on, when the terminal has colors
@@ -111,9 +114,6 @@ set autochdir
 "colorscheme pablo
 colorscheme desert
 
-set foldmethod=marker
-set foldnestmax=3
-set foldignore=~
 " language set ******************
 " 设置编码
 "if has("win32")
@@ -130,7 +130,8 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
 " vimwiki set -- RIV ******************
 let proj1 = { 'path': '~/my_wiki'}
-let g:riv_projects = [proj1]
+let proj2 = { 'path': '~/project'}
+let g:riv_projects = [proj1, proj2]
 let g:riv_auto_format_table = 0
 
 inoremap <F5> <br />

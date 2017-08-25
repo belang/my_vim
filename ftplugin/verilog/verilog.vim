@@ -5,7 +5,6 @@ let b:did_ftplugin = 1  " Don't load another plugin for this buffer
 set tabstop=4 
 set softtabstop=4 
 set shiftwidth=4 
-set textwidth=79 
 set expandtab 
 set autoindent 
 
@@ -26,11 +25,34 @@ func! verilog#dyAddPinList()
     let line_num = 0
     let module_head_line_num = 1000000
     let pin_list = []
+    "search module defination
     while line_num <= total_lines
         let line_str = getline(line_num)
         if line_str =~ '^module.*'
             let module_head_line_num = line_num
-        elseif line_str =~ '^ *input .*'
+            let line_num = line_num +1
+            break
+        endif
+        let line_num = line_num +1
+    endwhile
+    if module_head_line_num == 1000000
+        exit
+    endif
+    "remove origin pin list
+    let cur_pos = line_num
+    while line_num <= total_lines
+        let line_str = getline(cur_pos)
+        if line_str =~ '^);.*'
+            break
+        endif
+        execute(':'.cur_pos.'d')
+        let line_num = line_num +1
+    endwhile
+    let total_lines = line("$")
+    let line_num = 0
+    while line_num <= total_lines
+        let line_str = getline(line_num)
+        if line_str =~ '^ *input .*'
             let sub_str = substitute(line_str, ';', '', 'g')
             let sub_str_list = split(sub_str, ' \+')
             for one_pin in sub_str_list[1:-1]
@@ -53,19 +75,25 @@ func! verilog#dyAddPinList()
         endif
         let line_num = line_num +1
     endwhile
-    if module_head_line_num == 1000000
-        exit
-    endif
+    let line_num = 0
+    let total_lines = line("$")
     if len(pin_list) > 0
-        let tmp_num = module_head_line_num
-        for pin in pin_list
-            let pin_line = "    " . pin . ','
-            call append(tmp_num, pin_line)
-            let tmp_num = tmp_num + 1
-        endfor
-        let last_line = getline(tmp_num)
-        call setline(tmp_num, last_line[0:-2])
+        "add pin list
+        while line_num <= total_lines
+            let line_str = getline(line_num)
+            if line_str =~ '^module.*'
+                break
+            endif
+            let line_num = line_num + 1
+        endwhile
     endif
+    for pin in pin_list
+        let pin_line = "    " . pin . ','
+        call append(line_num, pin_line)
+        let line_num = line_num + 1
+    endfor
+    let line_str = getline(line_num)
+    call setline(line_num, line_str[0:-2])
 endfunction
 
 
