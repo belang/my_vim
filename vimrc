@@ -28,6 +28,8 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
+"Plugin 'vim-scripts/tlib'
+"Plugin 'SirVer/ultisnips'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/VisIncr'
@@ -56,7 +58,8 @@ if has('win32')
     set fileformat=unix
     set encoding=utf-8
     set langmenu=zh_CN.UTF-8
-    set guifont=Consolas:h14
+    "set guifont=Consolas:h14
+    set guifont=DejaVu_Sans_Mono:h14
     language message zh_CN.UTF-8
     "处理菜单及右键菜单乱码
     source $VIMRUNTIME/delmenu.vim
