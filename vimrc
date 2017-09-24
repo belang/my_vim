@@ -5,7 +5,7 @@ filetype off
 "if has('win32')
 if $OS =~ "Windows.*"
 	set rtp+=~/vimfiles/bundle/Vundle.vim
-	call vundle#begin('~/vimfiles/bundle/Vundle.vim')
+	call vundle#begin('~/vimfiles/bundle')
 "elseif has('unix')
 elseif $OS =~ "Unix"
 	set rtp+=~/.vim/bundle/Vundle.vim
@@ -36,6 +36,7 @@ Plugin 'Rykka/riv.vim'
 Plugin 'Rykka/rhythm.css'
 Plugin 'Rykka/InstantRst'
 Plugin 'majutsushi/tagbar'
+Plugin 'rkulla/pydiction'
 "Plugin 'mathjax/MathJax'
 "Plugin 'vimwiki/vimwiki'
 "Plugin 'plasticboy/vim-markdown'
@@ -66,6 +67,7 @@ if has('win32')
     "iunmap <C-Y>
 "    " tags
     let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
+    let g:pydiction_location = '$HOME/vimfiles/bundle/pydiction/complete-dict'
 elseif has('unix')
     "set fileformat=unix
     let g:tagbar_ctags_bin = '/usr/bin/ctags'
