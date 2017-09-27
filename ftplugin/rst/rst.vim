@@ -10,11 +10,11 @@ if exists("b:did_ftplugin")
 endif
 let b:did_ftplugin = 1  " Don't load another plugin for this buffer
 
-set tabstop=4 
-set softtabstop=0 
-set shiftwidth=4 
-"set textwidth=79 
-set expandtab 
+set tabstop=3
+set softtabstop=0
+set shiftwidth=3
+"set textwidth=79
+set expandtab
 "set backspace=eol,start whichwrap+=<,>,[,]
 
 "nnoremap <C-E>h1 :call rst#dyAddSectionHead(1)<Enter>
