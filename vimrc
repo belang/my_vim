@@ -27,8 +27,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-"Plugin 'tomtom/tlib_vim'
-Plugin 'vim-scripts/tlib'
+Plugin 'tomtom/tlib_vim'
+"Plugin 'vim-scripts/tlib'
 "Plugin 'SirVer/ultisnips'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
@@ -39,7 +39,7 @@ Plugin 'Rykka/rhythm.css'
 Plugin 'Rykka/InstantRst'
 Plugin 'majutsushi/tagbar'
 Plugin 'rkulla/pydiction'
-Plugin 'mathjax/MathJax'
+"Plugin 'mathjax/MathJax'
 "Plugin 'vimwiki/vimwiki'
 "Plugin 'plasticboy/vim-markdown'
 "Plugin 'mattn/emmet-vim'
@@ -70,6 +70,7 @@ if has('win32')
     "iunmap <C-Y>
 "    " tags
     let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
+    let g:pydiction_location = '$HOME/vimfiles/bundle/pydiction/complete-dict'
 elseif has('unix')
     "set fileformat=unix
     let g:tagbar_ctags_bin = '/usr/bin/ctags'
