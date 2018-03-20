@@ -5,13 +5,13 @@
 " tbh : 在表格当前行的上一行增加一行+--+结构。
 "
 
-if exists("b:did_ftplugin")
+if exists("b:lhy_ftplugin")
   finish
 endif
-let b:did_ftplugin = 1  " Don't load another plugin for this buffer
+let b:lhy_ftplugin = 1  " Don't load another plugin for this buffer
 
-set tabstop=3
-set softtabstop=0
+set tabstop=3 
+set softtabstop=3
 set shiftwidth=3
 "set textwidth=79
 set expandtab
