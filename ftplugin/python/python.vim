@@ -56,4 +56,4 @@ endfunc
 noremap <C-e>init :call <SID>dyPyInit()<cr>
 noremap <C-e>test :call <SID>createUnitTest()<cr>
 noremap <SPACE> o""" """<Esc>
-
+nnoremap <silent> <buffer> <cr> :PythonSearchContext<cr>

@@ -74,6 +74,7 @@ if has('win32')
 elseif has('unix')
     "set fileformat=unix
     let g:tagbar_ctags_bin = '/usr/bin/ctags'
+    let g:pydiction_location = '$HOME/.vim/bundle/pydiction/complete-dict'
     noremap <C-h> :VimwikiGoBackLink<cr>
 endif
 
