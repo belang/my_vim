@@ -27,8 +27,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-"Plugin 'vim-scripts/tlib'
+"Plugin 'tomtom/tlib_vim'
+Plugin 'vim-scripts/tlib'
 "Plugin 'SirVer/ultisnips'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
@@ -138,7 +138,7 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 let proj1 = { 'path': '~/my_wiki'}
 let proj2 = { 'path': '~/project'}
 let g:riv_projects = [proj1, proj2]
-let g:riv_auto_format_table = 0
+"let g:riv_auto_format_table = 0
 
 inoremap <F5> <br />
 " vimwiki set ******************
@@ -147,7 +147,7 @@ inoremap <F5> <br />
 iab xdate <c-r>=strftime("%c wd%w # ")
 iab xday <c-r>=strftime("%Y-%m-%d")
 iab vimhome <c-r>=$HOME<C-I>
-iab cdir <c-r>=pwd<C-I>
+iab cdir <c-r>=expand('%:p:h')<C-I>
 
 "" file type set ******************
 noremap <C-e>h :call AddHead()<cr>

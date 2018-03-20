@@ -2,9 +2,9 @@ if exists("b:did_ftplugin")
   finish
 endif
 let b:did_ftplugin = 1  " Don't load another plugin for this buffer
-set tabstop=4 
-set softtabstop=4 
-set shiftwidth=4 
+set tabstop=2 
+set softtabstop=2 
+set shiftwidth=2
 set expandtab 
 set autoindent 
 set foldmethod=indent
@@ -31,6 +31,14 @@ if !exists("*s:PySetMain")
     endfunc
 endif
 
+function! s:createPyMTL()
+    call setline(1,"#===========================================================================")
+    call setline(2,"# ")
+    call setline(3,"#===========================================================================")
+    call setline(4,"#")
+    call setline(5,"#")
+endfunction
+
 function! s:dyPyInit()
     execute "normal! odef __init__(self):"
 endfunction
@@ -55,5 +63,6 @@ endfunc
 
 noremap <C-e>init :call <SID>dyPyInit()<cr>
 noremap <C-e>test :call <SID>createUnitTest()<cr>
+noremap <C-e>mtl :call <SID>createPyMTL()<cr>
 noremap <SPACE> o""" """<Esc>
 nnoremap <silent> <buffer> <cr> :PythonSearchContext<cr>
