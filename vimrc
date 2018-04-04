@@ -117,8 +117,8 @@ nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 "set mouse=v " 鼠标选择
 set autochdir
 "set colorscheme 
-"colorscheme pablo
-colorscheme desert
+colorscheme pablo
+"colorscheme desert
 
 " language set ******************
 " 设置编码
@@ -162,8 +162,6 @@ autocmd BufRead,BufNewFile *.rst setf rst
 " map <F12> :!python.exe %
 "map :!'d:/Python34/python.exe' %
 
-" eclim python set ******************
-"nnoremap <silent> <buffer> <cr> :PythonSearchContext<cr>
 " tagbar set ******************
 "let g:tagbar_left = 1
 "
