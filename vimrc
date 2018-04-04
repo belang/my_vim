@@ -95,9 +95,9 @@ set shiftwidth=4
 set expandtab 
 set autoindent 
 set formatoptions+=m
-set foldmethod=marker
-set foldnestmax=5
-set foldignore="~"
+"set foldmethod=marker
+"set foldnestmax=5
+"set foldignore="~"
 
 " basic set ******************
 " Switch syntax highlighting on, when the terminal has colors
