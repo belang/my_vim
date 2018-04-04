@@ -27,8 +27,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-"Plugin 'vim-scripts/tlib'
+"Plugin 'tomtom/tlib_vim'
+Plugin 'vim-scripts/tlib'
 "Plugin 'SirVer/ultisnips'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
@@ -74,6 +74,7 @@ if has('win32')
 elseif has('unix')
     "set fileformat=unix
     let g:tagbar_ctags_bin = '/usr/bin/ctags'
+    let g:pydiction_location = '$HOME/.vim/bundle/pydiction/complete-dict'
     noremap <C-h> :VimwikiGoBackLink<cr>
 endif
 
@@ -94,9 +95,9 @@ set shiftwidth=4
 set expandtab 
 set autoindent 
 set formatoptions+=m
-set foldmethod=marker
-set foldnestmax=5
-set foldignore="~"
+"set foldmethod=marker
+"set foldnestmax=5
+"set foldignore="~"
 
 " basic set ******************
 " Switch syntax highlighting on, when the terminal has colors
@@ -116,8 +117,8 @@ nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 "set mouse=v " 鼠标选择
 set autochdir
 "set colorscheme 
-"colorscheme pablo
-colorscheme desert
+colorscheme pablo
+"colorscheme desert
 
 " language set ******************
 " 设置编码
@@ -146,7 +147,7 @@ inoremap <F5> <br />
 iab xdate <c-r>=strftime("%c wd%w # ")
 iab xday <c-r>=strftime("%Y-%m-%d")
 iab vimhome <c-r>=$HOME<C-I>
-iab cdir <c-r>=pwd<C-I>
+iab cdir <c-r>=expand('%:p:h')<C-I>
 
 "" file type set ******************
 noremap <C-e>h :call AddHead()<cr>
@@ -161,8 +162,6 @@ autocmd BufRead,BufNewFile *.rst setf rst
 " map <F12> :!python.exe %
 "map :!'d:/Python34/python.exe' %
 
-" eclim python set ******************
-"nnoremap <silent> <buffer> <cr> :PythonSearchContext<cr>
 " tagbar set ******************
 "let g:tagbar_left = 1
 "

@@ -2,14 +2,15 @@ if exists("b:did_ftplugin")
   finish
 endif
 let b:did_ftplugin = 1  " Don't load another plugin for this buffer
-set tabstop=4 
-set softtabstop=4 
-set shiftwidth=4 
+set tabstop=2 
+set softtabstop=2 
+set shiftwidth=2
 set expandtab 
 set autoindent 
 set foldmethod=indent
 set foldnestmax=3
-set foldignore=~
+"set foldlevelstart=99
+"set foldignore=~
 " in exists, '*' means function name
 if !exists("*s:PySetMain")
     func s:PySetMain()
@@ -17,19 +18,28 @@ if !exists("*s:PySetMain")
             "call setline(1,"`timescale 1ns/1ps")
             "call setline(5,"")
             call setline(1,"#! $PATH/python")
-            call setline(2,"")
-            call setline(3,"# file name: ".expand("%c"))
-            call setline(4,"# author: lianghy")
-            call setline(5,"# time: ".strftime("%c"))
-            call setline(6,"")
-            call setline(7,"if __name__ == \"__main__\":")
-            call setline(8,"    print(\"".expand("%c")."\")")
+            call setline(2,"# -*- coding: utf-8 -*-")
+            call setline(3,"")
+            call setline(4,"# file name: ".expand("%c"))
+            call setline(5,"# author: lianghy")
+            call setline(6,"# time: ".strftime("%c"))
+            call setline(7,"")
+            call setline(8,"if __name__ == \"__main__\":")
+            call setline(9,"    print(\"".expand("%c")."\")")
         "endif
     endfunc
     func PyDefFunc() abort
             return pumvisible() ? "\<c-e>" : ''
     endfunc
 endif
+
+function! s:createPyMTL()
+    call setline(1,"#===========================================================================")
+    call setline(2,"# ")
+    call setline(3,"#===========================================================================")
+    call setline(4,"#")
+    call setline(5,"#")
+endfunction
 
 function! s:dyPyInit()
     execute "normal! odef __init__(self):"
@@ -55,5 +65,6 @@ endfunc
 
 noremap <C-e>init :call <SID>dyPyInit()<cr>
 noremap <C-e>test :call <SID>createUnitTest()<cr>
+noremap <C-e>mtl :call <SID>createPyMTL()<cr>
 noremap <SPACE> o""" """<Esc>
-
+nnoremap <silent> <buffer> <cr> :PythonSearchContext<cr>
