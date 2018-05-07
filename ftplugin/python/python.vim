@@ -2,9 +2,9 @@ if exists("b:did_ftplugin")
   finish
 endif
 let b:did_ftplugin = 1  " Don't load another plugin for this buffer
-set tabstop=2 
-set softtabstop=2 
-set shiftwidth=2
+set tabstop=4 
+set softtabstop=4 
+set shiftwidth=4
 set expandtab 
 set autoindent 
 set foldmethod=indent
@@ -24,8 +24,10 @@ if !exists("*s:PySetMain")
             call setline(5,"# author: lianghy")
             call setline(6,"# time: ".strftime("%c"))
             call setline(7,"")
-            call setline(8,"if __name__ == \"__main__\":")
-            call setline(9,"    print(\"".expand("%c")."\")")
+            call setline(8,'""" """')
+            call setline(9,"")
+            call setline(10,"if __name__ == \"__main__\":")
+            call setline(11,"    print(\"".expand("%c")."\")")
         "endif
     endfunc
     func PyDefFunc() abort

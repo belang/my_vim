@@ -18,6 +18,7 @@ nmap ; A;<Esc>
 vmap ; :s/$/;/<cr>/asdf<cr>
 nmap , g$x
 nnoremap <buffer> <C-E>ins :call verilog#dyGenInstance()<Enter>
+nnoremap <buffer> <C-E>block :call verilog#dyAddBlockTitle()<Enter>
 
 " add pins to module define
 "
@@ -46,7 +47,8 @@ func! verilog#dyGenInstance()
         let cur_pin_len = strwidth(line_str)
         let space = repeat(" ", pin_length-cur_pin_len)
         let re_str = '    .\1\2' . space . '    (\2)\3'
-        let repl = substitute(line_str, ' *\(\%(i_\)\\|\%(o_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
+        "let repl = substitute(line_str, ' *\(\%(in_\)|\%(out_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
+        let repl = substitute(line_str, ' *\(in_\|out_\)\?\([^,]*\)\(,\?\)', re_str, 'g')
         call setline(line_num, repl)
         let line_num = line_num+1
     endwhile
@@ -56,7 +58,7 @@ endfunction
 "
 " sub func
 
-func! CatchOneLine(line_str, pin_list)
+func! verilog#CatchOneLine(line_str, pin_list)
     let sub_str = substitute(a:line_str, ';', '', 'g')
     let sub_str_list = split(sub_str, ' \+')
     for one_pin in sub_str_list[1:-1]
@@ -104,11 +106,11 @@ func! verilog#dyAddPinList()
     while line_num <= total_lines
         let line_str = getline(line_num)
         if line_str =~ '^ *input .*'
-	    call CatchOneLine(line_str, pin_list)
+	    call verilog#CatchOneLine(line_str, pin_list)
         elseif line_str =~ '^ *output .*'
-	    call CatchOneLine(line_str, pin_list)
+	    call verilog#CatchOneLine(line_str, pin_list)
         elseif line_str =~ '^ *inout .*'
-	    call CatchOneLine(line_str, pin_list)
+	    call verilog#CatchOneLine(line_str, pin_list)
         endif
         let line_num = line_num +1
     endwhile
@@ -152,6 +154,11 @@ func! YSetTitle()
       endif
 endfunc
 
+func! verilog#dyAddBlockTitle()
+    call append('.', "//====================")
+    call append('.', "//block: ")
+    call append('.', "//====================")
+endfunc
 " vim function
 "
 
