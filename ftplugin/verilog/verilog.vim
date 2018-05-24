@@ -48,7 +48,7 @@ func! verilog#dyGenInstance()
         let space = repeat(" ", pin_length-cur_pin_len)
         let re_str = '    .\1\2' . space . '    (\2)\3'
         "let repl = substitute(line_str, ' *\(\%(in_\)|\%(out_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
-        let repl = substitute(line_str, ' *\(in_\|out_\)\?\([^,]*\)\(,\?\)', re_str, 'g')
+        let repl = substitute(line_str, ' *\(i_\|o_\)\?\([^,]*\)\(,\?\)', re_str, 'g')
         call setline(line_num, repl)
         let line_num = line_num+1
     endwhile
