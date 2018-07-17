@@ -1,7 +1,0 @@
-= introductioin =
-This directory does not only contain vim settings, but also has some linux config
-== linux ==
-=== bash ===
-== my_vim ==
-other dirs
-
