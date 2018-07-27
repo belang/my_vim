@@ -69,6 +69,8 @@ if has('win32')
     "unmap <C-Y>
     "iunmap <C-Y>
 "    " tags
+    "colorscheme pablo
+    colorscheme desert
     let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
     let g:pydiction_location = '$HOME/vimfiles/bundle/pydiction/complete-dict'
 elseif has('unix')
@@ -117,8 +119,6 @@ nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 "set mouse=v " 鼠标选择
 set autochdir
 "set colorscheme 
-colorscheme pablo
-"colorscheme desert
 
 " language set ******************
 " 设置编码
