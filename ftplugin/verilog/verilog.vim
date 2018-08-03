@@ -139,6 +139,8 @@ endfunction
 " verilog header:
 func! YSetTitle()
     if &filetype == 'verilog'
+        let fname = "".expand("%")
+        let fname_short = substitute(fname, '\(.*\).v', '\1', 'g')
         call setline(1 ,"`timescale 1ns/1ps")
         call setline(2 ,"// file name: ".expand("%"))
         call setline(3 ,"// author: lianghy")
@@ -146,7 +148,7 @@ func! YSetTitle()
         call setline(5 ,"")
         call setline(6 ,"`include \"define.v\"")
         call setline(7 ,"")
-        call setline(8 ,"module (")
+        call setline(8 ,"module ".fname_short."(")
         call setline(9 ,");")
         call setline(10,"")
         call setline(11,"input  clk, rst_n;")
