@@ -135,12 +135,8 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
 " vimwiki set -- RIV ******************
-let proj0 = { 'path': 'D:/work_wiki'}
-let proj1 = { 'path': 'D:/work_wiki'}
-let proj2 = { 'path': '~/my_wiki'}
-let proj3 = { 'path': 'D:\maotu\maotu_1p5\doc'}
-let proj4 = { 'path': 'D:\lhy\bean\doc'}
-let g:riv_projects = [proj0, proj1, proj2, proj3, proj4]
+let proj0 = { 'path': '~/my_wiki'}
+let g:riv_projects = [proj0]
 "let g:riv_auto_format_table = 0
 
 inoremap <F5> <br />
