@@ -59,15 +59,19 @@ endfunction
 " sub func
 
 func! verilog#CatchOneLine(line_str, pin_list)
+    "" the string after ] and before // are pins. 
     let sub_str = substitute(a:line_str, ';', '', 'g')
-    let sub_str_list = split(sub_str, ' \+')
-    for one_pin in sub_str_list[1:-1]
-        if one_pin =~ '[.*'
-            continue
+    if sub_str =~ '.*[.*'
+        let sub_str_list = split(sub_str, ']')
+        let pin_str_list = split(sub_str_list[1], ' \+')
+    else
+        let sub_str_list = split(sub_str, ' \+')
+        let pin_str_list = sub_str_list[1:-1]
+    endif
+    for one_pin in pin_str_list
+        if one_pin =~ '//.*'
+            break
         endif
-	if one_pin =~ '//.*'
-	    break
-	endif
         let one_pin = substitute(one_pin, ',', '', 'g')
         call add(a:pin_list, one_pin)
     endfor
