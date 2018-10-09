@@ -19,6 +19,7 @@ vmap ; :s/$/;/<cr>/asdf<cr>
 nmap , g$x
 nnoremap <buffer> <C-E>ins :call verilog#dyGenInstance()<Enter>
 nnoremap <buffer> <C-E>block :call verilog#dyAddBlockTitle()<Enter>
+nnoremap <buffer> <C-E>declare :call verilog#dyDeclare()<Enter>
 
 " add pins to module define
 "
@@ -164,6 +165,26 @@ func! verilog#dyAddBlockTitle()
     call append('.', "//====================")
     call append('.', "//block: ")
     call append('.', "//====================")
+endfunc
+
+func! verilog#dyDeclare()
+    let start_line = line(".")
+    let end_line = 100000
+    let line_num = start_line
+    let pin_length = 0
+    let pin_list = []
+    let new_str = []
+    while line_num < end_line
+        let line_str = getline(line_num)
+        if line_str =~ '^wire'
+            call cursor(line_num, 0)
+            execute(':m '.start_line)
+        elseif line_str =~ '^reg'
+            call cursor(line_num, 0)
+            execute(':m '.start_line)
+        endif
+        let line_num = line_num+1
+    endwhile
 endfunc
 " vim function
 "
