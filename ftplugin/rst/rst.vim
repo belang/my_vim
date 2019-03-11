@@ -16,6 +16,14 @@ set shiftwidth=3
 "set textwidth=79
 set expandtab
 "set backspace=eol,start whichwrap+=<,>,[,]
+let b:di_vert    = "#" 
+let b:di_horiz   = "#" 
+let b:di_plus    = "#" 
+let b:di_upright = "#" 
+let b:di_upleft  = "#" 
+let b:di_cross   = "#" 
+let b:di_ellipse = '#' 
+
 
 "nnoremap <C-E>h1 :call rst#dyAddSectionHead(1)<Enter>
 "nnoremap <C-E>h2 :call rst#dyAddSectionHead(2)<Enter>

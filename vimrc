@@ -95,7 +95,7 @@ set softtabstop=4
 set shiftwidth=4 
 "set textwidth=79 
 set expandtab 
-set autoindent 
+"set autoindent 
 set formatoptions+=m
 "set foldmethod=marker
 "set foldnestmax=5
@@ -136,7 +136,9 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
 " vimwiki set -- RIV ******************
 let proj0 = { 'path': '~/my_wiki'}
-let g:riv_projects = [proj0]
+let proj1 = { 'path': '~/my_wiki'}
+let proj2 = { 'path': '~/dsp_wiki/source'}
+let g:riv_projects = [proj0, proj1, proj2]
 "let g:riv_auto_format_table = 0
 
 inoremap <F5> <br />
@@ -153,8 +155,14 @@ noremap <C-e>h :call AddHead()<cr>
 autocmd BufRead,BufNewFile *.wsdl setf xml
 autocmd BufRead,BufNewFile *.xsd setf xml
 autocmd BufRead,BufNewFile *.rst setf rst
+autocmd BufRead,BufNewFile *.lisa setf c
 " file type set ******************
 
+" syntax check ******************
+let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": ["ruby", "php"],
+    \ "passive_filetypes": ["puppet"] }
 
 "let python = 'd:/Python34/python.exe'
 " python *************
