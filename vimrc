@@ -113,11 +113,9 @@ endif
 set nobackup		" do not keep a backup file, use versions instead
 set undofile		" keep an undo file (undo changes after closing)
 set incsearch		" do incremental searching
-" F2 开关行号
-nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR> 
 "set mouse=a " 打开鼠标模式
 "set mouse=v " 鼠标选择
-set autochdir
+"set autochdir
 "set colorscheme 
 
 " language set ******************
@@ -133,6 +131,10 @@ set autochdir
 set fileencoding=utf-8
 " 设置文件编码检测类型及支持格式
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
+" F2 开关行号; F3 改变目录到当前文件所在目录
+nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR> 
+nnoremap <F3> :ch %:h<CR>
+"inoremap <F5> <br />
 
 " vimwiki set -- RIV ******************
 let proj0 = { 'path': '~/my_wiki'}
@@ -141,7 +143,6 @@ let proj2 = { 'path': '~/dsp_wiki/source'}
 let g:riv_projects = [proj0, proj1, proj2]
 "let g:riv_auto_format_table = 0
 
-inoremap <F5> <br />
 " vimwiki set ******************
 "
 " global key map
@@ -163,7 +164,7 @@ let g:syntastic_mode_map = {
     \ "mode": "passive",
     \ "active_filetypes": ["ruby", "php"],
     \ "passive_filetypes": ["puppet"] }
-
+let g:riv_auto_format_table = 0
 "let python = 'd:/Python34/python.exe'
 " python *************
 " map <F12> :!python.exe %
