@@ -6,9 +6,9 @@ set tabstop=4
 set softtabstop=4 
 set shiftwidth=4
 set expandtab 
-set autoindent 
 set foldmethod=indent
 set foldnestmax=3
+set noautoindent 
 "set foldlevelstart=99
 "set foldignore=~
 " in exists, '*' means function name

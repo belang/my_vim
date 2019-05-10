@@ -95,7 +95,7 @@ set softtabstop=4
 set shiftwidth=4 
 "set textwidth=79 
 set expandtab 
-set autoindent 
+"set autoindent 
 set formatoptions+=m
 "set foldmethod=marker
 "set foldnestmax=5
@@ -130,7 +130,6 @@ set autochdir
 "else
 "set fileencoding=utf-8
 "endif
-set fileencoding=utf-8
 " 设置文件编码检测类型及支持格式
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 
@@ -155,7 +154,12 @@ autocmd BufRead,BufNewFile *.xsd setf xml
 autocmd BufRead,BufNewFile *.rst setf rst
 " file type set ******************
 
+let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": ["ruby", "php"],
+    \ "passive_filetypes": ["puppet"] }
 
+" calls `:SyntasticCheck`.
 "let python = 'd:/Python34/python.exe'
 " python *************
 " map <F12> :!python.exe %
