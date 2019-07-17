@@ -128,7 +128,6 @@ set incsearch		" do incremental searching
 "else
 "set fileencoding=utf-8
 "endif
-set fileencoding=utf-8
 " 设置文件编码检测类型及支持格式
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 " F2 开关行号; F3 改变目录到当前文件所在目录
@@ -164,6 +163,8 @@ let g:syntastic_mode_map = {
     \ "mode": "passive",
     \ "active_filetypes": ["ruby", "php"],
     \ "passive_filetypes": ["puppet"] }
+
+" calls `:SyntasticCheck`.
 let g:riv_auto_format_table = 0
 
 " python *************
