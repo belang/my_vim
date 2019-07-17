@@ -74,7 +74,7 @@ if has('win32')
     let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
     let g:pydiction_location = '$HOME/vimfiles/bundle/pydiction/complete-dict'
 elseif has('unix')
-    "set fileformat=unix
+    set fileformat=unix
     let g:tagbar_ctags_bin = '/usr/bin/ctags'
     let g:pydiction_location = '$HOME/.vim/bundle/pydiction/complete-dict'
     noremap <C-h> :VimwikiGoBackLink<cr>
@@ -133,7 +133,7 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 " F2 开关行号; F3 改变目录到当前文件所在目录
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR> 
-nnoremap <F3> :ch %:h<CR>
+nnoremap <F3> :cd %:h<CR>
 "inoremap <F5> <br />
 
 " vimwiki set -- RIV ******************
@@ -165,7 +165,7 @@ let g:syntastic_mode_map = {
     \ "active_filetypes": ["ruby", "php"],
     \ "passive_filetypes": ["puppet"] }
 let g:riv_auto_format_table = 0
-"let python = 'd:/Python34/python.exe'
+
 " python *************
 " map <F12> :!python.exe %
 "map :!'d:/Python34/python.exe' %
