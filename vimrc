@@ -126,7 +126,7 @@ set incsearch		" do incremental searching
 "let &termencoding=&encoding
 "set fileencodings=utf-8,gbk,ucs-bom,cp936
 "else
-"set fileencoding=utf-8
+set fileencoding=utf-8
 "endif
 " 设置文件编码检测类型及支持格式
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
@@ -138,7 +138,7 @@ nnoremap <F3> :ch %:h<CR>
 " vimwiki set -- RIV ******************
 let proj0 = { 'path': '~/my_wiki'}
 let proj1 = { 'path': '~/my_wiki'}
-let proj2 = { 'path': '~/dsp_wiki/source'}
+let proj2 = { 'path': '~/my_wiki'}
 let g:riv_projects = [proj0, proj1, proj2]
 "let g:riv_auto_format_table = 0
 
@@ -166,10 +166,10 @@ let g:syntastic_mode_map = {
 
 " calls `:SyntasticCheck`.
 let g:riv_auto_format_table = 0
-"let python = 'd:/Python34/python.exe'
+
 " python *************
 " map <F12> :!python.exe %
-"map :!'d:/Python34/python.exe' %
+"map :!'$path/python.exe' %
 
 " tagbar set ******************
 "let g:tagbar_left = 1
