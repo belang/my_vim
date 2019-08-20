@@ -16,12 +16,12 @@ set shiftwidth=3
 "set textwidth=79
 set expandtab
 "set backspace=eol,start whichwrap+=<,>,[,]
-let b:di_vert    = "#" 
-let b:di_horiz   = "#" 
-let b:di_plus    = "#" 
-let b:di_upright = "#" 
-let b:di_upleft  = "#" 
-let b:di_cross   = "#" 
+let b:di_vert    = "│" 
+let b:di_horiz   = "─" 
+let b:di_plus    = "█" 
+let b:di_upright = "/" 
+let b:di_upleft  = "\\" 
+let b:di_cross   = "X" 
 let b:di_ellipse = '#' 
 
 
