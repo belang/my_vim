@@ -119,6 +119,15 @@ set incsearch		" do incremental searching
 "set colorscheme 
 
 " language set ******************
+" 设置编码
+"if has("win32")
+"set fileencoding=chinese
+"set encoding=utf-8
+"let &termencoding=&encoding
+"set fileencodings=utf-8,gbk,ucs-bom,cp936
+"else
+set fileencoding=utf-8
+"endif
 " 设置文件编码检测类型及支持格式
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 " F2 开关行号; F3 改变目录到当前文件所在目录
@@ -155,7 +164,7 @@ let g:syntastic_mode_map = {
 "let python = 'd:/Python34/python.exe'
 " python *************
 " map <F12> :!python.exe %
-"map :!'d:/Python34/python.exe' %
+"map :!'$path/python.exe' %
 
 " tagbar set ******************
 "let g:tagbar_left = 1
