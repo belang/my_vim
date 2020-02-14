@@ -97,7 +97,7 @@ set shiftwidth=4
 set expandtab 
 "set autoindent 
 set formatoptions+=m
-"set foldmethod=marker
+set foldmethod=indent
 "set foldnestmax=5
 "set foldignore="~"
 
@@ -119,28 +119,16 @@ set incsearch		" do incremental searching
 "set colorscheme 
 
 " language set ******************
-" 设置编码
-"if has("win32")
-"set fileencoding=chinese
-"set encoding=utf-8
-"let &termencoding=&encoding
-"set fileencodings=utf-8,gbk,ucs-bom,cp936
-"else
-"set fileencoding=utf-8
-"endif
 " 设置文件编码检测类型及支持格式
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 " F2 开关行号; F3 改变目录到当前文件所在目录
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR> 
-nnoremap <F3> :ch %:h<CR>
+nnoremap <F3> :cd %:h<CR>
 "inoremap <F5> <br />
 
 " vimwiki set -- RIV ******************
-let proj0 = { 'path': '~/my_wiki'}
 let proj1 = { 'path': '~/my_wiki'}
-let proj2 = { 'path': '~/dsp_wiki/source'}
-let g:riv_projects = [proj0, proj1, proj2]
-"let g:riv_auto_format_table = 0
+let g:riv_auto_format_table = 0
 
 " vimwiki set ******************
 "
@@ -154,7 +142,6 @@ iab cdir <c-r>=expand('%:p:h')<C-I>
 noremap <C-e>h :call AddHead()<cr>
 autocmd BufRead,BufNewFile *.wsdl setf xml
 autocmd BufRead,BufNewFile *.xsd setf xml
-autocmd BufRead,BufNewFile *.rst setf rst
 autocmd BufRead,BufNewFile *.lisa setf c
 " file type set ******************
 
@@ -165,7 +152,6 @@ let g:syntastic_mode_map = {
     \ "passive_filetypes": ["puppet"] }
 
 " calls `:SyntasticCheck`.
-let g:riv_auto_format_table = 0
 "let python = 'd:/Python34/python.exe'
 " python *************
 " map <F12> :!python.exe %
@@ -174,3 +160,9 @@ let g:riv_auto_format_table = 0
 " tagbar set ******************
 "let g:tagbar_left = 1
 "
+"
+if $OS =~ "Windows.*"
+    source ~/vimfiles/local.vim
+else
+    source ~/.vim/local.vim
+endif
