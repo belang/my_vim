@@ -133,7 +133,7 @@ set incsearch		" do incremental searching
 "let &termencoding=&encoding
 "set fileencodings=utf-8,gbk,ucs-bom,cp936
 "else
-"set fileencoding=utf-8
+set fileencoding=utf-8
 "endif
 " 设置文件编码检测类型及支持格式
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
@@ -143,17 +143,8 @@ nnoremap <F3> :cd %:h<CR>
 "inoremap <F5> <br />
 
 " vimwiki set -- RIV ******************
-"let proj0 = { 'path': '~/my_wiki',}
 let proj1 = { 'name': 'my_wiki', 'path': '~/my_wiki',}
-let proj2 = { 'name': 'dsp_wiki', 'path': '~/dsp_wiki/source',}
-let proj3 = { 'name': 'wireless', 'path': '~/wireless',}
-let proj4 = { 'name': 'zishu', 'path': '~/../work/zishu',}
-let proj5 = { 'name': 'xiaoxiao', 'path': '~/work/xiaoxiao/doc',}
-let proj6 = { 'name': 'nuanfeng', 'path': '~/work/nuanfeng/doc',}
-let proj7 = { 'name': 'feihua', 'path': '~/work/feihua/doc',}
-let proj8 = { 'name': 'wx', 'path': '~/eda_work/wx/doc',}
-let g:riv_projects = [proj1, proj2, proj3, proj4, proj5, proj6, proj7, proj8]
-"let g:riv_auto_format_table = 0
+let g:riv_auto_format_table = 0
 
 " vimwiki set ******************
 "
@@ -168,7 +159,6 @@ iab cdir <c-r>=expand('%:p:h')<C-I>
 noremap <C-e>h :call AddHead()<cr>
 autocmd BufRead,BufNewFile *.wsdl setf xml
 autocmd BufRead,BufNewFile *.xsd setf xml
-autocmd BufRead,BufNewFile *.rst setf rst
 autocmd BufRead,BufNewFile *.lisa setf c
 " file type set ******************
 
@@ -179,12 +169,16 @@ let g:syntastic_mode_map = {
     \ "passive_filetypes": ["puppet"] }
 
 " calls `:SyntasticCheck`.
-let g:riv_auto_format_table = 0
-
 " python *************
 " map <F12> :!python.exe %
-"map :!'d:/Python34/python.exe' %
+"map :!'$path/python.exe' %
 
 " tagbar set ******************
 "let g:tagbar_left = 1
 "
+"
+if $OS =~ "Windows.*"
+    source ~/vimfiles/local.vim
+else
+    source ~/.vim/local.vim
+endif
