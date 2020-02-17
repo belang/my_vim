@@ -7,7 +7,7 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab 
 set foldmethod=indent
-set foldnestmax=3
+set foldnestmax=7
 set noautoindent 
 "set foldlevelstart=99
 "set foldignore=~

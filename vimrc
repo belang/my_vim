@@ -23,7 +23,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'godlygeek/tabular'
 Plugin 'othree/xml.vim'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -34,9 +34,9 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/VisIncr'
 Plugin 'vim-scripts/DrawIt'
-Plugin 'Rykka/riv.vim'
-Plugin 'Rykka/rhythm.css'
-Plugin 'Rykka/InstantRst'
+Plugin 'gu-fan/riv.vim'
+Plugin 'gu-fan/rhythm.css'
+Plugin 'gu-fan/InstantRst'
 Plugin 'majutsushi/tagbar'
 Plugin 'rkulla/pydiction'
 "Plugin 'mathjax/MathJax'
@@ -44,6 +44,9 @@ Plugin 'rkulla/pydiction'
 "Plugin 'plasticboy/vim-markdown'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Rykka/riv.vim'
+"Plugin 'Rykka/rhythm.css'
+"Plugin 'Rykka/InstantRst'
 
 call vundle#end()            " required
 "call vundle#config#require(g:bundles)
@@ -53,6 +56,9 @@ filetype plugin indent on
 if has('win32')
     "source $VIMRUNTIME/mswin.vim
     " backspace and cursor keys wrap to previous/next line
+    " set mouse=nv
+    set guioptions+=a
+    set clipboard=autoselect
     set backspace=indent,eol,start whichwrap+=<,>,[,]
     au GUIEnter * simalt ~x
     set fileformat=unix
@@ -95,8 +101,9 @@ set softtabstop=4
 set shiftwidth=4 
 "set textwidth=79 
 set expandtab 
-"set autoindent 
+set autoindent 
 set formatoptions+=m
+set foldmethod=indent
 "set foldmethod=marker
 "set foldnestmax=5
 "set foldignore="~"
@@ -136,17 +143,24 @@ nnoremap <F3> :cd %:h<CR>
 "inoremap <F5> <br />
 
 " vimwiki set -- RIV ******************
-let proj0 = { 'path': '~/my_wiki'}
-let proj1 = { 'path': '~/my_wiki'}
-let proj2 = { 'path': '~/dsp_wiki/source'}
-let g:riv_projects = [proj0, proj1, proj2]
+"let proj0 = { 'path': '~/my_wiki',}
+let proj1 = { 'name': 'my_wiki', 'path': '~/my_wiki',}
+let proj2 = { 'name': 'dsp_wiki', 'path': '~/dsp_wiki/source',}
+let proj3 = { 'name': 'wireless', 'path': '~/wireless',}
+let proj4 = { 'name': 'zishu', 'path': '~/../work/zishu',}
+let proj5 = { 'name': 'xiaoxiao', 'path': '~/work/xiaoxiao/doc',}
+let proj6 = { 'name': 'nuanfeng', 'path': '~/work/nuanfeng/doc',}
+let proj7 = { 'name': 'feihua', 'path': '~/work/feihua/doc',}
+let proj8 = { 'name': 'wx', 'path': '~/eda_work/wx/doc',}
+let g:riv_projects = [proj1, proj2, proj3, proj4, proj5, proj6, proj7, proj8]
 "let g:riv_auto_format_table = 0
 
 " vimwiki set ******************
 "
 " global key map
-iab xdate <c-r>=strftime("%c wd%w # ")
+iab xtime <c-r>=strftime("%c wd%w # ")
 iab xday <c-r>=strftime("%Y-%m-%d")
+iab xdate <c-r>=strftime("%Y_%m_%d")
 iab vimhome <c-r>=$HOME<C-I>
 iab cdir <c-r>=expand('%:p:h')<C-I>
 

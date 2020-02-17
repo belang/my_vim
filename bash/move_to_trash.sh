@@ -1,3 +1,3 @@
 #!/bin/sh
 
-mv "$@" ~/.trash/.
+mv -b "$@" ~/.trash/.
