@@ -176,7 +176,31 @@ let g:syntastic_mode_map = {
 " tagbar set ******************
 "let g:tagbar_left = 1
 "
-"
+ 
+"matchit
+packadd! matchit
+let b:match_words = '\<if\>:\<endif\>:\<else\>,'
+\ . '\<while\>:\<continue\>,'
+\ . '\<begin\>:\<end\>,'
+\ . '\<module\>:\<endmodule\>,'
+\ . '\<class\>:\<endclass\>,'
+\ . '\<program\>:\<endprogram\>,'
+\ . '\<clocking\>:\<endclocking\>,'
+\ . '\<property\>:\<endproperty\>,'
+\ . '\<sequence\>:\<endsequence\>,'
+\ . '\<package\>:\<endpackage\>,'
+\ . '\<covergroup\>:\<endgroup\>,'
+\ . '\<primitive\>:\<endprimitive\>,'
+\ . '\<specify\>:\<endspecify\>,'
+\ . '\<generate\>:\<endgenerate\>,'
+\ . '\<interface\>:\<endinterface\>,'
+\ . '\<function\>:\<endfunction\>,'
+\ . '\<task\>:\<endtask\>,'
+\ . '\<case\>\|\<casex\>\|\<casez\>:\<endcase\>,'
+\ . '\<fork\>:\<join\>\|\<join_any\>\|\<join_none\>,'
+\ . '`ifdef\>:`else\>:`endif\>,'
+\ . '\<generate\>:\<endgenerate\>'
+
 if $OS =~ "Windows.*"
     source ~/vimfiles/local.vim
 else
