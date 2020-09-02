@@ -34,9 +34,9 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/VisIncr'
 Plugin 'vim-scripts/DrawIt'
-Plugin 'gu-fan/riv.vim'
-Plugin 'gu-fan/rhythm.css'
-Plugin 'gu-fan/InstantRst'
+"Plugin 'gu-fan/riv.vim'
+"Plugin 'gu-fan/rhythm.css'
+"Plugin 'gu-fan/InstantRst'
 Plugin 'majutsushi/tagbar'
 Plugin 'rkulla/pydiction'
 "Plugin 'mathjax/MathJax'
@@ -44,9 +44,9 @@ Plugin 'rkulla/pydiction'
 "Plugin 'plasticboy/vim-markdown'
 "Plugin 'mattn/emmet-vim'
 "Plugin 'Valloric/YouCompleteMe'
-"Plugin 'Rykka/riv.vim'
-"Plugin 'Rykka/rhythm.css'
-"Plugin 'Rykka/InstantRst'
+Plugin 'Rykka/riv.vim'
+Plugin 'Rykka/rhythm.css'
+Plugin 'Rykka/InstantRst'
 
 call vundle#end()            " required
 "call vundle#config#require(g:bundles)
@@ -141,6 +141,7 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 " F2 开关行号; F3 改变目录到当前文件所在目录
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR> 
 nnoremap <F3> :cd %:h<CR>
+nnoremap <F4> :setlocal spell spelllang=en_us
 "inoremap <F5> <br />
 
 " vimwiki set -- RIV ******************
