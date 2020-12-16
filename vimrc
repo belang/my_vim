@@ -64,9 +64,9 @@ if has('win32')
     set fileformat=unix
     set encoding=utf-8
     set langmenu=zh_CN.UTF-8
-    "set guifont=Consolas:h14
+    set guifont=Consolas:h14
     "set guifont=DejaVu_Sans_Mono:h14
-    set guifont=仿宋:h14
+    "set guifont=仿宋:h14
     language message zh_CN.UTF-8
     "处理菜单及右键菜单乱码
     source $VIMRUNTIME/delmenu.vim
@@ -147,7 +147,7 @@ nnoremap <F4> :setlocal spell spelllang=en_us
 " vimwiki set -- RIV ******************
 let proj1 = { 'name': 'my_wiki', 'path': '~/my_wiki',}
 let g:riv_auto_format_table = 0
-
+let g:riv_force = 1
 " vimwiki set ******************
 "
 " global key map
