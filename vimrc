@@ -64,9 +64,10 @@ if has('win32')
     set fileformat=unix
     set encoding=utf-8
     set langmenu=zh_CN.UTF-8
-    set guifont=Consolas:h14
+    "set guifont=Consolas:h14
     "set guifont=DejaVu_Sans_Mono:h14
     "set guifont=仿宋:h14
+    set guifont=SimHei:h14
     language message zh_CN.UTF-8
     "处理菜单及右键菜单乱码
     source $VIMRUNTIME/delmenu.vim
@@ -105,6 +106,7 @@ set expandtab
 set autoindent 
 set formatoptions+=m
 set foldmethod=indent
+set foldlevel=1
 "set foldmethod=marker
 "set foldnestmax=5
 "set foldignore="~"
@@ -141,15 +143,10 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 " F2 开关行号; F3 改变目录到当前文件所在目录
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR> 
 nnoremap <F3> :cd %:h<CR>
-nnoremap <F4> :setlocal spell spelllang=en_us
+nnoremap <F4> :setlocal spell! spelllang=en_us
+nnoremap <F5> :set cuc! cul!<CR>
 "inoremap <F5> <br />
 
-" vimwiki set -- RIV ******************
-let proj1 = { 'name': 'my_wiki', 'path': '~/my_wiki',}
-let g:riv_auto_format_table = 0
-let g:riv_force = 1
-" vimwiki set ******************
-"
 " global key map
 iab xtime <c-r>=strftime("%c wd%w # ")
 iab xday <c-r>=strftime("%Y-%m-%d")
@@ -175,8 +172,15 @@ let g:syntastic_mode_map = {
 " map <F12> :!python.exe %
 "map :!'$path/python.exe' %
 
-" tagbar set ******************
+" ******** plugin setting ********
+" ** tagbar set 
 "let g:tagbar_left = 1
+" ** snipMate
+let g:snipMate = { 'snippet_version' : 1 }
+" ** vimwiki set -- RIV ******************
+let proj1 = { 'name': 'my_wiki', 'path': '~/my_wiki',}
+let g:riv_auto_format_table = 0
+let g:riv_force = 1
 "
  
 "matchit
