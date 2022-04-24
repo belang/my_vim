@@ -1,4 +1,3 @@
-
 set nocompatible
 filetype off 
 
@@ -23,7 +22,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'godlygeek/tabular'
 Plugin 'othree/xml.vim'
-"Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -61,7 +60,6 @@ if has('win32')
     set clipboard=autoselect
     set backspace=indent,eol,start whichwrap+=<,>,[,]
     au GUIEnter * simalt ~x
-    set fileformat=unix
     set encoding=utf-8
     set langmenu=zh_CN.UTF-8
     "set guifont=Consolas:h14
@@ -82,10 +80,16 @@ if has('win32')
     let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
     let g:pydiction_location = '$HOME/vimfiles/bundle/pydiction/complete-dict'
 elseif has('unix')
-    set fileformat=unix
     let g:tagbar_ctags_bin = '/usr/bin/ctags'
     let g:pydiction_location = '$HOME/.vim/bundle/pydiction/complete-dict'
     noremap <C-h> :VimwikiGoBackLink<cr>
+    set laststatus=2
+    set statusline=
+    set statusline+=\ %f
+    set statusline+=%m
+    set statusline+=%=
+    set statusline+=\ %l:%c
+    set statusline+=\ %p%%
 endif
 
 """"""""""""""""""""""""""""""""user set
@@ -110,6 +114,8 @@ set foldlevel=1
 "set foldmethod=marker
 "set foldnestmax=5
 "set foldignore="~"
+set fileformat=unix
+
 
 " basic set ******************
 " Switch syntax highlighting on, when the terminal has colors
@@ -161,11 +167,39 @@ autocmd BufRead,BufNewFile *.xsd setf xml
 autocmd BufRead,BufNewFile *.lisa setf c
 " file type set ******************
 
+"" YCM
+"  let g:ycm_confirm_extra_conf = 1
+"  "let g:ycm_extra_conf_globlist = ["/home/lhy/.ycm_extra_conf.py"]
+"  "let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"  "let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"  "let g:SuperTabDefaultCompletionType = '<C-n>'
+"  "
+"  nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+"  nnoremap <leader>ji :YcmCompleter GoToImplementation<CR>
+
 " syntax check ******************
 let g:syntastic_mode_map = {
     \ "mode": "passive",
-    \ "active_filetypes": ["ruby", "php"],
+    \ "active_filetypes": ["ruby", "php", "systemverilog"],
     \ "passive_filetypes": ["puppet"] }
+
+    "\ "active_filetypes": ["ruby", "php", "cpp", "c", "systemverilog"],
+"let g:syntastic_cpp_checkers = ["g++"]
+"let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
+"let g:syntastic_cpp_include_dirs = ["libs", "headers"]
+"let g:syntastic_cpp_no_default_include_dirs = 1
+"let g:syntastic_c_checkers = ["gcc"]
+"let g:syntastic_c_config_file = '.syntastic_c_config'
+"let g:syntastic_c_include_dirs = ["libs", "headers"]
+"let g:syntastic_c_no_default_include_dirs = 1
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " calls `:SyntasticCheck`.
 " python *************
@@ -176,11 +210,14 @@ let g:syntastic_mode_map = {
 " ** tagbar set 
 "let g:tagbar_left = 1
 " ** snipMate
-let g:snipMate = { 'snippet_version' : 1 }
+    "imap <C-J> <Plug>snipMateNextOrTrigger
+    "smap <C-J> <Plug>snipMateNextOrTrigger
+    let g:snipMate = { 'snippet_version' : 1 }
 " ** vimwiki set -- RIV ******************
-let proj1 = { 'name': 'my_wiki', 'path': '~/my_wiki',}
-let g:riv_auto_format_table = 0
-let g:riv_force = 1
+    let proj1 = { 'name': 'my_wiki', 'path': '~/my_wiki',}
+    let g:riv_auto_format_table = 0
+    let g:riv_force = 1
+    set mmp=2000
 "
  
 "matchit

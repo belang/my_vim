@@ -1,10 +1,19 @@
 snippet init
 	initial begin
-		${0}
+	    ${0}
 	end
 
 snippet task
-    task ${1};
-        ${0}
-    endtask
+	task ${1};
+	    ${0}
+	endtask
+
+snippet dy
+	/* DY: ${0} */
+
+snippet mpa
+	#( parameter
+	    ${0}
+	)
+
 

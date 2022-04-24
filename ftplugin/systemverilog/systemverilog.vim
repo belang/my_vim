@@ -13,19 +13,19 @@ set autoindent
 
 " import
 vnoremap <C-E>imp :s/ *\(\%(i_\)\\|\%(o_\)\)\?\([^,]*\)\(,\?\)/    .\1\2    (\2)\3/<cr>
-nnoremap <buffer> <C-E>apl :call verilog#dyAddPinList()<Enter>
+nnoremap <buffer> <C-E>apl :call systemverilog#dyAddPinList()<Enter>
 nmap ; A;<Esc>
 vmap ; :s/$/;/<cr>/asdf<cr>
 nmap , g$x
-nnoremap <buffer> <C-E>ins :call verilog#dyGenInstance()<Enter>
-nnoremap <buffer> <C-E>block :call verilog#dyAddBlockTitle()<Enter>
-nnoremap <buffer> <C-E>declare :call verilog#dyDeclare()<Enter>
+nnoremap <buffer> <C-E>ins :call systemverilog#dyGenInstance()<Enter>
+nnoremap <buffer> <C-E>block :call systemverilog#dyAddBlockTitle()<Enter>
+nnoremap <buffer> <C-E>declare :call systemverilog#dyDeclare()<Enter>
 
 " add pins to module define
 "
 "
 
-func! verilog#dyGenInstance()
+func! systemverilog#dyGenInstance()
     let start_line = line(".")+1
     let end_line = 100000
     let line_num = start_line
@@ -42,24 +42,32 @@ func! verilog#dyGenInstance()
             let line_num = line_num+1
         endif
     endwhile
-    let line_num = start_line
+    call append(start_line, '    .*,')
+    let line_num = start_line+1
     while line_num < end_line
         let line_str = getline(line_num)
+        let line_str = substitute(line_str, '^ *', '', '')
+        let line_str = substitute(line_str, ',\? *$', '', '')
         let cur_pin_len = strwidth(line_str)
         let space = repeat(" ", pin_length-cur_pin_len)
-        let re_str = '    .\1\2' . space . '    (\2)\3'
+        let re_str = '    .\1\2' . space . '    (\2),'
         "let repl = substitute(line_str, ' *\(\%(in_\)|\%(out_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
-        let repl = substitute(line_str, ' *\(i_\|o_\)\?\([^,]*\)\(,\?\)', re_str, 'g')
+        let repl = substitute(line_str, '\(i_\|o_\)\?\(.*\)', re_str, 'g')
         call setline(line_num, repl)
         let line_num = line_num+1
     endwhile
+    " remove last line comma
+    let line_num = line_num-1
+    let line_str = getline(line_num)
+    let repl = substitute(line_str, '\(.*\),', '\1', 'g')
+    call setline(line_num, repl)
 endfunction
 
 " add pin list
 "
 " sub func
 
-func! verilog#CatchOneLine(line_str, pin_list)
+func! systemverilog#CatchOneLine(line_str, pin_list)
     "" the string after ] and before // are pins. 
     let sub_str = substitute(a:line_str, ';', '', 'g')
     if sub_str =~ '.*[.*'
@@ -78,7 +86,7 @@ func! verilog#CatchOneLine(line_str, pin_list)
     endfor
 endfunction
 
-func! verilog#dyAddPinList()
+func! systemverilog#dyAddPinList()
     let total_lines = line("$")
     let line_num = 0
     let module_head_line_num = 1000000
@@ -111,11 +119,11 @@ func! verilog#dyAddPinList()
     while line_num <= total_lines
         let line_str = getline(line_num)
         if line_str =~ '^ *input .*'
-	    call verilog#CatchOneLine(line_str, pin_list)
+	    call systemverilog#CatchOneLine(line_str, pin_list)
         elseif line_str =~ '^ *output .*'
-	    call verilog#CatchOneLine(line_str, pin_list)
+	    call systemverilog#CatchOneLine(line_str, pin_list)
         elseif line_str =~ '^ *inout .*'
-	    call verilog#CatchOneLine(line_str, pin_list)
+	    call systemverilog#CatchOneLine(line_str, pin_list)
         endif
         let line_num = line_num +1
     endwhile
@@ -141,11 +149,11 @@ func! verilog#dyAddPinList()
 endfunction
 
 
-" verilog header:
+" systemverilog header:
 func! YSetTitle()
-    if &filetype == 'verilog'
+    if &filetype == 'systemverilog'
         let fname = "".expand("%")
-        let fname_short = substitute(fname, '\(.*\).v', '\1', 'g')
+        let fname_short = substitute(fname, '\(.*\)\.sv', '\1', 'g')
         let line = 1
         call setline(line,"`timescale 1ns/1ps")
         let line = line + 1
@@ -157,20 +165,15 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"")
         let line = line + 1
-        call setline(line,"`include \"define.v\"")
-        let line = line + 1
         call setline(line,"")
         let line = line + 1
-        call setline(line,"module ".fname_short."(")
+        call setline(line,"module " . fname_short . "(")
+        let line = line + 1
+        call setline(line,"input logic clk, rst_n,")
         let line = line + 1
         call setline(line,");")
         let line = line + 1
         call setline(line,"")
-        let line = line + 1
-        call setline(line,"input  clk, rst_n;")
-        let line = line + 1
-        let line = line + 1
-        call setline(line,"// parameter")
         let line = line + 1
         call setline(line,"// reg")
         let line = line + 1
@@ -178,18 +181,19 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"// process: main")
         let line = line + 1
+        call setline(line,"")
         let line = line + 1
         call setline(line,"endmodule")
       endif
 endfunc
 
-func! verilog#dyAddBlockTitle()
+func! systemverilog#dyAddBlockTitle()
     call append('.', "//====================")
     call append('.', "//block: ")
     call append('.', "//====================")
 endfunc
 
-func! verilog#dyDeclare()
+func! systemverilog#dyDeclare()
     let start_line = line(".")
     let end_line = 100000
     let line_num = start_line

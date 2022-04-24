@@ -169,6 +169,7 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"input  clk, rst_n;")
         let line = line + 1
+        call setline(line,"")
         let line = line + 1
         call setline(line,"// parameter")
         let line = line + 1
@@ -178,6 +179,7 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"// process: main")
         let line = line + 1
+        call setline(line,"")
         let line = line + 1
         call setline(line,"endmodule")
       endif
