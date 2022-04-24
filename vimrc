@@ -65,11 +65,13 @@ if has('win32')
     "set guifont=Consolas:h14
     "set guifont=DejaVu_Sans_Mono:h14
     "set guifont=仿宋:h14
-    set guifont=SimHei:h14
-    language message zh_CN.UTF-8
+    "set guifont=SimHei:h14
+    "set guifont=SimSun:h14
+    set guifont=NSimSun:h14
+    "language message zh_CN.UTF-8
     "处理菜单及右键菜单乱码
-    source $VIMRUNTIME/delmenu.vim
-    source $VIMRUNTIME/menu.vim
+    "source $VIMRUNTIME/delmenu.vim
+    "source $VIMRUNTIME/menu.vim
     "unmap <C-V>
     "cunmap <C-V>
     "unmap <C-Y>
@@ -154,7 +156,8 @@ nnoremap <F5> :set cuc! cul!<CR>
 "inoremap <F5> <br />
 
 " global key map
-iab xtime <c-r>=strftime("%c wd%w # ")
+iab xtime <c-r>=strftime("%T")
+"iab xtime <c-r>=strftime("%c wd%w # ")
 iab xday <c-r>=strftime("%Y-%m-%d")
 iab xdate <c-r>=strftime("%Y_%m_%d")
 iab vimhome <c-r>=$HOME<C-I>
@@ -214,7 +217,10 @@ let g:syntastic_check_on_wq = 0
     "smap <C-J> <Plug>snipMateNextOrTrigger
     let g:snipMate = { 'snippet_version' : 1 }
 " ** vimwiki set -- RIV ******************
-    let proj1 = { 'name': 'my_wiki', 'path': '~/my_wiki',}
+    let proj1 = { 'name': 'work', 'path': '~/wiki/work',}
+    let proj2 = { 'name': 'note', 'path': "~/wiki/note" }
+    let proj3 = { 'name': 'tech', 'path': "~/wiki/tech" }
+    let proj4 = { 'name': 'project', 'path': "~/wiki/project"}
     let g:riv_auto_format_table = 0
     let g:riv_force = 1
     set mmp=2000
@@ -223,26 +229,26 @@ let g:syntastic_check_on_wq = 0
 "matchit
 packadd! matchit
 let b:match_words = '\<if\>:\<endif\>:\<else\>,'
-\ . '\<while\>:\<continue\>,'
-\ . '\<begin\>:\<end\>,'
-\ . '\<module\>:\<endmodule\>,'
-\ . '\<class\>:\<endclass\>,'
-\ . '\<program\>:\<endprogram\>,'
-\ . '\<clocking\>:\<endclocking\>,'
-\ . '\<property\>:\<endproperty\>,'
-\ . '\<sequence\>:\<endsequence\>,'
-\ . '\<package\>:\<endpackage\>,'
-\ . '\<covergroup\>:\<endgroup\>,'
-\ . '\<primitive\>:\<endprimitive\>,'
-\ . '\<specify\>:\<endspecify\>,'
-\ . '\<generate\>:\<endgenerate\>,'
-\ . '\<interface\>:\<endinterface\>,'
-\ . '\<function\>:\<endfunction\>,'
-\ . '\<task\>:\<endtask\>,'
-\ . '\<case\>\|\<casex\>\|\<casez\>:\<endcase\>,'
-\ . '\<fork\>:\<join\>\|\<join_any\>\|\<join_none\>,'
-\ . '`ifdef\>:`else\>:`endif\>,'
-\ . '\<generate\>:\<endgenerate\>'
+    \ . '\<while\>:\<continue\>,'
+    \ . '\<begin\>:\<end\>,'
+    \ . '\<module\>:\<endmodule\>,'
+    \ . '\<class\>:\<endclass\>,'
+    \ . '\<program\>:\<endprogram\>,'
+    \ . '\<clocking\>:\<endclocking\>,'
+    \ . '\<property\>:\<endproperty\>,'
+    \ . '\<sequence\>:\<endsequence\>,'
+    \ . '\<package\>:\<endpackage\>,'
+    \ . '\<covergroup\>:\<endgroup\>,'
+    \ . '\<primitive\>:\<endprimitive\>,'
+    \ . '\<specify\>:\<endspecify\>,'
+    \ . '\<generate\>:\<endgenerate\>,'
+    \ . '\<interface\>:\<endinterface\>,'
+    \ . '\<function\>:\<endfunction\>,'
+    \ . '\<task\>:\<endtask\>,'
+    \ . '\<case\>\|\<casex\>\|\<casez\>:\<endcase\>,'
+    \ . '\<fork\>:\<join\>\|\<join_any\>\|\<join_none\>,'
+    \ . '`ifdef\>:`else\>:`endif\>,'
+    \ . '\<generate\>:\<endgenerate\>'
 
 if $OS =~ "Windows.*"
     source ~/vimfiles/local.vim
