@@ -42,12 +42,18 @@ func! systemverilog#dyGenInstance()
             let line_num = line_num+1
         endif
     endwhile
-    call append(start_line, '    .*,')
-    let line_num = start_line+1
+    "call append(start_line, '    .*,')
+    let line_num = start_line
     while line_num < end_line
         let line_str = getline(line_num)
-        let line_str = substitute(line_str, '^ *', '', '')
-        let line_str = substitute(line_str, ',\? *$', '', '')
+        " remove spaces and defines of ports, comman after ports
+        let line_str = substitute(line_str, '^.* \([^,\S]\+\),\? *', '\1', '')
+        let line_str = substitute(line_str, '\(\S\+\)\[.*\]', '\1', '')
+        "let line_str = substitute(line_str, '^ *', '', '')
+        "let line_str = substitute(line_str, '^input *', '', '')
+        "let line_str = substitute(line_str, '^output *', '', '')
+        "let line_str = substitute(line_str, '^logic * ', '', '')
+        "let line_str = substitute(line_str, ',\? *$', '', '')
         let cur_pin_len = strwidth(line_str)
         let space = repeat(" ", pin_length-cur_pin_len)
         let re_str = '    .\1\2' . space . '    (\2),'
@@ -155,8 +161,8 @@ func! YSetTitle()
         let fname = "".expand("%")
         let fname_short = substitute(fname, '\(.*\)\.sv', '\1', 'g')
         let line = 1
-        call setline(line,"`timescale 1ns/1ps")
-        let line = line + 1
+        "call setline(line,"`timescale 1ns/1ps")
+        "let line = line + 1
         call setline(line,"// file name: ".expand("%"))
         let line = line + 1
         call setline(line,"// author: lianghy")
@@ -167,11 +173,15 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"")
         let line = line + 1
-        call setline(line,"module " . fname_short . "(")
+        call setline(line,"module " . fname_short)
         let line = line + 1
-        call setline(line,"input logic clk, rst_n,")
+        call setline(line,"    (")
         let line = line + 1
-        call setline(line,");")
+        call setline(line,"    input logic clk,")
+        let line = line + 1
+        call setline(line,"    input logic rst_n,")
+        let line = line + 1
+        call setline(line,"    );")
         let line = line + 1
         call setline(line,"")
         let line = line + 1
