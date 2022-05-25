@@ -1,8 +1,8 @@
 extends verilog
 
 snippet typee
-	typedef enum {${0} } ${1:name_t};
+	typedef enum logic [${2}:0] {${0}} ${1};
 
 snippet pack
-	package {${0}};
-	endpackage
+	package ${0};
+	endpackage: ${0}
