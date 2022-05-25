@@ -6,3 +6,6 @@ Deallocation
 rtl
 verilator
 vcs
+verilog
+neuromorphic
+regfile

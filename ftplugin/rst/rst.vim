@@ -9,6 +9,7 @@ if exists("b:lhy_ftplugin")
   finish
 endif
 let b:lhy_ftplugin = 1  " Don't load another plugin for this buffer
+"let b:current_syntax = "rst" " stop riv syntax
 
 set tabstop=3 
 set softtabstop=3
