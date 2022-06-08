@@ -7,6 +7,7 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
+set foldlevel=0
 
 " always
 "nnoremap <C-E>anl :call Always(0, 0)<cr>

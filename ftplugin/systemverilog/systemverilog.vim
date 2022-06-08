@@ -38,7 +38,18 @@ func! systemverilog#dyGenInstance()
             let end_line = line_num
             break
         else
-            let pin_length = max([strwidth(line_str), pin_length])
+            if line_str =~ "^ *//"
+                let line_num = line_num+1
+                continue
+            else
+                " remove spaces and defines of ports, comman after ports
+                " let line_str = substitute(line_str, '^.* \([^,\S]\+\),\? *', '\1', '')
+        let line_str = substitute(line_str, '^ *', '', '')                    " remove front space
+        let line_str = substitute(line_str, ',.*', '', '')                    " remove comma
+        let line_str = substitute(line_str, '//.*', '', '')                   " remove comment
+        let line_str = substitute(line_str, '.* \(\S\+\)$', '\1', '')         " remove non last string
+                let pin_length = max([strwidth(line_str), pin_length])
+            endif
             let line_num = line_num+1
         endif
     endwhile
@@ -46,20 +57,21 @@ func! systemverilog#dyGenInstance()
     let line_num = start_line
     while line_num < end_line
         let line_str = getline(line_num)
+        if line_str =~ "^ *//"
+            let line_num = line_num+1
+            continue
+        endif
         " remove spaces and defines of ports, comman after ports
-        let line_str = substitute(line_str, '^.* \([^,\S]\+\),\? *', '\1', '')
-        let line_str = substitute(line_str, '\(\S\+\)\[.*\]', '\1', '')
-        "let line_str = substitute(line_str, '^ *', '', '')
-        "let line_str = substitute(line_str, '^input *', '', '')
-        "let line_str = substitute(line_str, '^output *', '', '')
-        "let line_str = substitute(line_str, '^logic * ', '', '')
-        "let line_str = substitute(line_str, ',\? *$', '', '')
+        let line_str = substitute(line_str, '^ *', '', '')                    " remove front space
+        let line_str = substitute(line_str, ',.*', '', '')                    " remove comma
+        let line_str = substitute(line_str, '//.*', '', '')                   " remove comment
+        let line_str = substitute(line_str, '.* \(\S\+\)$', '\1', '')         " remove non last string
         let cur_pin_len = strwidth(line_str)
         let space = repeat(" ", pin_length-cur_pin_len)
         let re_str = '    .\1\2' . space . '    (\2),'
         "let repl = substitute(line_str, ' *\(\%(in_\)|\%(out_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
-        let repl = substitute(line_str, '\(i_\|o_\)\?\(.*\)', re_str, 'g')
-        call setline(line_num, repl)
+        let line_str = substitute(line_str, '^\(i_\|o_\)\?\(.*\)', re_str, 'g')
+        call setline(line_num, line_str)
         let line_num = line_num+1
     endwhile
     " remove last line comma
@@ -125,11 +137,11 @@ func! systemverilog#dyAddPinList()
     while line_num <= total_lines
         let line_str = getline(line_num)
         if line_str =~ '^ *input .*'
-	    call systemverilog#CatchOneLine(line_str, pin_list)
+            call systemverilog#CatchOneLine(line_str, pin_list)
         elseif line_str =~ '^ *output .*'
-	    call systemverilog#CatchOneLine(line_str, pin_list)
+            call systemverilog#CatchOneLine(line_str, pin_list)
         elseif line_str =~ '^ *inout .*'
-	    call systemverilog#CatchOneLine(line_str, pin_list)
+            call systemverilog#CatchOneLine(line_str, pin_list)
         endif
         let line_num = line_num +1
     endwhile
@@ -163,8 +175,8 @@ func! YSetTitle()
         let line = 1
         "call setline(line,"`timescale 1ns/1ps")
         "let line = line + 1
-        call setline(line,"// file name: ".expand("%"))
-        let line = line + 1
+        "call setline(line,"// file name: ".expand("%"))
+        "let line = line + 1
         call setline(line,"// author: lianghy")
         let line = line + 1
         call setline(line,"// time: ".strftime("%c"))
@@ -177,7 +189,7 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"    (")
         let line = line + 1
-        call setline(line,"    input logic clk,")
+        call setline(line,"    input wire  clk,")
         let line = line + 1
         call setline(line,"    input logic rst_n,")
         let line = line + 1
@@ -185,12 +197,16 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"")
         let line = line + 1
-        call setline(line,"// reg")
+        call setline(line,"//====================")
         let line = line + 1
-        call setline(line,"// wire")
+        call setline(line,"// resource")
         let line = line + 1
-        call setline(line,"// process: main")
+        call setline(line,"//====================")
         let line = line + 1
+        "call setline(line,"// wire")
+        "let line = line + 1
+        "call setline(line,"// process: main")
+        "let line = line + 1
         call setline(line,"")
         let line = line + 1
         call setline(line,"endmodule")

@@ -33,6 +33,7 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/VisIncr'
 Plugin 'vim-scripts/DrawIt'
+Plugin 'junegunn/vim-easy-align'
 "Plugin 'gu-fan/riv.vim'
 "Plugin 'gu-fan/rhythm.css'
 "Plugin 'gu-fan/InstantRst'
@@ -112,7 +113,7 @@ set expandtab
 set autoindent 
 set formatoptions+=m
 set foldmethod=indent
-set foldlevel=1
+set foldlevel=0
 "set foldmethod=marker
 "set foldnestmax=5
 "set foldignore="~"
@@ -203,6 +204,13 @@ let g:syntastic_mode_map = {
 "let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" easy align ******************
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " calls `:SyntasticCheck`.
 " python *************
