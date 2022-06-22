@@ -3,6 +3,11 @@ extends verilog
 snippet typee
 	typedef enum logic [${2}:0] {${0}} ${1};
 
-snippet pack
-	package ${0};
-	endpackage: ${0}
+# Sequential logic
+snippet alfa
+	always_ff @(posedge ${1:clk} or negedge rst_n) begin ${2:: statement_label}
+		${0}
+	end $2
+
+snippet assp
+	assert property (@(posedge ${1:clk} ${0});

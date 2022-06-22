@@ -34,7 +34,7 @@ func! systemverilog#dyGenInstance()
     let new_str = []
     while line_num < end_line
         let line_str = getline(line_num)
-        if line_str =~ '^);'
+        if line_str =~ '^ *);'
             let end_line = line_num
             break
         else
@@ -57,6 +57,10 @@ func! systemverilog#dyGenInstance()
     let line_num = start_line
     while line_num < end_line
         let line_str = getline(line_num)
+        if line_str =~ "^ *$"
+            let line_num = line_num+1
+            continue
+        endif
         if line_str =~ "^ *//"
             let line_num = line_num+1
             continue
@@ -65,12 +69,14 @@ func! systemverilog#dyGenInstance()
         let line_str = substitute(line_str, '^ *', '', '')                    " remove front space
         let line_str = substitute(line_str, ',.*', '', '')                    " remove comma
         let line_str = substitute(line_str, '//.*', '', '')                   " remove comment
-        let line_str = substitute(line_str, '.* \(\S\+\)$', '\1', '')         " remove non last string
+        let line_str = substitute(line_str, '.* \(\S\+\) *$', '\1', '')       " remove non last string
         let cur_pin_len = strwidth(line_str)
         let space = repeat(" ", pin_length-cur_pin_len)
         let re_str = '    .\1\2' . space . '    (\2),'
         "let repl = substitute(line_str, ' *\(\%(in_\)|\%(out_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
         let line_str = substitute(line_str, '^\(i_\|o_\)\?\(.*\)', re_str, 'g')
+        let re_str_io = '    .\1\2' . space . '    (wi_\2),'
+        let line_str = substitute(line_str, '^io_\(.*\)', re_str_io, 'g')
         call setline(line_num, line_str)
         let line_num = line_num+1
     endwhile
