@@ -69,6 +69,7 @@ if has('win32')
     "set guifont=SimHei:h14
     "set guifont=SimSun:h14
     set guifont=NSimSun:h14
+    silent! vunmap <C-X>
     "language message zh_CN.UTF-8
     "处理菜单及右键菜单乱码
     "source $VIMRUNTIME/delmenu.vim
@@ -79,7 +80,8 @@ if has('win32')
     "iunmap <C-Y>
 "    " tags
     "colorscheme pablo
-    colorscheme desert
+    "colorscheme desert
+    colorscheme delek
     let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
     let g:pydiction_location = '$HOME/vimfiles/bundle/pydiction/complete-dict'
 elseif has('unix')

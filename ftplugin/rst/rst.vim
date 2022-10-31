@@ -14,7 +14,7 @@ let b:lhy_ftplugin = 1  " Don't load another plugin for this buffer
 "set tabstop=3 
 "set softtabstop=3
 "set shiftwidth=3
-set textwidth=79
+"set textwidth=79
 set expandtab
 set foldlevel=1
 "set backspace=eol,start whichwrap+=<,>,[,]

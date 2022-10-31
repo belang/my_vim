@@ -18,8 +18,8 @@ nmap ; A;<Esc>
 vmap ; :s/$/;/<cr>/asdf<cr>
 nmap , g$x
 nnoremap <buffer> <C-E>ins :call systemverilog#dyGenInstance()<Enter>
-nnoremap <buffer> <C-E>block :call systemverilog#dyAddBlockTitle()<Enter>
-nnoremap <buffer> <C-E>declare :call systemverilog#dyDeclare()<Enter>
+nnoremap <buffer> <C-E>bl :call systemverilog#dyAddBlockTitle()<Enter>
+nnoremap <buffer> <C-E>dec :call systemverilog#dyDeclare()<Enter>
 
 " add pins to module define
 "
@@ -72,11 +72,26 @@ func! systemverilog#dyGenInstance()
         let line_str = substitute(line_str, '.* \(\S\+\) *$', '\1', '')       " remove non last string
         let cur_pin_len = strwidth(line_str)
         let space = repeat(" ", pin_length-cur_pin_len)
-        let re_str = '    .\1\2' . space . '    (\2),'
+        "let re_str = '    .\1\2' . space . '    (\2),'
         "let repl = substitute(line_str, ' *\(\%(in_\)|\%(out_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
-        let line_str = substitute(line_str, '^\(i_\|o_\)\?\(.*\)', re_str, 'g')
-        let re_str_io = '    .\1\2' . space . '    (wi_\2),'
-        let line_str = substitute(line_str, '^io_\(.*\)', re_str_io, 'g')
+        "let line_str = substitute(line_str, '^\(i_\|o_\)\?\(.*\)', re_str, 'g')
+        if line_str =~ "^i_.*"
+            let re_str = '    .\1\2' . space . '    (to_\2),'
+            let line_str = substitute(line_str, '^\(i_\)\(.*\)', re_str, 'g')
+        else
+            if line_str =~ "^o_.*"
+                let re_str = '    .\1\2' . space . '    (fr_\2),'
+                let line_str = substitute(line_str, '^\(o_\)\(.*\)', re_str, 'g')
+            else
+                if line_str =~ "^io_.*"
+                    let re_str = '    .\1\2' . space . '    (bi_\2),'
+                    let line_str = substitute(line_str, '^\(io_\)\(.*\)', re_str, 'g')
+                else
+                    let re_str = '    .\1' . space . '    (\1),'
+                    let line_str = substitute(line_str, '\(.*\)', re_str, 'g')
+                endif
+            endif
+        endif
         call setline(line_num, line_str)
         let line_num = line_num+1
     endwhile
@@ -178,12 +193,13 @@ func! YSetTitle()
     if &filetype == 'systemverilog'
         let fname = "".expand("%")
         let fname_short = substitute(fname, '\(.*\)\.sv', '\1', 'g')
+        //let module_name = substitute(fname_short, '.*\([^_]\+\)', '\1', 'g')
         let line = 1
         "call setline(line,"`timescale 1ns/1ps")
         "let line = line + 1
         "call setline(line,"// file name: ".expand("%"))
         "let line = line + 1
-        call setline(line,"// author: lianghy")
+        call setline(line,"// author: Hayes")
         let line = line + 1
         call setline(line,"// time: ".strftime("%c"))
         let line = line + 1
@@ -193,11 +209,19 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"module " . fname_short)
         let line = line + 1
+        call setline(line,"    import missile_pkg::*;")
+        let line = line + 1
         call setline(line,"    (")
         let line = line + 1
         call setline(line,"    input wire  clk,")
         let line = line + 1
         call setline(line,"    input logic rst_n,")
+        "let line = line + 1
+        "call setline(line,"    input  logic i_" . module_name . "_valid,")
+        "let line = line + 1
+        "call setline(line,"    input  logic i_" . module_name . "_stall,")
+        "let line = line + 1
+        "call setline(line,"    output logic i_" . module_name . "_ready,")
         let line = line + 1
         call setline(line,"    );")
         let line = line + 1
@@ -215,6 +239,12 @@ func! YSetTitle()
         "let line = line + 1
         call setline(line,"")
         let line = line + 1
+        call setline(line,"always_comb begin : gen_output")
+        let line = line + 1
+        call setline(line,"end : gen_output")
+        let line = line + 1
+        call setline(line,"")
+        let line = line + 1
         call setline(line,"endmodule")
       endif
 endfunc
@@ -223,26 +253,87 @@ func! systemverilog#dyAddBlockTitle()
     call append('.', "//====================")
     call append('.', "//block: ")
     call append('.', "//====================")
+    call append('.', "")
+    call append('.', "    //==end block")
 endfunc
 
 func! systemverilog#dyDeclare()
-    let start_line = line(".")
+    "let start_line = line(".")
+    "let end_line = 100000
+    "let line_num = start_line
+    "let pin_length = 0
+    "let pin_list = []
+    "let new_str = []
+    "while line_num < end_line
+        "let line_str = getline(line_num)
+        "if line_str =~ '^wire'
+            "call cursor(line_num, 0)
+            "execute(':m '.start_line)
+        "elseif line_str =~ '^reg'
+            "call cursor(line_num, 0)
+            "execute(':m '.start_line)
+        "endif
+        "let line_num = line_num+1
+    "endwhile
+    let start_line = line(".")+1
     let end_line = 100000
     let line_num = start_line
     let pin_length = 0
     let pin_list = []
     let new_str = []
+    "call append(start_line, '    .*,')
+    let line_num = start_line
     while line_num < end_line
-        let line_str = getline(line_num)
-        if line_str =~ '^wire'
-            call cursor(line_num, 0)
-            execute(':m '.start_line)
-        elseif line_str =~ '^reg'
-            call cursor(line_num, 0)
-            execute(':m '.start_line)
+        let org_line_str = getline(line_num)
+        if org_line_str =~ "^    //==end block"
+            break
         endif
+        if org_line_str =~ "^ *$"
+            let line_num = line_num+1
+            continue
+        endif
+        if org_line_str =~ "^ *//"
+            let line_num = line_num+1
+            continue
+        endif
+        let line_str = org_line_str
+        " remove spaces and defines of ports, comman after ports
+        let line_str = substitute(line_str, '^ *', '', '')                    " remove front space
+        let line_str = substitute(line_str, ',.*', '', '')                    " remove comma
+        let line_str = substitute(line_str, '//.*', '', '')                   " remove comment
+        let line_str = substitute(line_str, '.* \(\S\+\) *$', '\1', '')       " remove non last string
+        "let cur_pin_len = strwidth(line_str)
+        "let space = repeat(" ", pin_length-cur_pin_len)
+        "let re_str = '    .\1\2' . space . '    (\2),'
+        "let repl = substitute(line_str, ' *\(\%(in_\)|\%(out_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
+        "let line_str = substitute(line_str, '^\(i_\|o_\)\?\(.*\)', re_str, 'g')
+        if line_str =~ "^i_.*"
+            let re_str = 'to_\1'
+            let new_name = substitute(line_str, '^i_\(.*\)', re_str, 'g')
+            let new_line = substitute(org_line_str, line_str, new_name, 'g')
+        else
+            if line_str =~ "^o_.*"
+                let re_str = 'fr_\1'
+                let new_name = substitute(line_str, '^o_\(.*\)', re_str, 'g')
+                let new_line = substitute(org_line_str, line_str, new_name, 'g')
+            else
+                if line_str =~ "^io_.*"
+                    let re_str = 'bi_\1'
+                    let new_name = substitute(line_str, '^io_\(.*\)', re_str, 'g')
+                    let new_line = substitute(org_line_str, line_str, new_name, 'g')
+                else
+                    let new_line = org_line_str
+                endif
+            endif
+        endif
+        let new_line = substitute(new_line, ',', ';', 'g')
+        call setline(line_num, new_line)
         let line_num = line_num+1
     endwhile
+    let line_num = line_num-1
+    let line_str = getline(line_num)
+    let repl = substitute(line_str, '\(.*\)', '\1;', 'g')
+    call setline(line_num, repl)
 endfunc
 " vim function
 "
