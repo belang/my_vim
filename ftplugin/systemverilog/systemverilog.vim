@@ -233,10 +233,12 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"//====================")
         let line = line + 1
+        call setline(line,"    //==end block")
         "call setline(line,"// wire")
         "let line = line + 1
         "call setline(line,"// process: main")
         "let line = line + 1
+        let line = line + 1
         call setline(line,"")
         let line = line + 1
         call setline(line,"always_comb begin : gen_output")
@@ -327,6 +329,8 @@ func! systemverilog#dyDeclare()
             endif
         endif
         let new_line = substitute(new_line, ',', ';', 'g')
+        let new_line = substitute(new_line, 'input *', '', 'g')
+        let new_line = substitute(new_line, 'output *', '', 'g')
         call setline(line_num, new_line)
         let line_num = line_num+1
     endwhile
