@@ -193,7 +193,7 @@ func! YSetTitle()
     if &filetype == 'systemverilog'
         let fname = "".expand("%")
         let fname_short = substitute(fname, '\(.*\)\.sv', '\1', 'g')
-        //let module_name = substitute(fname_short, '.*\([^_]\+\)', '\1', 'g')
+        "let module_name = substitute(fname_short, '.*\([^_]\+\)', '\1', 'g')
         let line = 1
         "call setline(line,"`timescale 1ns/1ps")
         "let line = line + 1
