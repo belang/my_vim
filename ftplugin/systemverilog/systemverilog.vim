@@ -233,6 +233,8 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"//====================")
         let line = line + 1
+        call setline(line,"    //==connect instance")
+        let line = line + 1
         call setline(line,"    //==end block")
         "call setline(line,"// wire")
         "let line = line + 1
@@ -241,9 +243,9 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"")
         let line = line + 1
-        call setline(line,"always_comb begin : gen_output")
+        call setline(line,"always_comb begin : cal_output")
         let line = line + 1
-        call setline(line,"end : gen_output")
+        call setline(line,"end : cal_output")
         let line = line + 1
         call setline(line,"")
         let line = line + 1
