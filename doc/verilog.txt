@@ -5,4 +5,4 @@
 <C-E>apl 将端口名称添加到模块定义中。
 <C-e>imp 快速添加实例化端口连接，光标要停在实例化定义行：module_name instance_name(
 <C-E>block add block comment
-<C-E>declare 将定义reg, wire的语句移动到当前位置。
+<C-E>dec 将端口声明变为信号声明，用于连接实例

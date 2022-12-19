@@ -1,12 +1,14 @@
-if exists("b:did_ftplugin")
+if exists("b:did_sv_ftplugin")
   finish
 endif
-let b:did_ftplugin = 1  " Don't load another plugin for this buffer
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+let b:did_sv_ftplugin = 1  " Don't load another plugin for this buffer
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 set autoindent
+set foldlevel=0
+set textwidth=100
 
 " always
 "nnoremap <C-E>anl :call Always(0, 0)<cr>
@@ -193,37 +195,48 @@ func! YSetTitle()
     if &filetype == 'systemverilog'
         let fname = "".expand("%")
         let fname_short = substitute(fname, '\(.*\)\.sv', '\1', 'g')
+        let indent = "  "
         "let module_name = substitute(fname_short, '.*\([^_]\+\)', '\1', 'g')
         let line = 1
         "call setline(line,"`timescale 1ns/1ps")
         "let line = line + 1
         "call setline(line,"// file name: ".expand("%"))
         "let line = line + 1
-        call setline(line,"// author: Hayes")
+        call setline(line, "// Copyright lowRISC contributors.")
         let line = line + 1
-        call setline(line,"// time: ".strftime("%c"))
+        call setline(line, "// Licensed under the Apache License, Version 2.0, see LICENSE for details.")
         let line = line + 1
+        call setline(line, "// SPDX-License-Identifier: Apache-2.0")
+        let line = line + 1
+        call setline(line, "//")
+        let line = line + 1
+        call setline(line, "// One_line_description_of_the_module")
+        let line = line + 1
+        "call setline(line,"// author: Hayes")
+        "let line = line + 1
+        "call setline(line,"// time: ".strftime("%c"))
+        "let line = line + 1
         call setline(line,"")
         let line = line + 1
         call setline(line,"")
         let line = line + 1
         call setline(line,"module " . fname_short)
         let line = line + 1
-        call setline(line,"    import missile_pkg::*;")
+        call setline(line, indent . "import missile_pkg::*;")
         let line = line + 1
-        call setline(line,"    (")
+        call setline(line,"(")
         let line = line + 1
-        call setline(line,"    input wire  clk,")
+        call setline(line, indent . "input wire  clk,")
         let line = line + 1
-        call setline(line,"    input logic rst_n,")
+        call setline(line, indent . "input logic rst_n,")
         "let line = line + 1
-        "call setline(line,"    input  logic i_" . module_name . "_valid,")
+        "call setline(line, indent . "input  logic i_" . module_name . "_valid,")
         "let line = line + 1
-        "call setline(line,"    input  logic i_" . module_name . "_stall,")
+        "call setline(line, indent . "input  logic i_" . module_name . "_stall,")
         "let line = line + 1
-        "call setline(line,"    output logic i_" . module_name . "_ready,")
+        "call setline(line, indent . "output logic i_" . module_name . "_ready,")
         let line = line + 1
-        call setline(line,"    );")
+        call setline(line, indent . ");")
         let line = line + 1
         call setline(line,"")
         let line = line + 1
@@ -233,9 +246,9 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"//====================")
         let line = line + 1
-        call setline(line,"    //==connect instance")
+        call setline(line, indent . "//==instance port net")
         let line = line + 1
-        call setline(line,"    //==end block")
+        call setline(line, indent . "//==end port net")
         "call setline(line,"// wire")
         "let line = line + 1
         "call setline(line,"// process: main")
@@ -254,11 +267,11 @@ func! YSetTitle()
 endfunc
 
 func! systemverilog#dyAddBlockTitle()
+    call append('.', "    //==end block")
+    call append('.', "")
     call append('.', "//====================")
     call append('.', "//block: ")
     call append('.', "//====================")
-    call append('.', "")
-    call append('.', "    //==end block")
 endfunc
 
 func! systemverilog#dyDeclare()
@@ -289,7 +302,7 @@ func! systemverilog#dyDeclare()
     let line_num = start_line
     while line_num < end_line
         let org_line_str = getline(line_num)
-        if org_line_str =~ "^    //==end block"
+        if org_line_str =~ "^  //==end block"
             break
         endif
         if org_line_str =~ "^ *$"
@@ -311,14 +324,17 @@ func! systemverilog#dyDeclare()
         "let re_str = '    .\1\2' . space . '    (\2),'
         "let repl = substitute(line_str, ' *\(\%(in_\)|\%(out_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
         "let line_str = substitute(line_str, '^\(i_\|o_\)\?\(.*\)', re_str, 'g')
-        if line_str =~ "^i_.*"
+        "if line_str =~ "^i_.*"
+        if line_str =~ "^.*_i"
             let re_str = 'to_\1'
-            let new_name = substitute(line_str, '^i_\(.*\)', re_str, 'g')
+            let new_name = substitute(line_str, '^\(.*\)_i', re_str, 'g')
             let new_line = substitute(org_line_str, line_str, new_name, 'g')
         else
-            if line_str =~ "^o_.*"
+            "if line_str =~ "^o_.*"
+            if line_str =~ "^.*_o"
                 let re_str = 'fr_\1'
-                let new_name = substitute(line_str, '^o_\(.*\)', re_str, 'g')
+                "let new_name = substitute(line_str, '^o_\(.*\)', re_str, 'g')
+                let new_name = substitute(line_str, '^\(.*\)_o', re_str, 'g')
                 let new_line = substitute(org_line_str, line_str, new_name, 'g')
             else
                 if line_str =~ "^io_.*"
