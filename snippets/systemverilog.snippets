@@ -44,12 +44,11 @@ snippet reg_inc_s
 		end else if (${4:inc_en}) begin
 		    ${2} <= ${2} + 'b1;
 		end
-end
+	end
 
 snippet m_revert
 	for (int i = 0; i < ${1:length}; i++) begin  // revert bit
 		${2}[i] = ${3}[$1-i];
 	end
-end
 
 

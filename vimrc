@@ -107,12 +107,12 @@ autocmd BufReadPost *
 \   exe "normal! g`\"" |
 \ endif
 
-set tabstop=4 
-set softtabstop=4 
-set shiftwidth=4 
-"set textwidth=79 
-set expandtab 
-set autoindent 
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+"set textwidth=79
+set expandtab
+set autoindent
 set formatoptions+=m
 set foldmethod=indent
 set foldlevel=0
@@ -227,10 +227,10 @@ nmap ga <Plug>(EasyAlign)
     "smap <C-J> <Plug>snipMateNextOrTrigger
     let g:snipMate = { 'snippet_version' : 1 }
 " ** vimwiki set -- RIV ******************
-    let proj1 = { 'name': 'work', 'path': '~/work/wiki/work',}
-    let proj2 = { 'name': 'note', 'path': "~/work/wiki/note" }
-    let proj3 = { 'name': 'tech', 'path': "~/work/wiki/tech" }
-    let proj4 = { 'name': 'proj', 'path': "~/work/wiki/project"}
+    let proj1 = { 'name': 'work', 'path': '~/wiki/work',}
+    let proj2 = { 'name': 'note', 'path': "~/wiki/note" }
+    let proj3 = { 'name': 'proj', 'path': "~/wiki/work/project"}
+    let proj4 = { 'name': 'tech', 'path': "~/wiki/tech" }
     let g:riv_auto_format_table = 0
     let g:riv_force = 1
     set mmp=2000
