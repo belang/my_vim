@@ -1,14 +1,15 @@
-if exists("b:did_ftplugin")
+if exists("b:did_mpy_ftplugin")
   finish
 endif
-let b:did_ftplugin = 1  " Don't load another plugin for this buffer
-set tabstop=4 
-set softtabstop=4 
-set shiftwidth=4
-set expandtab 
+let b:did_mpy_ftplugin = 1  " Don't load another plugin for this buffer
+"set tabstop=4 
+"set softtabstop=4 
+"set shiftwidth=4
+"set expandtab 
 set foldmethod=indent
 set foldnestmax=7
 set noautoindent 
+set guifont=Fira_Code:h14
 "set foldlevelstart=99
 "set foldignore=~
 " in exists, '*' means function name
