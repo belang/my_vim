@@ -1,56 +1,40 @@
 set nocompatible
 filetype off 
 
-"if has('win32')
-if $OS =~ "Windows.*"
-	set rtp+=~/vimfiles/bundle/Vundle.vim
-	call vundle#begin('~/vimfiles/bundle')
-"elseif has('unix')
-elseif $OS =~ "Unix"
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
-else
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
-endif
+call plug#begin('~/vimfiles/bundle')
 
-" set the runtime path to include Vundle and initialize
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'godlygeek/tabular'
-Plugin 'othree/xml.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-"Plugin 'tomtom/tlib_vim'
-Plugin 'vim-scripts/tlib'
-"Plugin 'SirVer/ultisnips'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-Plugin 'vim-scripts/VisIncr'
-Plugin 'vim-scripts/DrawIt'
-Plugin 'junegunn/vim-easy-align'
-"Plugin 'gu-fan/riv.vim'
-"Plugin 'gu-fan/rhythm.css'
-"Plugin 'gu-fan/InstantRst'
-Plugin 'majutsushi/tagbar'
-Plugin 'rkulla/pydiction'
-"Plugin 'mathjax/MathJax'
-"Plugin 'vimwiki/vimwiki'
-"Plugin 'plasticboy/vim-markdown'
-"Plugin 'mattn/emmet-vim'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'Rykka/riv.vim'
-Plugin 'Rykka/rhythm.css'
-Plugin 'Rykka/InstantRst'
+Plug 'scrooloose/nerdtree'
+Plug 'godlygeek/tabular'
+Plug 'othree/xml.vim'
+"Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim'
+Plug 'vim-scripts/tlib'
+"Plug 'SirVer/ultisnips'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+Plug 'vim-scripts/VisIncr'
+Plug 'vim-scripts/DrawIt'
+Plug 'junegunn/vim-easy-align'
+"Plug 'gu-fan/riv.vim'
+"Plug 'gu-fan/rhythm.css'
+"Plug 'gu-fan/InstantRst'
+Plug 'majutsushi/tagbar'
+Plug 'rkulla/pydiction'
+"Plug 'mathjax/MathJax'
+Plug 'vimwiki/vimwiki'
+"Plug 'plasticboy/vim-markdown'
+"Plug 'mattn/emmet-vim'
+"Plug 'Valloric/YouCompleteMe'
+Plug 'Rykka/riv.vim'
+Plug 'Rykka/rhythm.css'
+Plug 'Rykka/InstantRst'
+Plug 'sheerun/vim-polyglot'
+Plug 'morhetz/gruvbox'
 
-call vundle#end()            " required
-"call vundle#config#require(g:bundles)
-filetype plugin indent on
+call plug#end()
 
 "source $VIMRUNTIME/vimrc_example.vim
 if has('win32')
@@ -69,6 +53,7 @@ if has('win32')
     "set guifont=SimHei:h14
     "set guifont=SimSun:h14
     set guifont=NSimSun:h14
+    "set guifont=Fira_Code:h14
     silent! vunmap <C-X>
     "language message zh_CN.UTF-8
     "处理菜单及右键菜单乱码
@@ -81,8 +66,8 @@ if has('win32')
 "    " tags
     "colorscheme pablo
     "colorscheme desert
-    colorscheme delek
-    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags58/ctags.exe'
+    "colorscheme delek
+    let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags/ctags.exe'
     let g:pydiction_location = '$HOME/vimfiles/bundle/pydiction/complete-dict'
 elseif has('unix')
     let g:tagbar_ctags_bin = '/usr/bin/ctags'
@@ -138,6 +123,9 @@ set incsearch		" do incremental searching
 "set mouse=v " 鼠标选择
 "set autochdir
 "set colorscheme 
+autocmd vimenter * ++nested colorscheme gruvbox
+set background=dark
+"set background=light
 
 " language set ******************
 " 设置编码
@@ -149,6 +137,7 @@ set incsearch		" do incremental searching
 "else
 set fileencoding=utf-8
 "endif
+set tags=./tags;/
 " 设置文件编码检测类型及支持格式
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,gb2312,gbk
 " F2 开关行号; F3 改变目录到当前文件所在目录
@@ -214,6 +203,7 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+
 " calls `:SyntasticCheck`.
 " python *************
 " map <F12> :!python.exe %
@@ -226,7 +216,7 @@ nmap ga <Plug>(EasyAlign)
     "imap <C-J> <Plug>snipMateNextOrTrigger
     "smap <C-J> <Plug>snipMateNextOrTrigger
     let g:snipMate = { 'snippet_version' : 1 }
-" ** vimwiki set -- RIV ******************
+" ** vim rst wiki set -- RIV ******************
     let proj1 = { 'name': 'work', 'path': '~/wiki/work',}
     let proj2 = { 'name': 'note', 'path': "~/wiki/note" }
     let proj3 = { 'name': 'proj', 'path': "~/wiki/work/project"}
@@ -234,6 +224,10 @@ nmap ga <Plug>(EasyAlign)
     let g:riv_auto_format_table = 0
     let g:riv_force = 1
     set mmp=2000
+
+" ** vimwiki ******************
+    let g:vimwiki_list = [{'path': '~/vimwiki/tech',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 "
  
 "matchit

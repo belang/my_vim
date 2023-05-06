@@ -1,7 +1,7 @@
-if exists("b:did_ftplugin")
+if exists("b:did_mv_ftplugin")
   finish
 endif
-let b:did_ftplugin = 1  " Don't load another plugin for this buffer
+let b:did_mv_ftplugin = 1  " Don't load another plugin for this buffer
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4

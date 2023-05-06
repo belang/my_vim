@@ -1,14 +1,15 @@
-if exists("b:did_sv_ftplugin")
+if exists("b:did_msv_ftplugin")
   finish
 endif
-let b:did_sv_ftplugin = 1  " Don't load another plugin for this buffer
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+let b:did_msv_ftplugin = 1  " Don't load another plugin for this buffer
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 set autoindent
 set foldlevel=0
 set textwidth=100
+set guifont=Fira_Code:h14
 
 " always
 "nnoremap <C-E>anl :call Always(0, 0)<cr>
@@ -77,17 +78,23 @@ func! systemverilog#dyGenInstance()
         "let re_str = '    .\1\2' . space . '    (\2),'
         "let repl = substitute(line_str, ' *\(\%(in_\)|\%(out_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
         "let line_str = substitute(line_str, '^\(i_\|o_\)\?\(.*\)', re_str, 'g')
-        if line_str =~ "^i_.*"
-            let re_str = '    .\1\2' . space . '    (to_\2),'
-            let line_str = substitute(line_str, '^\(i_\)\(.*\)', re_str, 'g')
+        "if line_str =~ "^.*_io$"
+        if line_str =~ "^io_.*$"
+            let re_str = '    .\1\2' . space . '    (bi_\2),'
+            let line_str = substitute(line_str, '^\(io_\)\(.*\)', re_str, 'g')
+            "let line_str = substitute(line_str, '^\(.*\)\(_io\)', re_str, 'g')
         else
-            if line_str =~ "^o_.*"
-                let re_str = '    .\1\2' . space . '    (fr_\2),'
-                let line_str = substitute(line_str, '^\(o_\)\(.*\)', re_str, 'g')
+            "if line_str =~ "^.*_i$"
+            if line_str =~ "^i_.*$"
+                let re_str = '    .\1\2' . space . '    (to_\2),'
+                let line_str = substitute(line_str, '^\(i_\)\(.*\)', re_str, 'g')
+                "let line_str = substitute(line_str, '^\(.*\)\(_i\)', re_str, 'g')
             else
-                if line_str =~ "^io_.*"
-                    let re_str = '    .\1\2' . space . '    (bi_\2),'
-                    let line_str = substitute(line_str, '^\(io_\)\(.*\)', re_str, 'g')
+                "if line_str =~ "^.*_o$"
+                if line_str =~ "^o_.*$"
+                    let re_str = '    .\1\2' . space . '    (fr_\2),'
+                    let line_str = substitute(line_str, '^\(o_\)\(.*\)', re_str, 'g')
+                    "let line_str = substitute(line_str, '^\(.*\)\(_o\)', re_str, 'g')
                 else
                     let re_str = '    .\1' . space . '    (\1),'
                     let line_str = substitute(line_str, '\(.*\)', re_str, 'g')
@@ -195,14 +202,14 @@ func! YSetTitle()
     if &filetype == 'systemverilog'
         let fname = "".expand("%")
         let fname_short = substitute(fname, '\(.*\)\.sv', '\1', 'g')
-        let indent = "  "
+        let indent = "    "
         "let module_name = substitute(fname_short, '.*\([^_]\+\)', '\1', 'g')
         let line = 1
         "call setline(line,"`timescale 1ns/1ps")
         "let line = line + 1
         "call setline(line,"// file name: ".expand("%"))
         "let line = line + 1
-        call setline(line, "// Copyright lowRISC contributors.")
+        call setline(line, "// Copyright my contributors.")
         let line = line + 1
         call setline(line, "// Licensed under the Apache License, Version 2.0, see LICENSE for details.")
         let line = line + 1
@@ -210,19 +217,19 @@ func! YSetTitle()
         let line = line + 1
         call setline(line, "//")
         let line = line + 1
+        call setline(line,"// Author: Hayes")
+        let line = line + 1
+        call setline(line,"// Time: ".strftime("%c"))
+        let line = line + 1
         call setline(line, "// One_line_description_of_the_module")
         let line = line + 1
-        "call setline(line,"// author: Hayes")
-        "let line = line + 1
-        "call setline(line,"// time: ".strftime("%c"))
-        "let line = line + 1
         call setline(line,"")
         let line = line + 1
         call setline(line,"")
         let line = line + 1
         call setline(line,"module " . fname_short)
         let line = line + 1
-        call setline(line, indent . "import missile_pkg::*;")
+        call setline(line, indent . "import my_pkg::*;")
         let line = line + 1
         call setline(line,"(")
         let line = line + 1
@@ -302,7 +309,7 @@ func! systemverilog#dyDeclare()
     let line_num = start_line
     while line_num < end_line
         let org_line_str = getline(line_num)
-        if org_line_str =~ "^  //==end block"
+        if org_line_str =~ "^    //==end port net"
             break
         endif
         if org_line_str =~ "^ *$"
@@ -325,22 +332,25 @@ func! systemverilog#dyDeclare()
         "let repl = substitute(line_str, ' *\(\%(in_\)|\%(out_\)\)\?\([^,]*\)\(,\?\)', re_str, 'g')
         "let line_str = substitute(line_str, '^\(i_\|o_\)\?\(.*\)', re_str, 'g')
         "if line_str =~ "^i_.*"
-        if line_str =~ "^.*_i"
+        "if line_str =~ "^.*_i"
+        if line_str =~ "^i_.*"
             let re_str = 'to_\1'
-            let new_name = substitute(line_str, '^\(.*\)_i', re_str, 'g')
+            let new_name = substitute(line_str, '^i_\(.*\)', re_str, 'g')
             let new_line = substitute(org_line_str, line_str, new_name, 'g')
         else
-            "if line_str =~ "^o_.*"
-            if line_str =~ "^.*_o"
+            if line_str =~ "^o_.*"
+            "if line_str =~ "^.*_o"
                 let re_str = 'fr_\1'
-                "let new_name = substitute(line_str, '^o_\(.*\)', re_str, 'g')
-                let new_name = substitute(line_str, '^\(.*\)_o', re_str, 'g')
+                let new_name = substitute(line_str, '^o_\(.*\)', re_str, 'g')
+                "let new_name = substitute(line_str, '^\(.*\)_o', re_str, 'g')
                 let new_line = substitute(org_line_str, line_str, new_name, 'g')
             else
                 if line_str =~ "^io_.*"
                     let re_str = 'bi_\1'
                     let new_name = substitute(line_str, '^io_\(.*\)', re_str, 'g')
                     let new_line = substitute(org_line_str, line_str, new_name, 'g')
+                    let re_str = '\1 \2(),'
+                    let new_line = substitute(new_line, '\(IF_[^\.]\+\).[s|m] \+\([^,]*\),\?', re_str, 'g')
                 else
                     let new_line = org_line_str
                 endif
@@ -357,6 +367,7 @@ func! systemverilog#dyDeclare()
     let repl = substitute(line_str, '\(.*\)', '\1;', 'g')
     call setline(line_num, repl)
 endfunc
+
 " vim function
 "
 
