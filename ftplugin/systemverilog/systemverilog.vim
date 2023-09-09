@@ -10,6 +10,8 @@ set autoindent
 set foldlevel=0
 set textwidth=100
 set guifont=Fira_Code:h14
+let g:gruvbox_italic=0
+let g:gruvbox_italicize_comments=0
 
 " always
 "nnoremap <C-E>anl :call Always(0, 0)<cr>
@@ -227,11 +229,12 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"")
         let line = line + 1
-        call setline(line,"module " . fname_short)
-        let line = line + 1
-        call setline(line, indent . "import my_pkg::*;")
-        let line = line + 1
-        call setline(line,"(")
+        "call setline(line,"module " . fname_short)
+        call setline(line,"module " . fname_short . " (")
+        "let line = line + 1
+        "call setline(line, indent . "import my_pkg::*;")
+        "let line = line + 1
+        "call setline(line,"(")
         let line = line + 1
         call setline(line, indent . "input wire  clk,")
         let line = line + 1
@@ -252,20 +255,32 @@ func! YSetTitle()
         call setline(line,"// resource")
         let line = line + 1
         call setline(line,"//====================")
-        let line = line + 1
-        call setline(line, indent . "//==instance port net")
-        let line = line + 1
-        call setline(line, indent . "//==end port net")
+        "let line = line + 1
+        "call setline(line, indent . "//==instance port net")
+        "let line = line + 1
+        "call setline(line, indent . "//==end port net")
         "call setline(line,"// wire")
         "let line = line + 1
         "call setline(line,"// process: main")
         "let line = line + 1
         let line = line + 1
+        call setline(line,"//====================")
+        let line = line + 1
+        call setline(line,"// state")
+        let line = line + 1
+        call setline(line,"//====================")
+        let line = line + 1
         call setline(line,"")
         let line = line + 1
-        call setline(line,"always_comb begin : cal_output")
+        call setline(line,"//====================")
         let line = line + 1
-        call setline(line,"end : cal_output")
+        call setline(line,"// progress")
+        let line = line + 1
+        call setline(line,"//====================")
+        "let line = line + 1
+        "call setline(line,"always_comb begin : cal_output")
+        "let line = line + 1
+        "call setline(line,"end : cal_output")
         let line = line + 1
         call setline(line,"")
         let line = line + 1

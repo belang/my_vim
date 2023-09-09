@@ -10,8 +10,8 @@ Plug 'othree/xml.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
-Plug 'vim-scripts/tlib'
+Plug 'tomtom/tlib_vim'
+"Plug 'vim-scripts/tlib'
 "Plug 'SirVer/ultisnips'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
@@ -24,7 +24,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'
 Plug 'rkulla/pydiction'
 "Plug 'mathjax/MathJax'
-Plug 'vimwiki/vimwiki'
 "Plug 'plasticboy/vim-markdown'
 "Plug 'mattn/emmet-vim'
 "Plug 'Valloric/YouCompleteMe'
@@ -196,6 +195,7 @@ let g:syntastic_mode_map = {
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:gruvbox_italicize_comments=0
 " easy align ******************
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -225,10 +225,6 @@ nmap ga <Plug>(EasyAlign)
     let g:riv_force = 1
     set mmp=2000
 
-" ** vimwiki ******************
-    let g:vimwiki_list = [{'path': '~/vimwiki/tech',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
-"
  
 "matchit
 packadd! matchit
