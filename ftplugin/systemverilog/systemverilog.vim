@@ -31,6 +31,8 @@ nnoremap <buffer> <C-E>dec :call systemverilog#dyDeclare()<Enter>
 "
 
 func! systemverilog#dyGenInstance()
+    let name_line = line(".")
+    let insn_name = substitute(getline(name_line), '^\S\+ u_\(\S\+\) *(', '\1', '')
     let start_line = line(".")+1
     let end_line = 100000
     let line_num = start_line
@@ -88,13 +90,15 @@ func! systemverilog#dyGenInstance()
         else
             "if line_str =~ "^.*_i$"
             if line_str =~ "^i_.*$"
-                let re_str = '    .\1\2' . space . '    (to_\2),'
+                "let re_str = '    .\1\2' . space . '    (to_\2),'
+                let re_str = '    .\1\2' . space . '    (to_' . insn_name . '_\2),'
                 let line_str = substitute(line_str, '^\(i_\)\(.*\)', re_str, 'g')
                 "let line_str = substitute(line_str, '^\(.*\)\(_i\)', re_str, 'g')
             else
                 "if line_str =~ "^.*_o$"
                 if line_str =~ "^o_.*$"
-                    let re_str = '    .\1\2' . space . '    (fr_\2),'
+                    "let re_str = '    .\1\2' . space . '    (fr_\2),'
+                    let re_str = '    .\1\2' . space . '    (fr_' . insn_name . '_\2),'
                     let line_str = substitute(line_str, '^\(o_\)\(.*\)', re_str, 'g')
                     "let line_str = substitute(line_str, '^\(.*\)\(_o\)', re_str, 'g')
                 else
@@ -211,13 +215,13 @@ func! YSetTitle()
         "let line = line + 1
         "call setline(line,"// file name: ".expand("%"))
         "let line = line + 1
-        call setline(line, "// Copyright my contributors.")
-        let line = line + 1
-        call setline(line, "// Licensed under the Apache License, Version 2.0, see LICENSE for details.")
-        let line = line + 1
-        call setline(line, "// SPDX-License-Identifier: Apache-2.0")
-        let line = line + 1
-        call setline(line, "//")
+        "call setline(line, "// Copyright my contributors.")
+        "let line = line + 1
+        "call setline(line, "// Licensed under the Apache License, Version 2.0, see LICENSE for details.")
+        "let line = line + 1
+        "call setline(line, "// SPDX-License-Identifier: Apache-2.0")
+        "let line = line + 1
+        call setline(line, "// See README for Copyright")
         let line = line + 1
         call setline(line,"// Author: Hayes")
         let line = line + 1
@@ -229,12 +233,12 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"")
         let line = line + 1
-        "call setline(line,"module " . fname_short)
-        call setline(line,"module " . fname_short . " (")
-        "let line = line + 1
-        "call setline(line, indent . "import my_pkg::*;")
-        "let line = line + 1
-        "call setline(line,"(")
+        call setline(line,"module " . fname_short)
+        "call setline(line,"module " . fname_short . " (")
+        let line = line + 1
+        call setline(line, indent . "import my_pkg::*;")
+        let line = line + 1
+        call setline(line,"    (")
         let line = line + 1
         call setline(line, indent . "input wire  clk,")
         let line = line + 1
@@ -255,14 +259,17 @@ func! YSetTitle()
         call setline(line,"// resource")
         let line = line + 1
         call setline(line,"//====================")
-        "let line = line + 1
-        "call setline(line, indent . "//==instance port net")
-        "let line = line + 1
-        "call setline(line, indent . "//==end port net")
+        let line = line + 1
+        call setline(line,"")
+        let line = line + 1
+        call setline(line, indent . "//==instance port net")
+        let line = line + 1
+        call setline(line, indent . "//==end port net")
         "call setline(line,"// wire")
         "let line = line + 1
         "call setline(line,"// process: main")
-        "let line = line + 1
+        let line = line + 1
+        call setline(line,"")
         let line = line + 1
         call setline(line,"//====================")
         let line = line + 1
@@ -274,7 +281,15 @@ func! YSetTitle()
         let line = line + 1
         call setline(line,"//====================")
         let line = line + 1
-        call setline(line,"// progress")
+        call setline(line,"// process")
+        let line = line + 1
+        call setline(line,"//====================")
+        let line = line + 1
+        call setline(line,"")
+        let line = line + 1
+        call setline(line,"//====================")
+        let line = line + 1
+        call setline(line,"// instance")
         let line = line + 1
         call setline(line,"//====================")
         "let line = line + 1
@@ -314,9 +329,8 @@ func! systemverilog#dyDeclare()
         "endif
         "let line_num = line_num+1
     "endwhile
-    let start_line = line(".")+1
+    let start_line = line(".")
     let end_line = 100000
-    let line_num = start_line
     let pin_length = 0
     let pin_list = []
     let new_str = []
@@ -327,12 +341,31 @@ func! systemverilog#dyDeclare()
         if org_line_str =~ "^    //==end port net"
             break
         endif
+        if org_line_str =~ '^\S\+ u_\(\S\+\) *('
+            let insn_name = substitute(org_line_str, '^\S\+ u_\(\S\+\) *(', '\1', '')
+            let new_str = '    // ' . insn_name
+            call setline(line_num, new_str)
+            let line_num = line_num+1
+            continue
+        endif
         if org_line_str =~ "^ *$"
             let line_num = line_num+1
             continue
         endif
         if org_line_str =~ "^ *//"
             let line_num = line_num+1
+            continue
+        endif
+        if org_line_str =~ "^ *.* clk,$"
+            "let line_num = line_num+1
+            call cursor(line_num, line_num)
+            execute(':delete')
+            continue
+        endif
+        if org_line_str =~ "^ *.* rst_n,$"
+            call cursor(line_num, line_num)
+            execute(':delete')
+            "let line_num = line_num+1
             continue
         endif
         let line_str = org_line_str
@@ -349,13 +382,13 @@ func! systemverilog#dyDeclare()
         "if line_str =~ "^i_.*"
         "if line_str =~ "^.*_i"
         if line_str =~ "^i_.*"
-            let re_str = 'to_\1'
+            let re_str = 'to_' . insn_name . '_\1'
             let new_name = substitute(line_str, '^i_\(.*\)', re_str, 'g')
             let new_line = substitute(org_line_str, line_str, new_name, 'g')
         else
             if line_str =~ "^o_.*"
             "if line_str =~ "^.*_o"
-                let re_str = 'fr_\1'
+                let re_str = 'fr_' . insn_name . '_\1'
                 let new_name = substitute(line_str, '^o_\(.*\)', re_str, 'g')
                 "let new_name = substitute(line_str, '^\(.*\)_o', re_str, 'g')
                 let new_line = substitute(org_line_str, line_str, new_name, 'g')
@@ -365,7 +398,7 @@ func! systemverilog#dyDeclare()
                     let new_name = substitute(line_str, '^io_\(.*\)', re_str, 'g')
                     let new_line = substitute(org_line_str, line_str, new_name, 'g')
                     let re_str = '\1 \2(),'
-                    let new_line = substitute(new_line, '\(IF_[^\.]\+\).[s|m] \+\([^,]*\),\?', re_str, 'g')
+                    let new_line = substitute(new_line, '\(IF_[^\.]\+\).[s|m|p|n] \+\([^,]*\),\?', re_str, 'g')
                 else
                     let new_line = org_line_str
                 endif
@@ -374,13 +407,16 @@ func! systemverilog#dyDeclare()
         let new_line = substitute(new_line, ',', ';', 'g')
         let new_line = substitute(new_line, 'input *', '', 'g')
         let new_line = substitute(new_line, 'output *', '', 'g')
+        if new_line !~ ".*;"
+            let new_line = substitute(new_line, '\(.*\)', '\1;', 'g')
+        endif
         call setline(line_num, new_line)
         let line_num = line_num+1
     endwhile
-    let line_num = line_num-1
-    let line_str = getline(line_num)
-    let repl = substitute(line_str, '\(.*\)', '\1;', 'g')
-    call setline(line_num, repl)
+    "let line_num = line_num-1
+    "let line_str = getline(line_num)
+    "let repl = substitute(line_str, '\(.*\)', '\1;', 'g')
+    "call setline(line_num, repl)
 endfunc
 
 " vim function

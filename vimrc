@@ -30,8 +30,13 @@ Plug 'rkulla/pydiction'
 Plug 'Rykka/riv.vim'
 Plug 'Rykka/rhythm.css'
 Plug 'Rykka/InstantRst'
-Plug 'sheerun/vim-polyglot'
+"Plug 'sheerun/vim-polyglot'
 Plug 'morhetz/gruvbox'
+Plug 'derekwyatt/vim-scala'
+Plug 'lfiolhais/vim-chisel'
+Plug 'itchyny/vim-cursorword'
+Plug 'vim-airline/vim-airline'
+
 
 call plug#end()
 
