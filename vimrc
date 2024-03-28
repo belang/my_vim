@@ -36,7 +36,7 @@ Plug 'derekwyatt/vim-scala'
 Plug 'lfiolhais/vim-chisel'
 Plug 'itchyny/vim-cursorword'
 Plug 'vim-airline/vim-airline'
-
+Plug 'HonkW93/automatic-verilog'
 
 call plug#end()
 
