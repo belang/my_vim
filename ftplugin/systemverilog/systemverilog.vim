@@ -2,9 +2,9 @@ if exists("b:did_msv_ftplugin")
   finish
 endif
 let b:did_msv_ftplugin = 1  " Don't load another plugin for this buffer
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set expandtab
 set autoindent
 set foldlevel=0
