@@ -22,7 +22,7 @@ Plug 'junegunn/vim-easy-align'
 "Plug 'gu-fan/rhythm.css'
 "Plug 'gu-fan/InstantRst'
 Plug 'majutsushi/tagbar'
-Plug 'rkulla/pydiction'
+"Plug 'rkulla/pydiction'
 "Plug 'mathjax/MathJax'
 "Plug 'plasticboy/vim-markdown'
 "Plug 'mattn/emmet-vim'
@@ -36,7 +36,6 @@ Plug 'derekwyatt/vim-scala'
 Plug 'lfiolhais/vim-chisel'
 Plug 'itchyny/vim-cursorword'
 Plug 'vim-airline/vim-airline'
-Plug 'HonkW93/automatic-verilog'
 
 call plug#end()
 
@@ -50,7 +49,7 @@ if has('win32')
     set backspace=indent,eol,start whichwrap+=<,>,[,]
     au GUIEnter * simalt ~x
     set encoding=utf-8
-    set langmenu=zh_CN.UTF-8
+    "set langmenu=zh_CN.UTF-8
     "set guifont=Consolas:h14
     "set guifont=DejaVu_Sans_Mono:h14
     "set guifont=仿宋:h14
