@@ -223,10 +223,10 @@ func! YSetTitle()
         "let line = line + 1
         call setline(line, "// See README for Copyright")
         let line = line + 1
-        call setline(line,"// Author: Hayes")
-        let line = line + 1
-        call setline(line,"// Time: ".strftime("%c"))
-        let line = line + 1
+        "call setline(line,"// Author: Hayes")
+        "let line = line + 1
+        "call setline(line,"// Time: ".strftime("%c"))
+        "let line = line + 1
         call setline(line, "// One_line_description_of_the_module")
         let line = line + 1
         call setline(line,"")
