@@ -1,5 +1,5 @@
 
-let proj5 = { 'name': 'tiny', 'path': "~/wiki/tiny" }
+let proj5 = { 'name': 'tech', 'path': "~/OneDrive\ -\ Intel\ Corporation/Documents/BaiduSyncdisk/note" }
 let proj6 = { 'name': 'work', 'path': "~/wiki/work" }
 let proj7 = { 'name': 'missile', 'path': "~/work/blackbean/missile_chip/doc" }
 let proj8 = { 'name': 'nf', 'path': "~/work/blackbean/nuanfeng/doc" }
