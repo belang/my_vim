@@ -16,19 +16,14 @@ set guifont=Fira_Code:h14
 if !exists("*s:PySetMain")
     func s:PySetMain()
         "if &filetype == 'python'
-            "call setline(1,"`timescale 1ns/1ps")
-            "call setline(5,"")
             call setline(1,"#! $PATH/python")
             call setline(2,"# -*- coding: utf-8 -*-")
             call setline(3,"")
-            call setline(4,"# file name: ".expand("%c"))
-            call setline(5,"# author: lianghy")
-            call setline(6,"# time: ".strftime("%c"))
-            call setline(7,"")
-            call setline(8,'""" """')
-            call setline(9,"")
-            call setline(10,"if __name__ == \"__main__\":")
-            call setline(11,"    print(\"".expand("%c")."\")")
+            call setline( 4,"")
+            call setline( 5,'""" """')
+            call setline( 6,"")
+            call setline( 7,"if __name__ == \"__main__\":")
+            call setline( 8,"    print(\"".expand("%c")."\")")
         "endif
     endfunc
     func PyDefFunc() abort

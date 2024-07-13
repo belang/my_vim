@@ -3,6 +3,11 @@ extends verilog
 snippet typee
 	typedef enum logic [${2}:0] {${3}} ${1};
 
+snippet typep
+	typedef struct packed {
+		${2}
+	} ${1:name_t};
+
 # Sequential logic
 snippet alfa
 	always_ff @(posedge ${1:clk} or negedge rst_n) begin ${2:: statement_label}

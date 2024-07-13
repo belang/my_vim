@@ -16,7 +16,7 @@ let b:lhy_ftplugin = 1  " Don't load another plugin for this buffer
 "set shiftwidth=3
 "set textwidth=79
 set expandtab
-set foldlevel=1
+"set foldlevel=1
 "set backspace=eol,start whichwrap+=<,>,[,]
 "let b:di_vert    = "│" 
 "let b:di_horiz   = "─" 
@@ -33,7 +33,8 @@ let b:di_upleft  = "\\"
 let b:di_cross   = "X" 
 let b:di_ellipse = '#' 
 
-
+setlocal spell! spelllang=en_us
+inoremap <C-Tab> <C-x><C-K>
 "nnoremap <C-E>h1 :call rst#dyAddSectionHead(1)<Enter>
 "nnoremap <C-E>h2 :call rst#dyAddSectionHead(2)<Enter>
 "nnoremap <C-E>h3 :call rst#dyAddSectionHead(3)<Enter>

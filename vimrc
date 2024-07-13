@@ -11,8 +11,8 @@ Plug 'dense-analysis/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
-Plug 'vim-scripts/tlib'
+Plug 'tomtom/tlib_vim'
+"Plug 'vim-scripts/tlib'
 "Plug 'SirVer/ultisnips'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
@@ -54,7 +54,7 @@ if has('win32')
     set backspace=indent,eol,start whichwrap+=<,>,[,]
     au GUIEnter * simalt ~x
     set encoding=utf-8
-    set langmenu=zh_CN.UTF-8
+    "set langmenu=zh_CN.UTF-8
     "set guifont=Consolas:h14
     "set guifont=DejaVu_Sans_Mono:h14
     "set guifont=仿宋:h14
@@ -198,6 +198,7 @@ noremap <C-e>h :call AddHead()<cr>
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
+let g:gruvbox_italicize_comments=0
 " easy align ******************
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
