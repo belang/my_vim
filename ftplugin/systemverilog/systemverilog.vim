@@ -11,6 +11,17 @@ set foldlevel=0
 set textwidth=100
 set guifont=Fira_Code:h14
 
+""verilog syntax
+":compiler vcs
+"let &makeprg='vlogan +v2k -full64 +vcs+flush+all +lint=all -sverilog +libext+.v+.sv -lca %'
+"autocmd BufWritePost *.v exec ":make"
+"
+":compiler verilator
+"let &makeprg='verilator -Wall --sc --exe'
+"autocmd BufWritePost *.sv exec ":make"
+
+let g:ale_linters = {'systemverilog' : ['verilator'],}
+
 " always
 "nnoremap <C-E>anl :call Always(0, 0)<cr>
 
