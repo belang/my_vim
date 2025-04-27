@@ -7,3 +7,6 @@ let proj9 = { 'name': 'bb_wiki', 'path': "~/wiki/blackbean" }
 let g:riv_projects = [proj1, proj2, proj3, proj4, proj5, proj6, proj7, proj8, proj9]
 
 let g:riv_todo_datestamp = 1
+
+let g:ale_linters = {'c' : ['~/work/cy_new/riscv-tools-install/bin/riscv64-unknown-linux-gnu-gcc']}
+let g:my_pkg = "bh_core_pkg"

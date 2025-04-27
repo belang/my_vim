@@ -12,6 +12,9 @@ set noautoindent
 set guifont=Fira_Code:h14
 "set foldlevelstart=99
 "set foldignore=~
+
+let g:ale_linters = {'python' : ['pylint'],}
+
 " in exists, '*' means function name
 if !exists("*s:PySetMain")
     func s:PySetMain()

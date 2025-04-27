@@ -23,7 +23,7 @@ Plug 'junegunn/vim-easy-align'
 "Plug 'gu-fan/rhythm.css'
 "Plug 'gu-fan/InstantRst'
 Plug 'majutsushi/tagbar'
-"Plug 'rkulla/pydiction'
+Plug 'rkulla/pydiction'
 "Plug 'mathjax/MathJax'
 "Plug 'plasticboy/vim-markdown'
 "Plug 'mattn/emmet-vim'
@@ -38,7 +38,7 @@ Plug 'lfiolhais/vim-chisel'
 "Plug 'vhda/verilog_systemverilog.vim'
 "Plug 'Shougo/neocomplete.vim'
 Plug 'itchyny/vim-cursorword'
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 "Plug 'HonkW93/automatic-verilog'
 "Plug 'tomasr/molokai'   " color scheme
 
@@ -115,6 +115,7 @@ set foldlevel=0
 set fileformat=unix
 
 
+let g:riv_python_rst_hl = 0
 " basic set ******************
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -157,6 +158,8 @@ nnoremap <F3> :cd %:h<CR>
 nnoremap <F4> :setlocal spell! spelllang=en_us
 nnoremap <F5> :set cuc! cul!<CR>
 "inoremap <F5> <br />
+vnoremap ' :s''<ESC>P
+vnoremap " :s""<ESC>P
 
 " global key map
 iab xtime <c-r>=strftime("%T")
@@ -312,4 +315,5 @@ if $OS =~ "Windows.*"
     source ~/vimfiles/local.vim
 else
     source ~/.vim/local.vim
+    let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 endif
