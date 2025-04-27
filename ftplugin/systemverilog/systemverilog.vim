@@ -10,7 +10,7 @@ set expandtab
 set autoindent
 set foldlevel=0
 set textwidth=100
-set guifont=Fira_Code:h14
+"set guifont=Fira_Code:h14
 let g:gruvbox_italic=0
 let g:gruvbox_italicize_comments=0
 
@@ -258,7 +258,7 @@ func! YSetTitle()
         let line = line + 1
         call setline(line, indent . "input logic rst_n,")
         let line = line + 1
-        call setline(line, indent . "output logic o_valid")
+        call setline(line, indent . "output  logic o_" . fname_short . "_valid")
         "let line = line + 1
         "call setline(line, indent . "input  logic i_" . module_name . "_valid,")
         "let line = line + 1
