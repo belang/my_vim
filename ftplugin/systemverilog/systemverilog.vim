@@ -9,7 +9,7 @@ set expandtab
 set autoindent
 set foldlevel=0
 set textwidth=100
-set guifont=Fira_Code:h14
+"set guifont=Fira_Code:h14
 let g:gruvbox_italic=0
 let g:gruvbox_italicize_comments=0
 
@@ -219,7 +219,7 @@ func! YSetTitle()
     if &filetype == 'systemverilog'
         let fname = "".expand("%")
         let fname_short = substitute(fname, '\(.*\)\.sv', '\1', 'g')
-        let indent = "    "
+        let indent = "  "
         "let module_name = substitute(fname_short, '.*\([^_]\+\)', '\1', 'g')
         let line = 1
         "call setline(line,"`timescale 1ns/1ps")
@@ -254,6 +254,8 @@ func! YSetTitle()
         call setline(line, indent . "input wire  clk,")
         let line = line + 1
         call setline(line, indent . "input logic rst_n,")
+        let line = line + 1
+        call setline(line, indent . "output  logic o_" . fname_short . "_valid")
         "let line = line + 1
         "call setline(line, indent . "input  logic i_" . module_name . "_valid,")
         "let line = line + 1

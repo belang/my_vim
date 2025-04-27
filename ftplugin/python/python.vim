@@ -9,9 +9,10 @@ let b:did_mpy_ftplugin = 1  " Don't load another plugin for this buffer
 set foldmethod=indent
 set foldnestmax=7
 set noautoindent 
-set guifont=Fira_Code:h14
+"set guifont=Fira_Code:h14
 "set foldlevelstart=99
 "set foldignore=~
+let g:ale_linters = {'python' : ['pylint'],}
 " in exists, '*' means function name
 if !exists("*s:PySetMain")
     func s:PySetMain()
@@ -66,5 +67,4 @@ endfunc
 noremap <C-e>init :call <SID>dyPyInit()<cr>
 noremap <C-e>test :call <SID>createUnitTest()<cr>
 noremap <C-e>mtl :call <SID>createPyMTL()<cr>
-noremap <SPACE> o""" """<Esc>
 nnoremap <silent> <buffer> <cr> :PythonSearchContext<cr>

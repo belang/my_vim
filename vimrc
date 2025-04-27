@@ -1,19 +1,16 @@
 set nocompatible
 filetype off 
 
-call plug#begin('~/.vim/bundle')
+call plug#begin('~/vimfiles/bundle')
 
 Plug 'scrooloose/nerdtree'
 Plug 'godlygeek/tabular'
 Plug 'othree/xml.vim'
-"Plug 'scrooloose/syntastic'
 Plug 'dense-analysis/ale'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-"Plug 'vim-scripts/tlib'
-"Plug 'SirVer/ultisnips'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'vim-scripts/VisIncr'
@@ -23,7 +20,7 @@ Plug 'junegunn/vim-easy-align'
 "Plug 'gu-fan/rhythm.css'
 "Plug 'gu-fan/InstantRst'
 Plug 'majutsushi/tagbar'
-"Plug 'rkulla/pydiction'
+Plug 'rkulla/pydiction'
 "Plug 'mathjax/MathJax'
 "Plug 'plasticboy/vim-markdown'
 "Plug 'mattn/emmet-vim'
@@ -33,13 +30,9 @@ Plug 'Rykka/rhythm.css'
 Plug 'Rykka/InstantRst'
 "Plug 'sheerun/vim-polyglot'
 Plug 'morhetz/gruvbox'
-Plug 'derekwyatt/vim-scala'
-Plug 'lfiolhais/vim-chisel'
-"Plug 'vhda/verilog_systemverilog.vim'
 "Plug 'Shougo/neocomplete.vim'
 Plug 'itchyny/vim-cursorword'
-Plug 'vim-airline/vim-airline'
-"Plug 'HonkW93/automatic-verilog'
+"Plug 'vim-airline/vim-airline'
 "Plug 'tomasr/molokai'   " color scheme
 
 call plug#end()
@@ -54,32 +47,16 @@ if has('win32')
     set backspace=indent,eol,start whichwrap+=<,>,[,]
     au GUIEnter * simalt ~x
     set encoding=utf-8
-    "set langmenu=zh_CN.UTF-8
-    "set guifont=Consolas:h14
-    "set guifont=DejaVu_Sans_Mono:h14
-    "set guifont=仿宋:h14
-    "set guifont=SimHei:h14
-    "set guifont=SimSun:h14
     set guifont=NSimSun:h14
     "set guifont=Fira_Code:h14
     silent! vunmap <C-X>
     "language message zh_CN.UTF-8
-    "处理菜单及右键菜单乱码
-    "source $VIMRUNTIME/delmenu.vim
-    "source $VIMRUNTIME/menu.vim
-    "unmap <C-V>
-    "cunmap <C-V>
-    "unmap <C-Y>
-    "iunmap <C-Y>
     " tags
-    "colorscheme pablo
-    "colorscheme desert
-    "colorscheme delek
     let g:tagbar_ctags_bin = '$HOME/vimfiles/ctags/ctags.exe'
-    "let g:pydiction_location = '$HOME/vimfiles/bundle/pydiction/complete-dict'
+    let g:pydiction_location = '$HOME/vimfiles/bundle/pydiction/complete-dict'
 elseif has('unix')
     let g:tagbar_ctags_bin = '/usr/bin/ctags'
-    "let g:pydiction_location = '$HOME/.vim/bundle/pydiction/complete-dict'
+    let g:pydiction_location = '$HOME/.vim/bundle/pydiction/complete-dict'
     noremap <C-h> :VimwikiGoBackLink<cr>
     set laststatus=2
     set statusline=
@@ -221,9 +198,7 @@ nmap ga <Plug>(EasyAlign)
     let g:snipMate = { 'snippet_version' : 1 }
 " ** vim rst wiki set -- RIV ******************
     let proj1 = { 'name': 'work', 'path': '~/wiki/work',}
-    let proj2 = { 'name': 'block', 'path': "/home/lhy/work/block_chip/doc" }
-    let proj3 = { 'name': 'proj', 'path': "~/wiki/work/project"}
-    let proj4 = { 'name': 'tech', 'path': "~/wiki/tech" }
+    let proj2 = { 'name': 'note', 'path': "~/wiki/note" }
     let g:riv_auto_format_table = 0
     let g:riv_force = 1
     set mmp=2000
